@@ -1,6 +1,8 @@
+import axios from "axios";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import { SET_USER } from "../redux/features/userSlice";
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -15,9 +17,12 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
+    const formData = { username, password };
 
     try {
-      const formData = { username, password };
+      const { data } = await axios.post("/api/v1/user/login", formData);
+
+      dispatch(SET_USER(data));
 
       console.log(formData);
 

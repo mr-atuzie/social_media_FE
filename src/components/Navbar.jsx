@@ -7,8 +7,6 @@ import { selectUser } from "../redux/features/userSlice";
 const Navbar = () => {
   const user = useSelector(selectUser);
 
-  console.log(user);
-
   return (
     <nav className="bg-white flex items-center  py-4">
       <div className=" w-[95%] flex justify-between items-center lg:w-[85%] mx-auto ">

@@ -1,9 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
+import AddPostCard from "./AddPostCard";
 
 const AddPost = () => {
+  const [addpost, setAddPost] = useState(false);
   return (
     <>
-      <button className=" w-16 h-16 flex justify-center items-center fixed bottom-[10%] right-[10%] z-40  rounded-full shadow-md bg-black text-white">
+      <button
+        onClick={() => setAddPost(true)}
+        className=" w-16 h-16 flex justify-center items-center fixed bottom-[10%] right-[10%] z-40  rounded-full shadow-md bg-black text-white"
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -19,8 +24,13 @@ const AddPost = () => {
           />
         </svg>
       </button>
-      <div className=" hidden fixed w-full h-screen hide-scrollbar  bg-black/70">
-        {/* <div className=" p-4 shadow-md bg-white rounded-lg flex gap-4  justify-between text-sm">
+      {addpost && (
+        <div className=" fixed top-0 left-0 z-50 w-full h-screen hide-scrollbar flex justify-center items-center  bg-black/70">
+          <AddPostCard setAddPost={setAddPost} />
+        </div>
+      )}
+
+      {/* <div className=" p-4 shadow-md bg-white rounded-lg flex gap-4  justify-between text-sm">
       <div>
         <img
           src={
@@ -80,7 +90,6 @@ const AddPost = () => {
         </div>
       </div>
     </div> */}
-      </div>
     </>
   );
 };
