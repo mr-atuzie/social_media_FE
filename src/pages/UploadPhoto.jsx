@@ -2,6 +2,8 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ErrorCard from "../components/ErrorCard";
+import { useDispatch } from "react-redux";
+import { SET_USER } from "../redux/features/userSlice";
 
 const UplaodPhoto = () => {
   const [selectedImage, setSelectedImage] = useState(null);
@@ -9,6 +11,7 @@ const UplaodPhoto = () => {
   const [errMsg, setErrMsg] = useState("");
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   async function uploadPhoto(ev) {
     ev.preventDefault();
@@ -44,6 +47,8 @@ const UplaodPhoto = () => {
 
       console.log(data);
 
+      dispatch(SET_USER(data));
+
       navigate("/");
 
       setUploading(false);
@@ -76,7 +81,7 @@ const UplaodPhoto = () => {
 
         <div className=" w-40 h-40 rounded-full  relative">
           <img
-            className=" object-cover rounded-full"
+            className=" w-full h-full object-cover rounded-full"
             src={
               selectedImage
                 ? URL.createObjectURL(selectedImage)

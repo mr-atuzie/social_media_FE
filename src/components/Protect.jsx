@@ -1,9 +1,11 @@
 import React from "react";
+import { useSelector } from "react-redux";
+import { selectIsLoggedIn } from "../redux/features/userSlice";
 
 const ShowOnLogin = ({ children }) => {
-  const isActive = true;
+  const isLoggedIn = useSelector(selectIsLoggedIn);
 
-  if (isActive) {
+  if (isLoggedIn) {
     return <>{children}</>;
   }
 
@@ -11,9 +13,9 @@ const ShowOnLogin = ({ children }) => {
 };
 
 export const ShowOnLogOut = ({ children }) => {
-  const isActive = true;
+  const isLoggedIn = useSelector(selectIsLoggedIn);
 
-  if (!isActive) {
+  if (!isLoggedIn) {
     return <>{children}</>;
   }
 

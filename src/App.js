@@ -8,11 +8,15 @@ import Navbar from "./components/Navbar";
 import Layout from "./pages/Layout";
 import axios from "axios";
 import { useEffect } from "react";
+import { SET_LOGIN } from "./redux/features/userSlice";
+import { useDispatch } from "react-redux";
 
 axios.defaults.baseURL = process.env.REACT_APP_SERVER_URL;
 axios.defaults.withCredentials = true;
 
 function App() {
+  const dispatch = useDispatch();
+
   useEffect(() => {
     const getLoginStatus = async () => {
       try {
@@ -20,10 +24,9 @@ function App() {
           withCredentials: true,
         });
 
-        // const loginStatus = res.data;
         console.log(data);
 
-        // dispatch(SET_LOGIN(loginStatus));
+        dispatch(SET_LOGIN(data));
       } catch (error) {
         const message =
           (error.response &&
@@ -36,7 +39,7 @@ function App() {
       }
     };
     getLoginStatus();
-  }, []);
+  }, [dispatch]);
 
   return (
     <BrowserRouter>

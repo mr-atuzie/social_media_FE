@@ -1,14 +1,20 @@
 import { Link } from "react-router-dom";
 import MobileMenu from "./MobileMenu";
 import ShowOnLogin, { ShowOnLogOut } from "./Protect";
+import { useSelector } from "react-redux";
+import { selectUser } from "../redux/features/userSlice";
 
 const Navbar = () => {
+  const user = useSelector(selectUser);
+
+  console.log(user);
+
   return (
     <nav className="bg-white flex items-center  py-4">
       <div className=" w-[95%] flex justify-between items-center lg:w-[85%] mx-auto ">
         {/* LEFT */}
         <div className=" md:hidden lg:block ">
-          <Link className=" text-xl font-semibold text-blue-600" to={"/"}>
+          <Link className=" text-xl font-semibold " to={"/"}>
             FACEBOOK
           </Link>
         </div>
@@ -187,7 +193,11 @@ const Navbar = () => {
 
               <div>
                 <img
-                  src="https://images.pexels.com/photos/24460824/pexels-photo-24460824/free-photo-of-esb-among-lower-skyscrapers.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load"
+                  src={
+                    user?.avatar
+                      ? user?.avatar
+                      : "https://i.ibb.co/4pDNDk1/avatar.png"
+                  }
                   alt=""
                   className=" w-8 ring-black ring-2 h-8 rounded-full object-cover"
                 />
@@ -214,7 +224,9 @@ const Navbar = () => {
                     />
                   </svg>
                 </div>
-                <span className=" text-sm text-gray-600">Login/Register</span>
+                <span className=" text-sm font-medium text-gray-600">
+                  Login/Register
+                </span>
               </div>
             </Link>
           </ShowOnLogOut>

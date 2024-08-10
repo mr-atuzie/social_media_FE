@@ -2,7 +2,25 @@ import React from "react";
 
 const AddPost = () => {
   return (
-    <div className=" p-4 shadow-md bg-white rounded-lg flex gap-4  justify-between text-sm">
+    <>
+      <button className=" w-16 h-16 flex justify-center items-center fixed bottom-[10%] right-[10%] z-40  rounded-full shadow-md bg-black text-white">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          strokeWidth={1.5}
+          stroke="currentColor"
+          className="size-6 font-medium"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M12 4.5v15m7.5-7.5h-15"
+          />
+        </svg>
+      </button>
+      <div className=" hidden fixed w-full h-screen hide-scrollbar  bg-black/70">
+        {/* <div className=" p-4 shadow-md bg-white rounded-lg flex gap-4  justify-between text-sm">
       <div>
         <img
           src={
@@ -61,7 +79,9 @@ const AddPost = () => {
           </div>
         </div>
       </div>
-    </div>
+    </div> */}
+      </div>
+    </>
   );
 };
 
