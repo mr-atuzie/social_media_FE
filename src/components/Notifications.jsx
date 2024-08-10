@@ -31,7 +31,6 @@ const Notifications = () => {
                 "https://images.pexels.com/photos/5232625/pexels-photo-5232625.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load"
               }
               alt=""
-              fill
               className="w-8 h-8 object-cover  rounded-full"
             />
           </div>

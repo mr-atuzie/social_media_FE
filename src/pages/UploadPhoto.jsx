@@ -1,15 +1,19 @@
+import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import ErrorCard from "../components/ErrorCard";
 
 const UplaodPhoto = () => {
   const [selectedImage, setSelectedImage] = useState(null);
   const [uploading, setUploading] = useState(false);
+  const [errMsg, setErrMsg] = useState("");
 
   const navigate = useNavigate();
 
   async function uploadPhoto(ev) {
     ev.preventDefault();
     setUploading(true);
+    setErrMsg(false);
 
     if (!selectedImage) {
       return alert("Please select image");
@@ -34,18 +38,26 @@ const UplaodPhoto = () => {
 
       console.log(uploadedFileUrl);
 
-      //   const formData = {
-      //     token,
-      //     profilePic: uploadedFileUrl,
-      //   };
+      const { data } = await axios.patch("/api/v1/user/uploadPhoto", {
+        photo: uploadedFileUrl,
+      });
 
-      //   const response = await uploadPic(formData);
+      console.log(data);
 
       navigate("/");
 
       setUploading(false);
     } catch (error) {
       setUploading(false);
+      console.log(error);
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+
+      setErrMsg(message);
       console.log(error);
     }
   }
@@ -59,6 +71,9 @@ const UplaodPhoto = () => {
             Join our community and share event,we got you
           </p>
         </div>
+
+        {errMsg && <ErrorCard message={errMsg} />}
+
         <div className=" w-40 h-40 rounded-full  relative">
           <img
             className=" object-cover rounded-full"

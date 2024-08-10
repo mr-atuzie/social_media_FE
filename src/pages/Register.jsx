@@ -1,6 +1,8 @@
 import { GiSeagull } from "react-icons/gi";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import ErrorCard from "../components/ErrorCard";
 
 const RegisterPage = () => {
   const [name, setName] = useState("");
@@ -25,16 +27,30 @@ const RegisterPage = () => {
       password,
     };
 
-    console.log(formData);
+    try {
+      const { data } = await axios.post("/api/v1/user/register", formData);
+      console.log(data);
+      setLoading(false);
+      navigate("/uploadPhoto");
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
 
-    navigate("/uploadPhoto");
+      setErrMsg(message);
+      console.log(error);
+      setLoading(false);
+    }
   };
 
   return (
     <div className="h-full w-full flex justify-center items-center">
       <form
         onSubmit={handleRegister}
-        className=" flex gap-6 flex-col w-full lg:w-[40%] my-20  mx-auto bg-white rounded-md shadow-md p-4 lg:p-8 "
+        className=" flex gap-6 flex-col w-[90%] lg:w-[40%] my-20  mx-auto bg-white rounded-md shadow-md p-4 lg:p-8 "
       >
         <div className="flex items-center  gap-2">
           <div className=" bg-gray-50 p-2 rounded-md">
@@ -44,11 +60,7 @@ const RegisterPage = () => {
           <h1 className=" font-semibold">Seagull</h1>
         </div>
 
-        {errMsg && (
-          <div className=" bg-red-50 border border-red-500 text-red-500 text-xs p-2 text-center rounded-md">
-            {errMsg}
-          </div>
-        )}
+        {errMsg && <ErrorCard message={errMsg} />}
 
         <div>
           <h1 className="font-bold text-2xl">Create account</h1>

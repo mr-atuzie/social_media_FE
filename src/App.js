@@ -6,8 +6,41 @@ import RegisterPage from "./pages/Register";
 import UplaodPhoto from "./pages/UploadPhoto";
 import Navbar from "./components/Navbar";
 import Layout from "./pages/Layout";
+import axios from "axios";
+import { useEffect } from "react";
+
+axios.defaults.baseURL = process.env.SERVER_URL;
+axios.defaults.withCredentials = true;
 
 function App() {
+  console.log(process.env.SERVER_URL);
+  console.log(process.env.REACT_APP_SERVER_URL);
+
+  useEffect(() => {
+    const getLoginStatus = async () => {
+      try {
+        const { data } = await axios.get(`/api/v1/user/loginStatus`, {
+          withCredentials: true,
+        });
+
+        // const loginStatus = res.data;
+        console.log(data);
+
+        // dispatch(SET_LOGIN(loginStatus));
+      } catch (error) {
+        const message =
+          (error.response &&
+            error.response.data &&
+            error.response.data.message) ||
+          error.message ||
+          error.toString();
+
+        console.log(message);
+      }
+    };
+    getLoginStatus();
+  }, []);
+
   return (
     <BrowserRouter>
       <Navbar />
