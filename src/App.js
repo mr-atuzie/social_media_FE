@@ -9,13 +9,10 @@ import Layout from "./pages/Layout";
 import axios from "axios";
 import { useEffect } from "react";
 
-axios.defaults.baseURL = process.env.SERVER_URL;
+axios.defaults.baseURL = process.env.REACT_APP_SERVER_URL;
 axios.defaults.withCredentials = true;
 
 function App() {
-  console.log(process.env.SERVER_URL);
-  console.log(process.env.REACT_APP_SERVER_URL);
-
   useEffect(() => {
     const getLoginStatus = async () => {
       try {
