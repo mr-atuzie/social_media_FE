@@ -19,7 +19,7 @@ const Stories = () => {
               className=" object-cover rounded-full ring-2"
             />
 
-            <div className=" w-8 h-8 flex justify-center items-center bg-black rounded-full absolute text-white bottom-0 right-0">
+            <div className=" w-8 h-8 flex justify-center items-center bg-black rounded-full absolute text-white -bottom-2 right-0">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"

@@ -16,12 +16,12 @@ const Post = () => {
             />
           </div>
 
-          <div className=" flex gap-2 items-center">
-            <div>
+          <div>
+            <div className=" flex gap-2">
               <p className=" font-medium text-sm lg:text-base">Jack Dorsey</p>
-              <p className=" text-gray-500 text-xs lg:text-sm">17m</p>
+              <p className=" text-gray-500 text-xs lg:text-sm">@Jacky_D</p>
             </div>
-            <p className=" text-gray-500 text-xs lg:text-sm">@Jacky_D</p>
+            <p className=" text-gray-500 text-xs lg:text-sm">17m</p>
           </div>
         </div>
 
