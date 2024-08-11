@@ -42,7 +42,7 @@ const Post = () => {
           </svg>
         </button>
       </div>
-      <p className=" text-sm">
+      <p className=" text-sm text-balance">
         I really want to be the best, so i will put in the work and i leave the
         rest for God because there's no one better.Thank you Lord
       </p>
@@ -78,7 +78,7 @@ const Post = () => {
               </svg>
             </div>
             <span className=" text-gray-300">|</span>
-            <span className=" text-sm lg:text-base text-gray-500">
+            <span className=" text-xs lg:text-sm text-gray-500">
               39 <span className=" hidden md:inline">Likes</span>
             </span>
           </div>
@@ -100,7 +100,7 @@ const Post = () => {
               </svg>
             </div>
             <span className=" text-gray-300">|</span>
-            <span className=" text-sm lg:text-base text-gray-500">
+            <span className=" text-xs lg:text-sm text-gray-500">
               300 <span className=" hidden md:inline">Comments</span>
             </span>
           </div>
@@ -124,7 +124,7 @@ const Post = () => {
             </svg>
           </div>
           <span className=" text-gray-300">|</span>
-          <span className=" text-xs lg:text-base text-gray-500">
+          <span className=" text-xs lg:text-sm text-gray-500">
             100 <span className=" hidden md:inline">Repost</span>
           </span>
         </div>
