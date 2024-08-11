@@ -1,6 +1,6 @@
 import React from "react";
 import Tooltip from "rc-tooltip";
-import "rc-tooltip/assets/bootstrap_white.css";
+// import "rc-tooltip/assets/bootstrap_white.css";
 // import Comments from "./Comments";
 
 const Post = () => {
@@ -28,7 +28,7 @@ const Post = () => {
             </div>
           </div>
           <Tooltip
-            placement="right"
+            placement="bottomRight'"
             trigger={["click"]}
             overlay={<span>tooltip</span>}
           >
@@ -50,7 +50,7 @@ const Post = () => {
             </button>
           </Tooltip>
         </div>
-        <p className=" text-sm text-ellipsis">
+        <p className=" text-sm whitespace-nowrap">
           I really want to be the best, so i will put in the work and i leave
           the rest for God because there's no one better.Thank you Lord
         </p>
