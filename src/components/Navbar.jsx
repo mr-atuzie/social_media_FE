@@ -201,7 +201,7 @@ const Navbar = () => {
                     />
                   </svg>
                 </div>
-                <span className=" text-sm font-medium ">Login/Register</span>
+                <span className=" text-sm  ">Login/Register</span>
               </div>
             </Link>
           </ShowOnLogOut>
