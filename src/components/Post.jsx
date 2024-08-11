@@ -50,7 +50,7 @@ const Post = () => {
             </button>
           </Tooltip>
         </div>
-        <p className=" text-sm whitespace-nowrap">
+        <p className=" text-sm text-pretty ">
           I really want to be the best, so i will put in the work and i leave
           the rest for God because there's no one better.Thank you Lord
         </p>

@@ -19,7 +19,7 @@ const Stories = () => {
               className=" object-cover rounded-full ring-2"
             />
 
-            <div className=" w-8 h-8 flex justify-center items-center bg-black rounded-full absolute text-white -bottom-0 -right-1">
+            <div className=" w-7 h-7 lg:w-8 lg:h-8 flex justify-center items-center bg-black rounded-full absolute text-white -bottom-0 -right-1">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -36,7 +36,9 @@ const Stories = () => {
               </svg>
             </div>
           </div>
-          <span className=" text-xs md:text-sm text-gray-500">Add status</span>
+          <span className=" text-xs md:text-sm whitespace-nowrap text-gray-500">
+            Add status
+          </span>
         </div>
         {stories.map((story) => {
           return (
