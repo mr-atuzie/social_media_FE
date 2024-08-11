@@ -30,9 +30,7 @@ const Post = () => {
           <Tooltip
             placement="right"
             trigger={["click"]}
-            overlay={
-              <span className=" bg-white rounded-md shadow-md">tooltip</span>
-            }
+            overlay={<span>tooltip</span>}
           >
             <button>
               <svg

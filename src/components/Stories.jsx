@@ -10,7 +10,7 @@ const Stories = () => {
           status disappear after 24 hours
         </p>
       </div>
-      <div className=" flex gap-4 py-1 md:gap-6 overflow-scroll hide-scrollbar  w-full">
+      <div className=" flex gap-4 p-1 md:gap-6 overflow-scroll hide-scrollbar  w-full">
         <div className=" flex flex-col items-center gap-2 cursor-pointer ">
           <div className="relative  w-14 h-14 ring-black lg:w-16 lg:h-16 ">
             <img
@@ -19,7 +19,7 @@ const Stories = () => {
               className=" object-cover rounded-full ring-2"
             />
 
-            <div className=" w-8 h-8 flex justify-center items-center bg-black rounded-full absolute text-white -bottom-2 -right-1">
+            <div className=" w-8 h-8 flex justify-center items-center bg-black rounded-full absolute text-white -bottom-0 -right-1">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
