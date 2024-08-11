@@ -10,7 +10,7 @@ const Stories = () => {
           status disappear after 24 hours
         </p>
       </div>
-      <div className=" flex gap-4 md:gap-6 overflow-scroll hide-scrollbar  w-max">
+      <div className=" flex gap-4 p-2 md:gap-6 overflow-scroll hide-scrollbar  w-max">
         <div className=" flex flex-col items-center gap-2 cursor-pointer ">
           <div className="relative  w-14 h-14 ring-black lg:w-16 lg:h-16 ">
             <img
