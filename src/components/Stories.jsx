@@ -3,7 +3,7 @@ import React from "react";
 const Stories = () => {
   const stories = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
   return (
-    <div className=" w-full p-4 flex flex-col gap-4 bg-white rounded-lg  shadow-md   text-xs">
+    <div className=" w-full p-4 flex flex-col gap-4 overflow-hidden bg-white rounded-lg  shadow-md   text-xs">
       <div>
         <h1 className=" font-medium">Status</h1>
         <p className=" text-xs text-gray-400">

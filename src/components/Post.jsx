@@ -124,7 +124,7 @@ const Post = () => {
             </svg>
           </div>
           <span className=" text-gray-300">|</span>
-          <span className=" text-sm lg:text-base text-gray-500">
+          <span className=" text-xs lg:text-base text-gray-500">
             100 <span className=" hidden md:inline">Repost</span>
           </span>
         </div>
