@@ -4,7 +4,7 @@ import React from "react";
 const Post = () => {
   return (
     <div className=" flex flex-col gap-4">
-      <div className=" flex items-center justify-between">
+      <div className=" flex items-start justify-between">
         <div className=" flex items-center gap-4">
           <div>
             <img
@@ -17,7 +17,7 @@ const Post = () => {
           </div>
 
           <div>
-            <div className=" flex gap-2">
+            <div className=" flex  items-center gap-2">
               <p className=" font-medium text-sm lg:text-base">Jack Dorsey</p>
               <p className=" text-gray-500 text-xs lg:text-sm">@Jacky_D</p>
             </div>
@@ -78,7 +78,7 @@ const Post = () => {
               </svg>
             </div>
             <span className=" text-gray-300">|</span>
-            <span className=" text-gray-500">
+            <span className=" text-sm lg:text-base text-gray-500">
               39 <span className=" hidden md:inline">Likes</span>
             </span>
           </div>
@@ -100,8 +100,8 @@ const Post = () => {
               </svg>
             </div>
             <span className=" text-gray-300">|</span>
-            <span className=" text-gray-500">
-              39 <span className=" hidden md:inline">Comments</span>
+            <span className=" text-sm lg:text-base text-gray-500">
+              300 <span className=" hidden md:inline">Comments</span>
             </span>
           </div>
         </div>
@@ -124,7 +124,7 @@ const Post = () => {
             </svg>
           </div>
           <span className=" text-gray-300">|</span>
-          <span className=" text-gray-500">
+          <span className=" text-sm lg:text-base text-gray-500">
             100 <span className=" hidden md:inline">Repost</span>
           </span>
         </div>

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import MobileMenu from "./MobileMenu";
+// import MobileMenu from "./MobileMenu";
 import ShowOnLogin, { ShowOnLogOut } from "./Protect";
 import { useSelector } from "react-redux";
 import { selectUser } from "../redux/features/userSlice";
@@ -8,7 +8,7 @@ const Navbar = () => {
   const user = useSelector(selectUser);
 
   return (
-    <nav className="bg-white flex items-center  py-4">
+    <nav className="bg-white sticky w-full top-0 flex items-center  py-5 shadow-md">
       <div className=" w-[95%] flex justify-between items-center lg:w-[85%] mx-auto ">
         {/* LEFT */}
         <div className=" md:hidden lg:block ">
@@ -206,7 +206,7 @@ const Navbar = () => {
             </Link>
           </ShowOnLogOut>
 
-          <MobileMenu />
+          {/* <MobileMenu /> */}
         </div>
       </div>
     </nav>

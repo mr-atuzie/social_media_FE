@@ -25,7 +25,7 @@ const AddPost = () => {
         </svg>
       </button>
       {addpost && (
-        <div className=" fixed top-0 left-0 z-50 w-full h-screen hide-scrollbar flex justify-center items-center  bg-black/70">
+        <div className=" fixed inset-0 z-50 w-full h-screen hide-scrollbar overflow-hidden flex justify-center items-center  bg-black/70">
           <AddPostCard setAddPost={setAddPost} />
         </div>
       )}
