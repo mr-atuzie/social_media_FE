@@ -1,4 +1,6 @@
 import React from "react";
+import Tooltip from "rc-tooltip";
+import "rc-tooltip/assets/bootstrap_white.css";
 // import Comments from "./Comments";
 
 const Post = () => {
@@ -25,23 +27,30 @@ const Post = () => {
               <p className=" text-gray-500 text-xs lg:text-sm">17m</p>
             </div>
           </div>
-
-          <button>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="size-6"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M6.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM12.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM18.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z"
-              />
-            </svg>
-          </button>
+          <Tooltip
+            placement="right"
+            trigger={["click"]}
+            overlay={
+              <span className=" bg-white rounded-md shadow-md">tooltip</span>
+            }
+          >
+            <button>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="size-6"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M6.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM12.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM18.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z"
+                />
+              </svg>
+            </button>
+          </Tooltip>
         </div>
         <p className=" text-sm text-balance">
           I really want to be the best, so i will put in the work and i leave
