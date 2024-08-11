@@ -17,9 +17,11 @@ const Post = () => {
           </div>
 
           <div className=" flex gap-2 items-center">
-            <p className=" font-medium">Jack Dorsey</p>
-            <p className=" text-gray-500 text-sm">@Jacky_D</p>
-            <p className=" text-gray-500 text-sm">. 17m</p>
+            <div>
+              <p className=" font-medium text-sm lg:text-base">Jack Dorsey</p>
+              <p className=" text-gray-500 text-xs lg:text-sm">@Jacky_D</p>
+            </div>
+            <p className=" text-gray-500 text-xs lg:text-sm">. 17m</p>
           </div>
         </div>
 
@@ -41,10 +43,8 @@ const Post = () => {
         </button>
       </div>
       <p className=" text-sm">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quas magnam
-        amet suscipit dolor dolore eligendi voluptatem, impedit modi placeat
-        ratione quibusdam quod odit eaque expedita earum. Perferendis aliquid
-        inventore minus!
+        I really want to be the best, so i will put in the work and i leave the
+        rest for God because there's no one better.Thank you Lord
       </p>
       <div className=" flex flex-col gap-4">
         <div>
@@ -59,8 +59,8 @@ const Post = () => {
       </div>
       {/* interaction */}
       <div className=" flex items-center text-sm justify-between my-2.5">
-        <div className="flex gap-8 ">
-          <div className=" flex items-center gap-4 bg-gray-50 p-2 rounded-xl">
+        <div className="flex gap-4 md:gap-6 lg:gap-8 ">
+          <div className=" flex items-center gap-2 lg:gap-4 bg-gray-50 p-2 rounded-xl">
             <div>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -68,7 +68,7 @@ const Post = () => {
                 viewBox="0 0 24 24"
                 strokeWidth={1.5}
                 stroke="currentColor"
-                className="size-6"
+                className="size-4 lg:size-6"
               >
                 <path
                   strokeLinecap="round"
@@ -82,7 +82,7 @@ const Post = () => {
               39 <span className=" hidden md:inline">Likes</span>
             </span>
           </div>
-          <div className=" flex items-center gap-4 bg-gray-50 p-2 rounded-xl">
+          <div className=" flex items-center gap-2 lg:gap-4 bg-gray-50 p-2 rounded-xl">
             <div>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -90,7 +90,7 @@ const Post = () => {
                 viewBox="0 0 24 24"
                 strokeWidth={1.5}
                 stroke="currentColor"
-                className="size-6"
+                className="size-4 lg:size-6"
               >
                 <path
                   strokeLinecap="round"
@@ -106,7 +106,7 @@ const Post = () => {
           </div>
         </div>
 
-        <div className=" flex items-center gap-4 bg-gray-50 p-2 rounded-xl">
+        <div className=" flex items-center gap-2 lg:gap-4 bg-gray-50 p-2 rounded-xl">
           <div>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -114,7 +114,7 @@ const Post = () => {
               viewBox="0 0 24 24"
               strokeWidth={1.5}
               stroke="currentColor"
-              className="size-6"
+              className="size-4 lg:size-6"
             >
               <path
                 strokeLinecap="round"
