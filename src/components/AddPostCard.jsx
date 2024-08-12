@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { selectUser } from "../redux/features/userSlice";
 import ErrorCard from "./ErrorCard";
+import axios from "axios";
 // import PhotoGrid from "./PhotoGrid";
 
 const AddPostCard = ({ setAddPost }) => {
@@ -10,6 +11,7 @@ const AddPostCard = ({ setAddPost }) => {
   const [addedPhotos, setAddedPhotos] = useState([]);
   const [desc, setDesc] = useState("");
   const [errMsg, setErrMsg] = useState("");
+  const [loading, setLoading] = useState(false);
 
   async function uploadPhoto(ev) {
     let uploadFiles = [];
@@ -38,6 +40,32 @@ const AddPostCard = ({ setAddPost }) => {
   }
 
   const numberOfPhotos = addedPhotos?.length;
+
+  const addPost = async () => {
+    setLoading(true);
+    try {
+      const { data } = await axios.post("/api/v1/post", {
+        desc,
+        photo: addedPhotos,
+      });
+
+      console.log(data);
+      setLoading(false);
+      setAddPost(false);
+    } catch (error) {
+      setLoading(false);
+      console.log(error);
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+
+      setErrMsg(message);
+      console.log(error);
+    }
+  };
   return (
     <div className=" w-[90%] flex flex-col gap-4 mx-auto bg-white  rounded-md shadow-md p-4 lg:w-[35%]">
       <div className=" flex  items-center justify-between">
@@ -331,7 +359,11 @@ const AddPostCard = ({ setAddPost }) => {
 
       <div className=" flex w-full justify-end">
         {(addedPhotos.length > 0 || desc) && (
-          <button className="bg-black text-white rounded-md w-fit px-4 py-2">
+          <button
+            disabled={loading}
+            onClick={addPost}
+            className="bg-black text-white rounded-md w-fit px-4 py-2"
+          >
             Post
           </button>
         )}
