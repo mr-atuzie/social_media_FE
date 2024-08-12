@@ -46,7 +46,7 @@ const Stories = () => {
               key={story}
               className=" flex flex-col items-center gap-2 cursor-pointer "
             >
-              <div className=" w-14 h-14 lg:w-16 lg:h-1">
+              <div className=" w-14 h-14 lg:w-16 lg:h-16">
                 <img
                   src={
                     "https://images.pexels.com/photos/22873531/pexels-photo-22873531/free-photo-of-surfers-going-into-the-sea.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load"
