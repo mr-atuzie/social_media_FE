@@ -168,7 +168,7 @@ const Navbar = () => {
                 </svg>
               </div>
 
-              <div>
+              <Link to={"/profile/" + user?._id}>
                 <img
                   src={
                     user?.avatar
@@ -178,7 +178,7 @@ const Navbar = () => {
                   alt=""
                   className=" w-8 ring-black ring-2 h-8 rounded-full object-cover"
                 />
-              </div>
+              </Link>
             </div>
           </ShowOnLogin>
 

@@ -1,5 +1,6 @@
 import React from "react";
 import Tooltip from "rc-tooltip";
+import { Link } from "react-router-dom";
 // import PhotoGrid from "./PhotoGrid";
 // import "rc-tooltip/assets/bootstrap_white.css";
 // import Comments from "./Comments";
@@ -11,13 +12,13 @@ const Post = ({ post }) => {
       <div className=" flex flex-col gap-4">
         <div className=" flex items-start justify-between">
           <div className=" flex items-center gap-4">
-            <div>
+            <Link to={"/profile/" + post?.user?._id}>
               <img
                 src={post?.user.avatar}
                 alt=""
                 className="w-10 h-10 object-cover  rounded-full"
               />
-            </div>
+            </Link>
 
             <div>
               <div className=" flex  items-center gap-2">

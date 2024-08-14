@@ -1,4 +1,4 @@
-import { GiSeagull } from "react-icons/gi";
+// import { GiSeagull } from "react-icons/gi";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -57,15 +57,13 @@ const RegisterPage = () => {
         onSubmit={handleRegister}
         className=" flex gap-6 flex-col w-[90%] lg:w-[40%] my-20  mx-auto bg-white rounded-md shadow-md p-4 lg:p-8 "
       >
-        <div className="flex items-center  gap-2">
+        {/* <div className="flex items-center  gap-2">
           <div className=" bg-gray-50 p-2 rounded-md">
             <GiSeagull size={20} />
           </div>
 
           <h1 className=" font-semibold">Seagull</h1>
-        </div>
-
-        {errMsg && <ErrorCard message={errMsg} />}
+        </div> */}
 
         <div>
           <h1 className="font-bold text-2xl">Create account</h1>
@@ -74,6 +72,7 @@ const RegisterPage = () => {
           </p>
         </div>
 
+        {errMsg && <ErrorCard message={errMsg} />}
         <div>
           <div className="flex flex-col lg:flex-row gap-4">
             <div>
