@@ -9,6 +9,7 @@ const AddPostCard = ({ setAddPost }) => {
   const user = useSelector(selectUser);
 
   const [addedPhotos, setAddedPhotos] = useState([]);
+  const [selectedImages, setSelectedImages] = useState([]);
   const [desc, setDesc] = useState("");
   const [errMsg, setErrMsg] = useState("");
   const [loading, setLoading] = useState(false);
@@ -21,11 +22,14 @@ const AddPostCard = ({ setAddPost }) => {
     console.log(files);
 
     for (let i = 0; i < files.length; i++) {
-      uploadFiles.push(URL.createObjectURL(ev.target.files[i]));
-
       if (files.length > 4) {
         return setErrMsg("You can only add 4 photos");
       }
+      uploadFiles.push(URL.createObjectURL(ev.target.files[i]));
+
+      setSelectedImages((prev) => {
+        return [...prev, ev.target.files[0]];
+      });
 
       // console.log(uploadFiles);
     }
@@ -43,15 +47,36 @@ const AddPostCard = ({ setAddPost }) => {
 
   const addPost = async () => {
     setLoading(true);
+    let uploadFiles = [];
     try {
+      // const files = ev.target.files;
+      const dataDoc = new FormData();
+
+      for (let i = 0; i < selectedImages.length; i++) {
+        dataDoc.append("file", selectedImages[i]);
+        dataDoc.append("cloud_name", process.env.REACT_APP_CLOUD_NAME);
+        dataDoc.append("upload_preset", process.env.REACT_APP_UPLOAD_PRESET);
+
+        const res = await fetch(process.env.REACT_APP_CLOUD_URL, {
+          method: "post",
+          body: dataDoc,
+        });
+
+        const imageData = await res.json();
+
+        uploadFiles.push(imageData.secure_url.toString());
+
+        console.log(uploadFiles);
+      }
+
       const { data } = await axios.post("/api/v1/post", {
         desc,
-        photo: addedPhotos,
+        photo: uploadFiles,
       });
 
       console.log(data);
       setLoading(false);
-      setAddPost(false);
+      // setAddPost(false);
     } catch (error) {
       setLoading(false);
       console.log(error);
@@ -66,16 +91,27 @@ const AddPostCard = ({ setAddPost }) => {
       console.log(error);
     }
   };
+
   return (
     <div className=" w-[90%] flex flex-col gap-4 mx-auto bg-white  rounded-md shadow-md p-4 lg:w-[35%]">
       <div className=" flex  items-center justify-between">
-        <img
-          src={
-            user?.avatar ? user?.avatar : "https://i.ibb.co/4pDNDk1/avatar.png"
-          }
-          alt=""
-          className=" w-8  h-8 rounded-full object-cover"
-        />
+        <div className=" flex gap-2 items-center">
+          <img
+            src={
+              user?.avatar
+                ? user?.avatar
+                : "https://i.ibb.co/4pDNDk1/avatar.png"
+            }
+            alt=""
+            className=" w-8  h-8 rounded-full object-cover"
+          />
+          <div className=" ">
+            <p className=" font-medium text-sm lg:text-base">{user?.name}</p>
+            <p className=" text-gray-500 text-xs -mt-1 lg:text-sm">
+              @{user?.username}
+            </p>
+          </div>
+        </div>
 
         <button onClick={() => setAddPost(false)}>
           <svg
@@ -103,45 +139,10 @@ const AddPostCard = ({ setAddPost }) => {
           className=" p-2 w-full text-sm md:text-base bg-transparent outline-none placeholder:font-light placeholder:text-gray-400"
         ></textarea>
 
-        {/* <div className=" grid grid-cols-2 gap-2">
-          {addedPhotos.map((link, index) => {
-            return (
-              <div key={index} className=" h-full flex relative ">
-                <img
-                  className=" w-full h-full  object-cover "
-                  src={link}
-                  alt=""
-                />
-                {console.log(link)}
-                <button
-                  onClick={() => removePhoto(link)}
-                  className=" absolute bottom-1 right-1 bg-black py-2 px-2 lg:px-3 cursor-pointer bg-opacity-50 text-white rounded-2xl"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth={1.5}
-                    stroke="currentColor"
-                    className="w-4 lg:w-6 h-4 lg:h-6"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0"
-                    />
-                  </svg>
-                </button>
-              </div>
-            );
-          })}
-        </div> */}
-
         {numberOfPhotos === 1 && (
-          <div className=" overflow-hidden rounded-lg">
+          <div className=" overflow-hidden max-h-72 rounded-lg">
             {addedPhotos.map((link, index) => (
               <div className=" h-full flex relative " key={index}>
-                {console.log(index)}
                 <img
                   className=" w-full h-full  object-cover "
                   src={link}
@@ -232,7 +233,7 @@ const AddPostCard = ({ setAddPost }) => {
               </button>
             </div>
             <div className="flex flex-col gap-2">
-              <div className=" h-full flex relative ">
+              <div className=" flex-1 h-full flex relative ">
                 <img
                   className=" w-full h-full  object-cover "
                   src={addedPhotos[1]}
@@ -258,7 +259,7 @@ const AddPostCard = ({ setAddPost }) => {
                   </svg>
                 </button>
               </div>
-              <div className=" h-full flex relative ">
+              <div className=" flex-1 h-full flex relative ">
                 <img
                   className=" w-full h-full  object-cover "
                   src={addedPhotos[2]}
@@ -320,41 +321,6 @@ const AddPostCard = ({ setAddPost }) => {
             ))}
           </div>
         )}
-
-        {/* <PhotoGrid addedPhotos={addedPhotos} setAddedPhotos={setAddedPhotos} /> */}
-        {/* <div className=" grid grid-cols-2 gap-3 rounded-2xl overflow-hidden">
-          {addedPhotos.length > 0 &&
-            addedPhotos.map((link, index) => {
-              return (
-                <div className=" h-28 flex relative " key={index}>
-                  <img
-                    className=" w-full h-full  object-cover "
-                    src={link}
-                    alt=""
-                  />
-                  <button
-                    onClick={() => removePhoto(link)}
-                    className=" absolute bottom-1 right-1 bg-black py-2 px-2 lg:px-3 cursor-pointer bg-opacity-50 text-white rounded-2xl"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth={1.5}
-                      stroke="currentColor"
-                      className="w-4 lg:w-6 h-4 lg:h-6"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0"
-                      />
-                    </svg>
-                  </button>
-                </div>
-              );
-            })}
-        </div> */}
       </div>
 
       <div className=" flex w-full justify-end">
@@ -362,9 +328,9 @@ const AddPostCard = ({ setAddPost }) => {
           <button
             disabled={loading}
             onClick={addPost}
-            className="bg-black text-white rounded-md w-fit px-4 py-2"
+            className="bg-black disabled:opacity-50 text-white text-sm lg:text-base rounded-md w-fit px-4 py-2"
           >
-            Post
+            {loading ? "Uploading" : "Post"}
           </button>
         )}
       </div>

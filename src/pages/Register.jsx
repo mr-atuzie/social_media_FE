@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import ErrorCard from "../components/ErrorCard";
 import { useDispatch } from "react-redux";
-import { SET_USER } from "../redux/features/userSlice";
+import { SET_LOGIN, SET_USER } from "../redux/features/userSlice";
 
 const RegisterPage = () => {
   const [name, setName] = useState("");
@@ -34,6 +34,7 @@ const RegisterPage = () => {
       const { data } = await axios.post("/api/v1/user/register", formData);
 
       dispatch(SET_USER(data));
+      dispatch(SET_LOGIN(true));
       setLoading(false);
       navigate("/uploadPhoto");
     } catch (error) {
