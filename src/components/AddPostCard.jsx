@@ -28,7 +28,7 @@ const AddPostCard = ({ setAddPost }) => {
       uploadFiles.push(URL.createObjectURL(ev.target.files[i]));
 
       setSelectedImages((prev) => {
-        return [...prev, ev.target.files[0]];
+        return [...prev, ev.target.files[i]];
       });
 
       // console.log(uploadFiles);
@@ -48,6 +48,7 @@ const AddPostCard = ({ setAddPost }) => {
   const addPost = async () => {
     setLoading(true);
     let uploadFiles = [];
+    console.log(selectedImages);
     try {
       // const files = ev.target.files;
       const dataDoc = new FormData();
@@ -76,7 +77,7 @@ const AddPostCard = ({ setAddPost }) => {
 
       console.log(data);
       setLoading(false);
-      // setAddPost(false);
+      setAddPost(false);
     } catch (error) {
       setLoading(false);
       console.log(error);
@@ -140,7 +141,7 @@ const AddPostCard = ({ setAddPost }) => {
         ></textarea>
 
         {numberOfPhotos === 1 && (
-          <div className=" overflow-hidden max-h-72 rounded-lg">
+          <div className=" overflow-hidden h-72 rounded-lg">
             {addedPhotos.map((link, index) => (
               <div className=" h-full flex relative " key={index}>
                 <img
@@ -180,7 +181,7 @@ const AddPostCard = ({ setAddPost }) => {
                   src={link}
                   alt=""
                 />
-                {console.log(link)}
+
                 <button
                   onClick={() => removePhoto(link)}
                   className=" absolute bottom-1 right-1 bg-black py-2 px-2 lg:px-3 cursor-pointer bg-opacity-50 text-white rounded-2xl"

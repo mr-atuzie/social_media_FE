@@ -1,9 +1,11 @@
 import React from "react";
 import Tooltip from "rc-tooltip";
+// import PhotoGrid from "./PhotoGrid";
 // import "rc-tooltip/assets/bootstrap_white.css";
 // import Comments from "./Comments";
+const { formatDistanceToNow } = require("date-fns");
 
-const Post = () => {
+const Post = ({ post }) => {
   return (
     <>
       <div className=" flex flex-col gap-4">
@@ -11,9 +13,7 @@ const Post = () => {
           <div className=" flex items-center gap-4">
             <div>
               <img
-                src={
-                  "https://images.pexels.com/photos/18582529/pexels-photo-18582529/free-photo-of-a-man-is-working-on-a-statue-in-a-workshop.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load"
-                }
+                src={post?.user.avatar}
                 alt=""
                 className="w-10 h-10 object-cover  rounded-full"
               />
@@ -21,10 +21,19 @@ const Post = () => {
 
             <div>
               <div className=" flex  items-center gap-2">
-                <p className=" font-medium text-sm lg:text-base">Jack Dorsey</p>
-                <p className=" text-gray-500 text-xs lg:text-sm">@Jacky_D</p>
+                <p className=" font-medium text-sm lg:text-base">
+                  {post?.user.name}
+                </p>
+                <p className=" text-gray-500 text-xs lg:text-sm">
+                  @{post?.user.username}
+                </p>
               </div>
-              <p className=" text-gray-500 text-xs lg:text-sm">17m</p>
+              <p className=" text-gray-500 text-xs lg:text-sm">
+                {/* {format(post?.createdAt, "mm")} */}
+                {formatDistanceToNow(post?.createdAt, {
+                  addSuffix: true,
+                })}
+              </p>
             </div>
           </div>
           <Tooltip
@@ -50,21 +59,90 @@ const Post = () => {
             </button>
           </Tooltip>
         </div>
-        <p className=" text-sm text-pretty ">
-          I really want to be the best, so i will put in the work and i leave
-          the rest for God because there's no one better.Thank you Lord
-        </p>
+        <p className=" text-sm text-pretty ">{post?.desc}</p>
+
         <div className=" flex flex-col gap-4">
           <div>
-            <img
+            {/* <img
               src={
                 "https://images.pexels.com/photos/26926247/pexels-photo-26926247/free-photo-of-closeness.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
               }
               alt=""
               className="object-cover w-full min-h-96 rounded-md"
-            />
+            /> */}
+
+            {post?.photo.length === 1 && (
+              <div className=" overflow-hidden h-96 rounded-lg">
+                {post?.photo.map((link, index) => (
+                  <div className=" h-full flex  " key={index}>
+                    <img
+                      className=" w-full h-full  object-cover "
+                      src={link}
+                      alt=""
+                    />
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {post?.photo.length === 2 && (
+              <div className=" grid grid-cols-2 gap-1 overflow-hidden rounded-lg">
+                {post?.photo.map((link, index) => (
+                  <div key={index} className=" h-48 flex">
+                    <img
+                      className=" w-full h-full  object-cover "
+                      src={link}
+                      alt=""
+                    />
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {post?.photo.length === 3 && (
+              <div className="grid gap-1  grid-cols-[2fr_1fr]  rounded-lg overflow-hidden ">
+                <div className=" h-full flex">
+                  <img
+                    className=" w-full h-full  object-cover "
+                    src={post?.photo[0]}
+                    alt=""
+                  />
+                </div>
+                <div className="flex flex-col gap-1">
+                  <div className=" flex-1 h-full flex ">
+                    <img
+                      className=" w-full h-full  object-cover "
+                      src={post?.photo[1]}
+                      alt=""
+                    />
+                  </div>
+                  <div className=" flex-1 h-full flex ">
+                    <img
+                      className=" w-full h-full  object-cover "
+                      src={post?.photo[2]}
+                      alt=""
+                    />
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {post?.photo.length === 4 && (
+              <div className=" grid grid-cols-2 gap-1 overflow-hidden rounded-lg">
+                {post?.photo.map((link, index) => (
+                  <div key={index} className=" h-48 flex">
+                    <img
+                      className=" w-full h-full  object-cover "
+                      src={link}
+                      alt=""
+                    />
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         </div>
+
         {/* interaction */}
         <div className=" flex items-center text-sm justify-between my-2.5">
           <div className="flex gap-4 md:gap-6 lg:gap-8 ">
@@ -87,7 +165,8 @@ const Post = () => {
               </div>
               <span className=" text-gray-300">|</span>
               <span className=" text-xs lg:text-sm text-gray-500">
-                39 <span className=" hidden md:inline">Likes</span>
+                {post?.likes.length}{" "}
+                <span className=" hidden md:inline">Likes</span>
               </span>
             </div>
             <div className=" flex items-center gap-2 lg:gap-4 bg-gray-50 p-2 rounded-xl">
@@ -109,7 +188,8 @@ const Post = () => {
               </div>
               <span className=" text-gray-300">|</span>
               <span className=" text-xs lg:text-sm text-gray-500">
-                300 <span className=" hidden md:inline">Comments</span>
+                {post?.comments.length}
+                <span className=" hidden md:inline">Comments</span>
               </span>
             </div>
           </div>
@@ -140,7 +220,7 @@ const Post = () => {
         {/* comment */}
         {/* <Comments /> */}
       </div>
-      <hr className=" border-t  border-gray-100 w-52 self-center" />
+      <hr className=" border-t  border-gray-100 w-[85%] self-center" />
     </>
   );
 };
