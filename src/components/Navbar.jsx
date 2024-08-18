@@ -8,7 +8,7 @@ const Navbar = () => {
   const user = useSelector(selectUser);
 
   return (
-    <nav className="bg-white sticky w-full top-0 flex items-center  py-5 shadow-md">
+    <nav className="bg-white sticky w-full top-0 z-50 flex items-center  py-5 shadow-md">
       <div className=" w-[95%] flex justify-between items-center lg:w-[85%] mx-auto ">
         {/* LEFT */}
         <div className=" md:hidden lg:block ">

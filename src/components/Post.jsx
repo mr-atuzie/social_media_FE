@@ -9,7 +9,7 @@ const { formatDistanceToNow } = require("date-fns");
 const Post = ({ post }) => {
   return (
     <>
-      <div className=" flex flex-col gap-4">
+      <div className=" flex flex-col gap-2 lg:gap-4">
         <div className=" flex items-start justify-between">
           <div className=" flex items-center gap-4">
             <Link to={"/profile/" + post?.user?._id}>

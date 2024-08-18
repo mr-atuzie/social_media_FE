@@ -2,30 +2,52 @@ import React, { useEffect, useState } from "react";
 import Post from "./Post";
 import axios from "axios";
 
-const Feed = () => {
+const Feed = ({ userId }) => {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    const getPosts = async () => {
-      try {
-        const { data } = await axios.get("/api/v1/post");
-        setPosts(data.posts);
-        console.log(data);
-      } catch (error) {
-        const message =
-          (error.response &&
-            error.response.data &&
-            error.response.data.message) ||
-          error.message ||
-          error.toString();
+    if (userId) {
+      const getPosts = async () => {
+        try {
+          const { data } = await axios.get("/api/v1/post/user/" + userId);
+          setPosts(data.posts);
+          console.log(data);
+        } catch (error) {
+          const message =
+            (error.response &&
+              error.response.data &&
+              error.response.data.message) ||
+            error.message ||
+            error.toString();
 
-        console.log(error);
-        console.log(message);
-      }
-    };
+          console.log(error);
+          console.log(message);
+        }
+      };
 
-    getPosts();
-  }, []);
+      getPosts();
+    } else {
+      const getPosts = async () => {
+        try {
+          const { data } = await axios.get("/api/v1/post");
+          setPosts(data.posts);
+          console.log(data);
+        } catch (error) {
+          const message =
+            (error.response &&
+              error.response.data &&
+              error.response.data.message) ||
+            error.message ||
+            error.toString();
+
+          console.log(error);
+          console.log(message);
+        }
+      };
+
+      getPosts();
+    }
+  }, [userId]);
 
   return (
     <div className=" p-4 shadow-md bg-white rounded-lg flex flex-col gap-3 lg:gap-6">
