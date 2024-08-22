@@ -1,12 +1,42 @@
 import React from "react";
 import Tooltip from "rc-tooltip";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import toast from "react-hot-toast";
+import { useDispatch, useSelector } from "react-redux";
+import { selectUser } from "../redux/features/userSlice";
+import { fetchPosts } from "../redux/features/postSlice";
 // import PhotoGrid from "./PhotoGrid";
 // import "rc-tooltip/assets/bootstrap_white.css";
 // import Comments from "./Comments";
 const { formatDistanceToNow } = require("date-fns");
 
 const Post = ({ post }) => {
+  const currentUser = useSelector(selectUser);
+
+  const liked = post.likes.includes(currentUser._id);
+
+  const dispatch = useDispatch();
+
+  const LikePost = async () => {
+    toast.success("post liked");
+    try {
+      const { data } = await axios.patch("/api/v1/post/like/" + post._id);
+
+      dispatch(fetchPosts());
+      console.log(data);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+
+      toast.error(message);
+      console.log(error);
+    }
+  };
   return (
     <>
       <div className=" flex flex-col gap-2 lg:gap-4">
@@ -147,29 +177,43 @@ const Post = ({ post }) => {
         {/* interaction */}
         <div className=" flex items-center text-sm justify-between my-2.5">
           <div className="flex gap-4 md:gap-6 lg:gap-8 ">
-            <div className=" flex items-center gap-2 lg:gap-4 bg-gray-50 p-2 rounded-xl">
+            <button
+              onClick={LikePost}
+              className=" flex items-center gap-2 lg:gap-4 bg-gray-50 p-2 rounded-xl"
+            >
               <div>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                  className="size-5 lg:size-6"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M6.633 10.25c.806 0 1.533-.446 2.031-1.08a9.041 9.041 0 0 1 2.861-2.4c.723-.384 1.35-.956 1.653-1.715a4.498 4.498 0 0 0 .322-1.672V2.75a.75.75 0 0 1 .75-.75 2.25 2.25 0 0 1 2.25 2.25c0 1.152-.26 2.243-.723 3.218-.266.558.107 1.282.725 1.282m0 0h3.126c1.026 0 1.945.694 2.054 1.715.045.422.068.85.068 1.285a11.95 11.95 0 0 1-2.649 7.521c-.388.482-.987.729-1.605.729H13.48c-.483 0-.964-.078-1.423-.23l-3.114-1.04a4.501 4.501 0 0 0-1.423-.23H5.904m10.598-9.75H14.25M5.904 18.5c.083.205.173.405.27.602.197.4-.078.898-.523.898h-.908c-.889 0-1.713-.518-1.972-1.368a12 12 0 0 1-.521-3.507c0-1.553.295-3.036.831-4.398C3.387 9.953 4.167 9.5 5 9.5h1.053c.472 0 .745.556.5.96a8.958 8.958 0 0 0-1.302 4.665c0 1.194.232 2.333.654 3.375Z"
-                  />
-                </svg>
+                {liked ? (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    className="size-5 text-red-500 lg:size-6"
+                  >
+                    <path d="m11.645 20.91-.007-.003-.022-.012a15.247 15.247 0 0 1-.383-.218 25.18 25.18 0 0 1-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0 1 12 5.052 5.5 5.5 0 0 1 16.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 0 1-4.244 3.17 15.247 15.247 0 0 1-.383.219l-.022.012-.007.004-.003.001a.752.752 0 0 1-.704 0l-.003-.001Z" />
+                  </svg>
+                ) : (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                    className="size-5 lg:size-6"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"
+                    />
+                  </svg>
+                )}
               </div>
               <span className=" text-gray-300">|</span>
               <span className=" text-xs lg:text-sm text-gray-500">
                 {post?.likes.length}{" "}
                 <span className=" hidden md:inline">Likes</span>
               </span>
-            </div>
+            </button>
             <div className=" flex items-center gap-2 lg:gap-4 bg-gray-50 p-2 rounded-xl">
               <div>
                 <svg

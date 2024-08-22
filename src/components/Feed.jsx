@@ -1,62 +1,53 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Post from "./Post";
-import axios from "axios";
 import PostLoader from "./PostLoader";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  fetchPosts,
+  fetchUserPosts,
+  selectPostLoader,
+  selectPosts,
+} from "../redux/features/postSlice";
 
 const Feed = ({ userId }) => {
-  const [posts, setPosts] = useState([]);
-  const [loading, setLoading] = useState(false);
+  // const [posts, setPosts] = useState([]);
+  // const [loading, setLoading] = useState(false);
+
+  const dispatch = useDispatch();
+  const posts = useSelector(selectPosts);
+  const postLoader = useSelector(selectPostLoader);
+  // const getPosts = async () => {
+  //   setLoading(true);
+  //   try {
+  //     const { data } = await axios.get("/api/v1/post");
+  //     setPosts(data.posts);
+  //     setLoading(false);
+  //     console.log(data);
+  //   } catch (error) {
+  //     const message =
+  //       (error.response &&
+  //         error.response.data &&
+  //         error.response.data.message) ||
+  //       error.message ||
+  //       error.toString();
+
+  //     setLoading(false);
+  //     console.log(error);
+  //     console.log(message);
+  //   }
+  // };
+
+  // getPosts();
 
   useEffect(() => {
     if (userId) {
-      setLoading(true);
-      const getPosts = async () => {
-        try {
-          const { data } = await axios.get("/api/v1/post/user/" + userId);
-          setPosts(data.posts);
-          console.log(data);
-          setLoading(false);
-        } catch (error) {
-          const message =
-            (error.response &&
-              error.response.data &&
-              error.response.data.message) ||
-            error.message ||
-            error.toString();
-          setLoading(false);
-          console.log(error);
-          console.log(message);
-        }
-      };
-
-      getPosts();
+      dispatch(fetchUserPosts(userId));
     } else {
-      const getPosts = async () => {
-        setLoading(true);
-        try {
-          const { data } = await axios.get("/api/v1/post");
-          setPosts(data.posts);
-          setLoading(false);
-          console.log(data);
-        } catch (error) {
-          const message =
-            (error.response &&
-              error.response.data &&
-              error.response.data.message) ||
-            error.message ||
-            error.toString();
-
-          setLoading(false);
-          console.log(error);
-          console.log(message);
-        }
-      };
-
-      getPosts();
+      dispatch(fetchPosts());
     }
-  }, [userId]);
+  }, [userId, dispatch]);
 
-  if (loading) {
+  if (postLoader) {
     return <PostLoader />;
   }
 

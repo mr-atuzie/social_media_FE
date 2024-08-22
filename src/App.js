@@ -10,6 +10,8 @@ import axios from "axios";
 import { useEffect } from "react";
 import { SET_LOGIN } from "./redux/features/userSlice";
 import { useDispatch } from "react-redux";
+import { Toaster } from "react-hot-toast";
+import { fetchPosts } from "./redux/features/postSlice";
 
 axios.defaults.baseURL = process.env.REACT_APP_SERVER_URL;
 axios.defaults.withCredentials = true;
@@ -27,6 +29,7 @@ function App() {
         console.log(data);
 
         dispatch(SET_LOGIN(data));
+        dispatch(fetchPosts());
       } catch (error) {
         const message =
           (error.response &&
@@ -43,6 +46,7 @@ function App() {
 
   return (
     <BrowserRouter>
+      <Toaster position="top-center" reverseOrder={false} />
       <Navbar />
       <Routes>
         <Route path="/" element={<Layout />}>
