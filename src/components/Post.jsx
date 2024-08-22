@@ -77,7 +77,7 @@ const Post = ({ post }) => {
                 {post?.photo.map((link, index) => (
                   <div className=" h-full flex  " key={index}>
                     <img
-                      className=" w-full h-full  object-cover "
+                      className=" bg-gray-200 w-full h-full  object-cover "
                       src={link}
                       alt=""
                     />
@@ -91,7 +91,7 @@ const Post = ({ post }) => {
                 {post?.photo.map((link, index) => (
                   <div key={index} className=" h-48 flex">
                     <img
-                      className=" w-full h-full  object-cover "
+                      className=" bg-gray-200 w-full h-full  object-cover "
                       src={link}
                       alt=""
                     />
@@ -104,7 +104,7 @@ const Post = ({ post }) => {
               <div className="grid gap-1  grid-cols-[2fr_1fr]  rounded-lg overflow-hidden ">
                 <div className=" h-full flex">
                   <img
-                    className=" w-full h-full  object-cover "
+                    className=" bg-gray-200 w-full h-full  object-cover "
                     src={post?.photo[0]}
                     alt=""
                   />
@@ -112,14 +112,14 @@ const Post = ({ post }) => {
                 <div className="flex flex-col gap-1">
                   <div className=" flex-1 h-full flex ">
                     <img
-                      className=" w-full h-full  object-cover "
+                      className=" w-full h-full bg-gray-200  object-cover "
                       src={post?.photo[1]}
                       alt=""
                     />
                   </div>
                   <div className=" flex-1 h-full flex ">
                     <img
-                      className=" w-full h-full  object-cover "
+                      className=" w-full h-full bg-gray-200  object-cover "
                       src={post?.photo[2]}
                       alt=""
                     />
@@ -133,7 +133,7 @@ const Post = ({ post }) => {
                 {post?.photo.map((link, index) => (
                   <div key={index} className=" h-48 flex">
                     <img
-                      className=" w-full h-full  object-cover "
+                      className=" bg-gray-200 w-full h-full  object-cover "
                       src={link}
                       alt=""
                     />
@@ -155,7 +155,7 @@ const Post = ({ post }) => {
                   viewBox="0 0 24 24"
                   strokeWidth={1.5}
                   stroke="currentColor"
-                  className="size-4 lg:size-6"
+                  className="size-5 lg:size-6"
                 >
                   <path
                     strokeLinecap="round"
@@ -178,7 +178,7 @@ const Post = ({ post }) => {
                   viewBox="0 0 24 24"
                   strokeWidth={1.5}
                   stroke="currentColor"
-                  className="size-4 lg:size-6"
+                  className="size-5 lg:size-6"
                 >
                   <path
                     strokeLinecap="round"
@@ -203,7 +203,7 @@ const Post = ({ post }) => {
                 viewBox="0 0 24 24"
                 strokeWidth={1.5}
                 stroke="currentColor"
-                className="size-4 lg:size-6"
+                className="size-5 lg:size-6"
               >
                 <path
                   strokeLinecap="round"

@@ -4,13 +4,13 @@ import Notifications from "./Notifications";
 import UserInfoCard from "./UserInfoCard";
 import UserMediaCard from "./UserMediaCard";
 
-const RightMenu = ({ userId }) => {
+const RightMenu = ({ user }) => {
   return (
     <div className=" flex flex-col gap-6">
-      {userId ? (
+      {user ? (
         <>
-          <UserInfoCard userId={userId} />
-          <UserMediaCard userId={userId} />
+          <UserInfoCard user={user} />
+          <UserMediaCard userId={user._id} />
         </>
       ) : null}
       <FriendRequests />
