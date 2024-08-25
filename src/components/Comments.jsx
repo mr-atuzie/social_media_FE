@@ -1,13 +1,11 @@
 import React from "react";
 
-const Comments = () => {
+const Comments = ({ post }) => {
   return (
     <div>
       <div className=" flex items-center gap-4">
         <img
-          src={
-            "https://images.pexels.com/photos/27101332/pexels-photo-27101332/free-photo-of-portrait-of-hugging-couple.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-          }
+          src={post.user.avatar}
           alt=""
           width={32}
           height={32}

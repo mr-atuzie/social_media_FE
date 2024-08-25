@@ -18,7 +18,7 @@ const Navbar = () => {
         {/* LEFT */}
         <div className=" md:hidden lg:block ">
           <Link className=" text-xl font-semibold " to={"/"}>
-            FACEBOOK
+            TEXTURE
           </Link>
         </div>
 

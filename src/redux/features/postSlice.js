@@ -1,12 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-// Define an async thunk for fetching posts
-// export const fetchPosts = createAsyncThunk("", async () => {
-//   const response = await axios.get("/api/v1/post/");
-//   return response.data;
-// });
-
 export const fetchPosts = createAsyncThunk(
   "posts/fetchPosts",
   async (_, thunkAPI) => {
@@ -45,8 +39,28 @@ export const fetchUserPosts = createAsyncThunk(
   }
 );
 
+export const fetchSinglePost = createAsyncThunk(
+  "posts/fetchSinglePost",
+  async (postId, thunkAPI) => {
+    try {
+      const response = await axios.get("/api/v1/post/" + postId);
+      return response.data; // Assuming your API returns the data directly
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 const initialState = {
   posts: [],
+  post: null,
   isLoading: false,
   isError: null,
 };
@@ -60,7 +74,7 @@ const postSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    //get all
+    //get all post
     builder
       .addCase(fetchPosts.pending, (state) => {
         state.isLoading = true;
@@ -92,6 +106,20 @@ const postSlice = createSlice({
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;
+      })
+      //get single post
+      .addCase(fetchSinglePost.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(fetchSinglePost.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isError = false;
+        state.post = action.payload;
+      })
+      .addCase(fetchSinglePost.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
       });
   },
 });
@@ -99,6 +127,7 @@ const postSlice = createSlice({
 export const { SET_POSTS } = postSlice.actions;
 
 export const selectPosts = (state) => state.post.posts;
+export const selectPost = (state) => state.post.post;
 export const selectPostLoader = (state) => state.post.isLoading;
 
 export default postSlice.reducer;
