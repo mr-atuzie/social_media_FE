@@ -5,6 +5,7 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
 import { selectUser } from "../redux/features/userSlice";
+import Images from "./Images";
 // import { fetchPosts, SET_POSTS } from "../redux/features/postSlice";
 // import PhotoGrid from "./PhotoGrid";
 // import "rc-tooltip/assets/bootstrap_white.css";
@@ -15,10 +16,11 @@ const Post = (props) => {
   const [post, setPost] = useState(props.post);
   const currentUser = useSelector(selectUser);
 
+  const [showAllPhotos, setShowAllPhotos] = useState(false);
+
   const liked = post.likes.includes(currentUser._id);
 
   const LikePost = async () => {
-    toast.success("post liked");
     try {
       const { data } = await axios.patch("/api/v1/post/like/" + post._id);
 
@@ -38,8 +40,12 @@ const Post = (props) => {
       console.log(error);
     }
   };
+
   return (
     <>
+      {showAllPhotos && (
+        <Images post={post} setShowAllPhotos={setShowAllPhotos} />
+      )}
       <div className=" flex flex-col gap-2 lg:gap-4">
         <div className=" flex items-start justify-between">
           <div className=" flex items-center gap-4">
@@ -97,7 +103,7 @@ const Post = (props) => {
         </Link>
 
         <div className=" flex flex-col gap-4">
-          <div>
+          <div onClick={() => setShowAllPhotos(true)}>
             {/* <img
               src={
                 "https://images.pexels.com/photos/26926247/pexels-photo-26926247/free-photo-of-closeness.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
