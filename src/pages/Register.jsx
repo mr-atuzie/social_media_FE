@@ -55,7 +55,7 @@ const RegisterPage = () => {
     <div className="h-full w-full flex justify-center items-center">
       <form
         onSubmit={handleRegister}
-        className=" flex gap-6 flex-col w-[90%] lg:w-[40%] my-20  mx-auto bg-white rounded-md shadow-md p-4 lg:p-8 "
+        className=" flex gap-6 flex-col w-[90%] lg:w-[35%] my-20  mx-auto bg-white rounded-md shadow-md p-4 lg:p-8 "
       >
         {/* <div className="flex items-center  gap-2">
           <div className=" bg-gray-50 p-2 rounded-md">

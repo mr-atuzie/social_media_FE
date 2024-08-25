@@ -12,6 +12,7 @@ import { SET_LOGIN } from "./redux/features/userSlice";
 import { useDispatch } from "react-redux";
 import { Toaster } from "react-hot-toast";
 import { fetchPosts } from "./redux/features/postSlice";
+import Post from "./pages/Post";
 
 axios.defaults.baseURL = process.env.REACT_APP_SERVER_URL;
 axios.defaults.withCredentials = true;
@@ -53,6 +54,7 @@ function App() {
           <Route index element={<Home />} />
           <Route path="/uploadPhoto" element={<UplaodPhoto />} />
           <Route path="/profile/:id" element={<Profile />} />
+          <Route path="/post/:id" element={<Post />} />
         </Route>
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<Login />} />

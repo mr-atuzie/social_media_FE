@@ -1,30 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
 import Tooltip from "rc-tooltip";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { selectUser } from "../redux/features/userSlice";
-import { fetchPosts } from "../redux/features/postSlice";
+// import { fetchPosts, SET_POSTS } from "../redux/features/postSlice";
 // import PhotoGrid from "./PhotoGrid";
 // import "rc-tooltip/assets/bootstrap_white.css";
 // import Comments from "./Comments";
 const { formatDistanceToNow } = require("date-fns");
 
-const Post = ({ post }) => {
+const Post = (props) => {
+  const [post, setPost] = useState(props.post);
   const currentUser = useSelector(selectUser);
 
   const liked = post.likes.includes(currentUser._id);
-
-  const dispatch = useDispatch();
 
   const LikePost = async () => {
     toast.success("post liked");
     try {
       const { data } = await axios.patch("/api/v1/post/like/" + post._id);
 
-      dispatch(fetchPosts());
+      // dispatch(fetchPosts());
       console.log(data);
+      setPost(data.post);
+      // dispatch(SET_POSTS(data.posts));
     } catch (error) {
       const message =
         (error.response &&
@@ -90,7 +91,10 @@ const Post = ({ post }) => {
             </button>
           </Tooltip>
         </div>
-        <p className=" text-sm text-pretty ">{post?.desc}</p>
+
+        <Link to={"/post/" + post._id}>
+          <p className=" text-sm text-pretty ">{post?.desc}</p>
+        </Link>
 
         <div className=" flex flex-col gap-4">
           <div>
