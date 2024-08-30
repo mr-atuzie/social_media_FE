@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import {
   fetchComments,
   fetchSinglePost,
@@ -52,7 +52,27 @@ const Post = () => {
               <PostCard post={post} />
               <Comments post={post} />
               {comments?.map((comment) => {
-                return <div>{comment.comment}</div>;
+                return (
+                  <div className="  p-2 flex items-center gap-4">
+                    <Link to={"/profile/" + comment?.user?._id}>
+                      <img
+                        src={comment?.user.avatar}
+                        alt=""
+                        className="w-8 h-8 object-cover  rounded-full"
+                      />
+                    </Link>
+
+                    <div>
+                      <p className=" font-medium text-sm lg:text-base">
+                        {comment?.user.name}
+                      </p>
+
+                      <p className=" text-gray-500 text-sm lg:text-sm">
+                        {comment?.comment}
+                      </p>
+                    </div>
+                  </div>
+                );
               })}
             </div>
           )}
