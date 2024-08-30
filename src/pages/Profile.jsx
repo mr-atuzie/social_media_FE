@@ -1,36 +1,56 @@
 import React, { useEffect, useState } from "react";
 import LeftMenu from "../components/LeftMenu";
-import Feed from "../components/Feed";
+// import Feed from "../components/Feed";
 import RightMenu from "../components/RightMenu";
-import axios from "axios";
+// import axios from "axios";
 import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  fetchUserPosts,
+  selectPostLoader,
+  selectPosts,
+} from "../redux/features/postSlice";
+import PostLoader from "../components/PostLoader";
+import Post from "./Post";
 
 const Profile = () => {
+  const dispatch = useDispatch();
+  const posts = useSelector(selectPosts);
+  const postLoader = useSelector(selectPostLoader);
+
   const [user, setUser] = useState(null);
   const { id } = useParams();
 
   useEffect(() => {
-    const getPosts = async () => {
-      try {
-        const { data } = await axios.get("/api/v1/user/" + id);
-        console.log(data);
+    dispatch(fetchUserPosts(id));
+  }, [id, dispatch]);
 
-        setUser(data);
-      } catch (error) {
-        const message =
-          (error.response &&
-            error.response.data &&
-            error.response.data.message) ||
-          error.message ||
-          error.toString();
+  if (postLoader) {
+    return <PostLoader />;
+  }
 
-        console.log(error);
-        console.log(message);
-      }
-    };
+  // useEffect(() => {
+  //   const getPosts = async () => {
+  //     try {
+  //       const { data } = await axios.get("/api/v1/user/" + id);
+  //       console.log(data);
 
-    getPosts();
-  }, [id]);
+  //       setUser(data);
+  //     } catch (error) {
+  //       const message =
+  //         (error.response &&
+  //           error.response.data &&
+  //           error.response.data.message) ||
+  //         error.message ||
+  //         error.toString();
+
+  //       console.log(error);
+  //       console.log(message);
+  //     }
+  //   };
+
+  //   getPosts();
+  // }, [id]);
   return (
     <div className=" flex gap-6 pt-6">
       <div className="hidden lg:block w-[20%]">
@@ -59,9 +79,7 @@ const Profile = () => {
             </p>
             <div className=" flex items-center justify-center text-sm    gap-12 mb-4">
               <div className=" flex flex-col items-center">
-                <h2 className=" text-black font-semibold">
-                  {user?.posts.length}
-                </h2>
+                <h2 className=" text-black font-semibold">{posts?.length}</h2>
                 <p className=" ">Posts</p>
               </div>
               <div className=" flex flex-col  items-center">
@@ -80,7 +98,11 @@ const Profile = () => {
               </div>
             </div>
           </div>
-          <Feed userId={user?._id} />
+          <div className=" p-4 shadow-md my-4 bg-white rounded-lg flex flex-col gap-3 lg:gap-6">
+            {posts?.map((post) => {
+              return <Post key={post?._id} post={post} />;
+            })}
+          </div>
         </div>
       </div>
       <div className="hidden md:block w-[30%]">

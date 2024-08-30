@@ -4,7 +4,6 @@ import PostLoader from "./PostLoader";
 import { useDispatch, useSelector } from "react-redux";
 import {
   fetchPosts,
-  fetchUserPosts,
   selectPostLoader,
   selectPosts,
 } from "../redux/features/postSlice";
@@ -40,11 +39,7 @@ const Feed = ({ userId }) => {
   // getPosts();
 
   useEffect(() => {
-    if (userId) {
-      dispatch(fetchUserPosts(userId));
-    } else {
-      dispatch(fetchPosts());
-    }
+    dispatch(fetchPosts());
   }, [userId, dispatch]);
 
   if (postLoader) {

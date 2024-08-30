@@ -44,7 +44,29 @@ export const fetchSinglePost = createAsyncThunk(
   async (postId, thunkAPI) => {
     try {
       const response = await axios.get("/api/v1/post/" + postId);
-      return response.data; // Assuming your API returns the data directly
+      // const comments = await axios.get("/api/v1/post/comment/" + postId);
+      // return { post: response.data, comments: comments.data.comments };
+      return response.data;
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
+export const fetchComments = createAsyncThunk(
+  "posts/fetchComments",
+  async (postId, thunkAPI) => {
+    try {
+      const response = await axios.get("/api/v1/post/comment/" + postId);
+
+      return response.data.comments; // Assuming your API returns the data directly
     } catch (error) {
       const message =
         (error.response &&
@@ -61,6 +83,7 @@ export const fetchSinglePost = createAsyncThunk(
 const initialState = {
   posts: [],
   post: null,
+  comments: [],
   isLoading: false,
   isError: null,
 };
@@ -99,8 +122,6 @@ const postSlice = createSlice({
         state.isLoading = false;
         state.isError = false;
         state.posts = action.payload; // Load the fetched posts into the state
-
-        console.log({ from: "postUserSlice", posts: action.payload });
       })
       .addCase(fetchUserPosts.rejected, (state, action) => {
         state.isLoading = false;
@@ -120,6 +141,22 @@ const postSlice = createSlice({
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;
+      })
+      //get post comments
+      .addCase(fetchComments.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(fetchComments.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isError = false;
+        state.comments = action.payload;
+
+        console.log({ from: "getCommenets", comments: action.payload });
+      })
+      .addCase(fetchComments.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
       });
   },
 });
@@ -128,6 +165,7 @@ export const { SET_POSTS } = postSlice.actions;
 
 export const selectPosts = (state) => state.post.posts;
 export const selectPost = (state) => state.post.post;
+export const selectComents = (state) => state.post.comments;
 export const selectPostLoader = (state) => state.post.isLoading;
 
 export default postSlice.reducer;

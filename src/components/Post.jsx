@@ -16,9 +16,12 @@ const Post = (props) => {
   const [post, setPost] = useState(props.post);
   const currentUser = useSelector(selectUser);
 
+  // console.log(post);
+  // console.log(props.post);
+
   const [showAllPhotos, setShowAllPhotos] = useState(false);
 
-  const liked = post.likes.includes(currentUser._id);
+  const liked = post?.likes.includes(currentUser._id);
 
   const LikePost = async () => {
     try {
@@ -68,9 +71,15 @@ const Post = (props) => {
               </div>
               <p className=" text-gray-500 text-xs lg:text-sm">
                 {/* {format(post?.createdAt, "mm")} */}
-                {formatDistanceToNow(post?.createdAt, {
+                {/* {formatDistanceToNow(post?.createdAt, {
                   addSuffix: true,
-                })}
+                })} */}
+                {/* {console.log(post)} */}
+
+                {post?.createdAt &&
+                  formatDistanceToNow(new Date(post?.createdAt), {
+                    addSuffix: true,
+                  })}
               </p>
             </div>
           </div>
@@ -98,7 +107,7 @@ const Post = (props) => {
           </Tooltip>
         </div>
 
-        <Link to={"/post/" + post._id}>
+        <Link to={"/post/" + post?._id}>
           <p className=" text-sm text-pretty ">{post?.desc}</p>
         </Link>
 
@@ -220,7 +229,7 @@ const Post = (props) => {
               </div>
               <span className=" text-gray-300">|</span>
               <span className=" text-xs lg:text-sm text-gray-500">
-                {post?.likes.length}{" "}
+                {post?.likes?.length}{" "}
                 <span className=" hidden md:inline">Likes</span>
               </span>
             </button>
@@ -275,7 +284,7 @@ const Post = (props) => {
         {/* comment */}
         {/* <Comments /> */}
       </div>
-      <hr className=" border-t  border-gray-100 w-[85%] self-center" />
+      <hr className=" border-t  border-gray-100 w-[95%] self-center" />
     </>
   );
 };
