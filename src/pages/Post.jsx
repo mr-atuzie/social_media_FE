@@ -77,7 +77,7 @@ const Post = () => {
         <div className="hidden lg:block w-[25%]">
           <LeftMenu />
         </div>
-        <div className="w-full p-4 rounded-lg bg-white md:w-[70%] lg:w-[45%]">
+        <div className="w-full p-4 rounded-lg mb-16 bg-white md:w-[70%] lg:w-[45%]">
           {loading ? (
             <PostLoader />
           ) : (
