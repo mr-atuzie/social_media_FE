@@ -25,7 +25,7 @@ const Post = (props) => {
 
   const LikePost = async () => {
     try {
-      const { data } = await axios.patch("/api/v1/post/like/" + post._id);
+      const { data } = await axios.patch("/api/v1/post/like/" + post?._id);
 
       // dispatch(fetchPosts());
       console.log(data);
