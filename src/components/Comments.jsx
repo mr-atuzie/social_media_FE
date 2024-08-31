@@ -37,7 +37,11 @@ const Comments = ({ post }) => {
     <div>
       <div className=" flex items-center gap-4">
         <img
-          src={currentUser?.avatar}
+          src={
+            currentUser?.avatar
+              ? currentUser?.avatar
+              : "https://i.ibb.co/4pDNDk1/avatar.png"
+          }
           alt=""
           width={32}
           height={32}
