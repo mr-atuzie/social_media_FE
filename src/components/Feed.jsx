@@ -8,10 +8,7 @@ import {
   selectPosts,
 } from "../redux/features/postSlice";
 
-const Feed = ({ userId }) => {
-  // const [posts, setPosts] = useState([]);
-  // const [loading, setLoading] = useState(false);
-
+const Feed = () => {
   const dispatch = useDispatch();
   const posts = useSelector(selectPosts);
   const postLoader = useSelector(selectPostLoader);
@@ -40,7 +37,7 @@ const Feed = ({ userId }) => {
 
   useEffect(() => {
     dispatch(fetchPosts());
-  }, [userId, dispatch]);
+  }, [dispatch]);
 
   if (postLoader) {
     return <PostLoader />;

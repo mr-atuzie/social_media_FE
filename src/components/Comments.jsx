@@ -3,24 +3,25 @@ import { useSelector } from "react-redux";
 import { selectUser } from "../redux/features/userSlice";
 import toast from "react-hot-toast";
 import axios from "axios";
-// import { selectComents } from "../redux/features/postSlice";
 
-const Comments = ({ post }) => {
+const Comments = ({ post, setComments }) => {
   const currentUser = useSelector(selectUser);
   const [comment, setComment] = useState("");
-
-  // const comments = useSelector(selectComents);
-
-  // console.log(comments);
+  const [adding, setAdding] = useState(false);
 
   const addComment = async (e) => {
     e.preventDefault();
+    setAdding(true);
     try {
-      await axios.post("/api/v1/post/comment/" + post._id, {
+      const { data } = await axios.post("/api/v1/post/comment/" + post._id, {
         comment,
       });
 
+      console.log(data);
+
       setComment("");
+      setAdding(false);
+      setComments(data.comments);
     } catch (error) {
       const message =
         (error.response &&
@@ -30,6 +31,7 @@ const Comments = ({ post }) => {
         error.toString();
 
       console.log(error);
+      setAdding(false);
       toast.error(message);
     }
   };
@@ -49,8 +51,9 @@ const Comments = ({ post }) => {
         />
         <form onSubmit={addComment} className=" flex-1">
           <input
-            className="  bg-gray-100 rounded-xl text-sm px-6 py-3 w-full"
+            className=" disabled:opacity-75 bg-gray-100 rounded-xl text-sm px-6 py-3 w-full"
             type="text"
+            disabled={adding}
             placeholder="Write a comment..."
             value={comment}
             onChange={(e) => setComment(e.target.value)}

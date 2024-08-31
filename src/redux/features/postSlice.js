@@ -80,6 +80,26 @@ export const fetchComments = createAsyncThunk(
   }
 );
 
+export const likePost = createAsyncThunk(
+  "posts/likePost",
+  async (postId, thunkAPI) => {
+    try {
+      const response = await axios.get("/api/v1/post/like/" + postId);
+
+      return response.data.post; // Assuming your API returns the data directly
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 const initialState = {
   posts: [],
   post: null,
@@ -154,6 +174,22 @@ const postSlice = createSlice({
         console.log({ from: "getCommenets", comments: action.payload });
       })
       .addCase(fetchComments.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+      })
+      //like post
+      .addCase(likePost.pending, (state) => {
+        state.isLoading = false;
+      })
+      .addCase(likePost.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isError = false;
+        state.post = action.payload;
+
+        console.log({ from: "likepost", post: action.payload });
+      })
+      .addCase(likePost.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;

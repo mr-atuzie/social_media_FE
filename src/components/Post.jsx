@@ -6,18 +6,12 @@ import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
 import { selectUser } from "../redux/features/userSlice";
 import Images from "./Images";
-// import { fetchPosts, SET_POSTS } from "../redux/features/postSlice";
-// import PhotoGrid from "./PhotoGrid";
-// import "rc-tooltip/assets/bootstrap_white.css";
-// import Comments from "./Comments";
+import "rc-tooltip/assets/bootstrap_white.css";
 const { formatDistanceToNow } = require("date-fns");
 
 const Post = (props) => {
   const [post, setPost] = useState(props.post);
   const currentUser = useSelector(selectUser);
-
-  // console.log(post);
-  // console.log(props.post);
 
   const [showAllPhotos, setShowAllPhotos] = useState(false);
 
@@ -49,7 +43,7 @@ const Post = (props) => {
       {showAllPhotos && (
         <Images post={post} setShowAllPhotos={setShowAllPhotos} />
       )}
-      <div className=" flex flex-col gap-2 lg:gap-4">
+      <div className=" flex flex-col gap-3 lg:gap-4">
         <div className=" flex items-start justify-between">
           <div className=" flex items-center gap-4">
             <Link to={"/profile/" + post?.user?._id}>
@@ -70,12 +64,7 @@ const Post = (props) => {
                 </p>
               </div>
               <p className=" text-gray-500 text-xs lg:text-sm">
-                {/* {format(post?.createdAt, "mm")} */}
-                {/* {formatDistanceToNow(post?.createdAt, {
-                  addSuffix: true,
-                })} */}
-                {/* {console.log(post)} */}
-
+                posted{" "}
                 {post?.createdAt &&
                   formatDistanceToNow(new Date(post?.createdAt), {
                     addSuffix: true,
@@ -109,11 +98,10 @@ const Post = (props) => {
 
         <Link to={"/post/" + post?._id}>
           <p className=" text-sm text-pretty ">{post?.desc}</p>
-        </Link>
 
-        <div className=" flex flex-col gap-4">
-          <div onClick={() => setShowAllPhotos(true)}>
-            {/* <img
+          <div className=" flex flex-col gap-4">
+            <div onClick={() => setShowAllPhotos(true)}>
+              {/* <img
               src={
                 "https://images.pexels.com/photos/26926247/pexels-photo-26926247/free-photo-of-closeness.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
               }
@@ -121,77 +109,78 @@ const Post = (props) => {
               className="object-cover w-full min-h-96 rounded-md"
             /> */}
 
-            {post?.photo.length === 1 && (
-              <div className=" overflow-hidden h-96 rounded-lg">
-                {post?.photo.map((link, index) => (
-                  <div className=" h-full flex  " key={index}>
-                    <img
-                      className=" bg-gray-200 w-full h-full  object-cover "
-                      src={link}
-                      alt=""
-                    />
-                  </div>
-                ))}
-              </div>
-            )}
-
-            {post?.photo.length === 2 && (
-              <div className=" grid grid-cols-2 gap-1 overflow-hidden rounded-lg">
-                {post?.photo.map((link, index) => (
-                  <div key={index} className=" h-48 flex">
-                    <img
-                      className=" bg-gray-200 w-full h-full  object-cover "
-                      src={link}
-                      alt=""
-                    />
-                  </div>
-                ))}
-              </div>
-            )}
-
-            {post?.photo.length === 3 && (
-              <div className="grid gap-1  grid-cols-[2fr_1fr]  rounded-lg overflow-hidden ">
-                <div className=" h-full flex">
-                  <img
-                    className=" bg-gray-200 w-full h-full  object-cover "
-                    src={post?.photo[0]}
-                    alt=""
-                  />
+              {post?.photo.length === 1 && (
+                <div className=" overflow-hidden h-96 rounded-lg">
+                  {post?.photo.map((link, index) => (
+                    <div className=" h-full flex  " key={index}>
+                      <img
+                        className=" bg-gray-200 w-full h-full  object-cover "
+                        src={link}
+                        alt=""
+                      />
+                    </div>
+                  ))}
                 </div>
-                <div className="flex flex-col gap-1">
-                  <div className=" flex-1 h-full flex ">
-                    <img
-                      className=" w-full h-full bg-gray-200  object-cover "
-                      src={post?.photo[1]}
-                      alt=""
-                    />
-                  </div>
-                  <div className=" flex-1 h-full flex ">
-                    <img
-                      className=" w-full h-full bg-gray-200  object-cover "
-                      src={post?.photo[2]}
-                      alt=""
-                    />
-                  </div>
-                </div>
-              </div>
-            )}
+              )}
 
-            {post?.photo.length === 4 && (
-              <div className=" grid grid-cols-2 gap-1 overflow-hidden rounded-lg">
-                {post?.photo.map((link, index) => (
-                  <div key={index} className=" h-48 flex">
+              {post?.photo.length === 2 && (
+                <div className=" grid grid-cols-2 gap-1 overflow-hidden rounded-lg">
+                  {post?.photo.map((link, index) => (
+                    <div key={index} className=" h-48 flex">
+                      <img
+                        className=" bg-gray-200 w-full h-full  object-cover "
+                        src={link}
+                        alt=""
+                      />
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              {post?.photo.length === 3 && (
+                <div className="grid gap-1  grid-cols-[2fr_1fr]  rounded-lg overflow-hidden ">
+                  <div className=" h-full flex">
                     <img
                       className=" bg-gray-200 w-full h-full  object-cover "
-                      src={link}
+                      src={post?.photo[0]}
                       alt=""
                     />
                   </div>
-                ))}
-              </div>
-            )}
+                  <div className="flex flex-col gap-1">
+                    <div className=" flex-1 h-full flex ">
+                      <img
+                        className=" w-full h-full bg-gray-200  object-cover "
+                        src={post?.photo[1]}
+                        alt=""
+                      />
+                    </div>
+                    <div className=" flex-1 h-full flex ">
+                      <img
+                        className=" w-full h-full bg-gray-200  object-cover "
+                        src={post?.photo[2]}
+                        alt=""
+                      />
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {post?.photo.length === 4 && (
+                <div className=" grid grid-cols-2 gap-1 overflow-hidden rounded-lg">
+                  {post?.photo.map((link, index) => (
+                    <div key={index} className=" h-48 flex">
+                      <img
+                        className=" bg-gray-200 w-full h-full  object-cover "
+                        src={link}
+                        alt=""
+                      />
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
           </div>
-        </div>
+        </Link>
 
         {/* interaction */}
         <div className=" flex items-center text-sm justify-between my-2.5">
@@ -233,29 +222,31 @@ const Post = (props) => {
                 <span className=" hidden md:inline">Likes</span>
               </span>
             </button>
-            <div className=" flex items-center gap-2 lg:gap-4 bg-gray-50 p-2 rounded-xl">
-              <div>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                  className="size-5 lg:size-6"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M12 20.25c4.97 0 9-3.694 9-8.25s-4.03-8.25-9-8.25S3 7.444 3 12c0 2.104.859 4.023 2.273 5.48.432.447.74 1.04.586 1.641a4.483 4.483 0 0 1-.923 1.785A5.969 5.969 0 0 0 6 21c1.282 0 2.47-.402 3.445-1.087.81.22 1.668.337 2.555.337Z"
-                  />
-                </svg>
+            <Link to={"/post/" + post?._id}>
+              <div className=" flex items-center gap-2 lg:gap-4 bg-gray-50 p-2 rounded-xl">
+                <div>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                    className="size-5 lg:size-6"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M12 20.25c4.97 0 9-3.694 9-8.25s-4.03-8.25-9-8.25S3 7.444 3 12c0 2.104.859 4.023 2.273 5.48.432.447.74 1.04.586 1.641a4.483 4.483 0 0 1-.923 1.785A5.969 5.969 0 0 0 6 21c1.282 0 2.47-.402 3.445-1.087.81.22 1.668.337 2.555.337Z"
+                    />
+                  </svg>
+                </div>
+                <span className=" text-gray-300">|</span>
+                <span className=" text-xs lg:text-sm text-gray-500">
+                  {post?.comments.length}
+                  <span className=" hidden md:inline">Comments</span>
+                </span>
               </div>
-              <span className=" text-gray-300">|</span>
-              <span className=" text-xs lg:text-sm text-gray-500">
-                {post?.comments.length}
-                <span className=" hidden md:inline">Comments</span>
-              </span>
-            </div>
+            </Link>
           </div>
 
           <div className=" flex items-center gap-2 lg:gap-4 bg-gray-50 p-2 rounded-xl">

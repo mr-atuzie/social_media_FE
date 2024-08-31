@@ -13,6 +13,7 @@ import { useDispatch } from "react-redux";
 import { Toaster } from "react-hot-toast";
 import { fetchPosts } from "./redux/features/postSlice";
 import Post from "./pages/Post";
+import ScrollTop from "./components/ScrollTop";
 
 axios.defaults.baseURL = process.env.REACT_APP_SERVER_URL;
 axios.defaults.withCredentials = true;
@@ -48,6 +49,7 @@ function App() {
   return (
     <BrowserRouter>
       <Toaster position="top-center" reverseOrder={false} />
+      <ScrollTop />
       <Navbar />
       <Routes>
         <Route path="/" element={<Layout />}>
