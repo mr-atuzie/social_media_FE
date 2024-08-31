@@ -104,7 +104,7 @@ const Post = (props) => {
           <div className=" flex flex-col gap-4">
             <div onClick={() => setShowAllPhotos(true)}>
               {post?.photo.length === 1 && (
-                <div className=" overflow-hidden max-h-[500px] rounded-lg">
+                <div className=" overflow-hidden h-96 rounded-lg">
                   {post?.photo.map((link, index) => (
                     <div className=" h-full flex  " key={index}>
                       <img
