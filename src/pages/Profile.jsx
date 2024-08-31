@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import LeftMenu from "../components/LeftMenu";
 // import Feed from "../components/Feed";
 import RightMenu from "../components/RightMenu";
@@ -12,13 +12,15 @@ import {
 } from "../redux/features/postSlice";
 import PostLoader from "../components/PostLoader";
 import Post from "./Post";
+import { selectUser } from "../redux/features/userSlice";
 
 const Profile = () => {
   const dispatch = useDispatch();
   const posts = useSelector(selectPosts);
   const postLoader = useSelector(selectPostLoader);
 
-  const [user, setUser] = useState(null);
+  // const [user, setUser] = useState(null);
+  const user = useSelector(selectUser);
   const { id } = useParams();
 
   useEffect(() => {
