@@ -98,7 +98,9 @@ const Post = (props) => {
 
         <Link to={"/post/" + post?._id}>
           <p className=" text-sm text-pretty ">{post?.desc}</p>
+        </Link>
 
+        <Link to={"/post/" + post?._id}>
           <div className=" flex flex-col gap-4">
             <div onClick={() => setShowAllPhotos(true)}>
               {/* <img
