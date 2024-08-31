@@ -1,16 +1,11 @@
 import { Link } from "react-router-dom";
 // import MobileMenu from "./MobileMenu";
 import ShowOnLogin, { ShowOnLogOut } from "./Protect";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { selectUser } from "../redux/features/userSlice";
-import { fetchUserPosts } from "../redux/features/postSlice";
 
 const Navbar = () => {
   const user = useSelector(selectUser);
-
-  const dispatch = useDispatch();
-
-  dispatch(fetchUserPosts(user._id));
 
   return (
     <nav className="bg-white sticky w-full top-0 z-50 flex items-center  py-5 shadow-md">
