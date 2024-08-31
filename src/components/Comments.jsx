@@ -37,7 +37,7 @@ const Comments = ({ post }) => {
     <div>
       <div className=" flex items-center gap-4">
         <img
-          src={currentUser.avatar}
+          src={currentUser?.avatar}
           alt=""
           width={32}
           height={32}
