@@ -103,16 +103,8 @@ const Post = (props) => {
         <Link to={"/post/" + post?._id}>
           <div className=" flex flex-col gap-4">
             <div onClick={() => setShowAllPhotos(true)}>
-              {/* <img
-              src={
-                "https://images.pexels.com/photos/26926247/pexels-photo-26926247/free-photo-of-closeness.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-              }
-              alt=""
-              className="object-cover w-full min-h-96 rounded-md"
-            /> */}
-
               {post?.photo.length === 1 && (
-                <div className=" overflow-hidden h-96 rounded-lg">
+                <div className=" overflow-hidden max-h-[400px] rounded-lg">
                   {post?.photo.map((link, index) => (
                     <div className=" h-full flex  " key={index}>
                       <img
@@ -170,7 +162,7 @@ const Post = (props) => {
               {post?.photo.length === 4 && (
                 <div className=" grid grid-cols-2 gap-1 overflow-hidden rounded-lg">
                   {post?.photo.map((link, index) => (
-                    <div key={index} className=" h-48 flex">
+                    <div key={index} className=" h-32 flex">
                       <img
                         className=" bg-gray-200 w-full h-full  object-cover "
                         src={link}
