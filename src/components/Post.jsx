@@ -21,7 +21,7 @@ const Post = (props) => {
 
   const [showAllPhotos, setShowAllPhotos] = useState(false);
 
-  const liked = post?.likes.includes(currentUser._id);
+  const liked = post?.likes.includes(currentUser?._id);
 
   const LikePost = async () => {
     try {
