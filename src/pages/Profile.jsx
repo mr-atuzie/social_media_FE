@@ -3,31 +3,33 @@ import LeftMenu from "../components/LeftMenu";
 import RightMenu from "../components/RightMenu";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 
 import PostLoader from "../components/PostLoader";
-import { selectUser } from "../redux/features/userSlice";
+// import { selectUser } from "../redux/features/userSlice";
 import toast from "react-hot-toast";
 import Post from "../components/Post";
 
 const Profile = () => {
-  const user = useSelector(selectUser);
+  // const user = useSelector(selectUser);
   const [posts, setPosts] = useState([]);
+  const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(false);
 
   const { id } = useParams();
 
-  console.log(id);
+  // console.log(id);
 
   useEffect(() => {
     const fetchUserPosts = async () => {
       setLoading(true);
       try {
+        const response = await axios.get("/api/v1/user/" + id);
         const { data } = await axios.get("/api/v1/post/user/" + id);
-        console.log(data.posts);
-        setLoading(false);
 
+        setLoading(false);
         setPosts(data.posts);
+        setUser(response.data);
       } catch (error) {
         const message =
           (error.response &&
@@ -107,15 +109,13 @@ const Profile = () => {
                   </div>
                   <div className=" flex flex-col  items-center">
                     <h2 className=" text-black font-semibold">
-                      100
-                      {/* {user?.followers.length} */}
+                      {user?.follower.length}
                     </h2>
                     <p className=" ">Followers</p>
                   </div>
                   <div className=" flex flex-col items-center">
                     <h2 className=" text-black font-semibold">
-                      345
-                      {/* {user?.followings.length} */}
+                      {user?.following.length}
                     </h2>
                     <p className=" ">Followings</p>
                   </div>

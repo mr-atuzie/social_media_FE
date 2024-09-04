@@ -1,11 +1,61 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { selectUser } from "../redux/features/userSlice";
+import toast from "react-hot-toast";
+import axios from "axios";
 const { format } = require("date-fns");
 
 const UserInfoCard = ({ user }) => {
   const currentUser = useSelector(selectUser);
+  const [loading, setLoading] = useState(false);
+  const [isFollowing, setIsFollowing] = useState(null);
+
+  const followUser = async () => {
+    setLoading(true);
+    try {
+      const { data } = await axios.patch("/api/v1/user/follow/" + user._id);
+
+      setLoading(false);
+      setIsFollowing(data.isFollowing);
+    } catch (error) {
+      setLoading(false);
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+
+      toast.error(message);
+    }
+  };
+
+  useEffect(() => {
+    const isFollowing = async () => {
+      try {
+        const { data } = await axios.get(
+          "/api/v1/user/isFollowing/" + user._id
+        );
+
+        console.log(data);
+        setIsFollowing(data);
+      } catch (error) {
+        const message =
+          (error.response &&
+            error.response.data &&
+            error.response.data.message) ||
+          error.message ||
+          error.toString();
+
+        console.log(error);
+        console.log(message);
+      }
+    };
+
+    isFollowing();
+  }, [user._id]);
+
   return (
     <div className="p-4 text-sm shadow-md bg-white rounded-lg flex flex-col gap-4">
       <div className=" flex justify-between items-center">
@@ -126,11 +176,29 @@ const UserInfoCard = ({ user }) => {
             </span>
           </div>
 
-          {currentUser !== user._id && (
-            <button className=" bg-black text-white text-sm rounded-md p-2">
-              Follow
-            </button>
-          )}
+          {/* {console.log({ currentUser: currentUser._id, user: user._id })} */}
+          {/* {console.log(currentUser.following.includes(user._id))}
+          {console.log(user._id)}
+          {console.log(currentUser.following)}
+          {console.log(currentUser)} */}
+          {currentUser._id !== user._id &&
+            (isFollowing ? (
+              <button
+                disabled={loading}
+                onClick={followUser}
+                className=" disabled:opacity-60 bg-black text-white text-sm rounded-md p-2"
+              >
+                Following
+              </button>
+            ) : (
+              <button
+                disabled={loading}
+                onClick={followUser}
+                className=" disabled:opacity-60 bg-black text-white text-sm rounded-md p-2"
+              >
+                Follow
+              </button>
+            ))}
 
           {/* <span className=" font-medium text-red-400 self-end text-xs cursor-pointer">
             Block User

@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import toast from "react-hot-toast";
 
 export const fetchPosts = createAsyncThunk(
   "posts/fetchPosts",
@@ -125,14 +126,13 @@ const postSlice = createSlice({
       .addCase(fetchPosts.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isError = false;
-        state.posts = action.payload; // Load the fetched posts into the state
-
-        console.log({ from: "postSlice", posts: action.payload });
+        state.posts = action.payload;
       })
       .addCase(fetchPosts.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
-        state.message = action.payload;
+
+        toast.error(action.payload);
       })
       //get all user post
       .addCase(fetchUserPosts.pending, (state) => {
@@ -146,7 +146,8 @@ const postSlice = createSlice({
       .addCase(fetchUserPosts.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
-        state.message = action.payload;
+
+        toast.error(action.payload);
       })
       //get single post
       .addCase(fetchSinglePost.pending, (state) => {
@@ -160,7 +161,8 @@ const postSlice = createSlice({
       .addCase(fetchSinglePost.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
-        state.message = action.payload;
+
+        toast.error(action.payload);
       })
       //get post comments
       .addCase(fetchComments.pending, (state) => {
@@ -170,13 +172,12 @@ const postSlice = createSlice({
         state.isLoading = false;
         state.isError = false;
         state.comments = action.payload;
-
-        console.log({ from: "getCommenets", comments: action.payload });
       })
       .addCase(fetchComments.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
-        state.message = action.payload;
+
+        toast.error(action.payload);
       })
       //like post
       .addCase(likePost.pending, (state) => {
@@ -186,13 +187,12 @@ const postSlice = createSlice({
         state.isLoading = false;
         state.isError = false;
         state.post = action.payload;
-
-        console.log({ from: "likepost", post: action.payload });
       })
       .addCase(likePost.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
-        state.message = action.payload;
+
+        toast.error(action.payload);
       });
   },
 });

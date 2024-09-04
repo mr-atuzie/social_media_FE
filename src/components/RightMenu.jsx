@@ -12,9 +12,13 @@ const RightMenu = ({ user }) => {
           <UserInfoCard user={user} />
           <UserMediaCard userId={user._id} />
         </>
-      ) : null}
-      <FriendRequests />
-      <Notifications />
+      ) : (
+        <>
+          <FriendRequests />
+          <Notifications />
+        </>
+      )}
+
       <Ad />
     </div>
   );

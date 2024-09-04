@@ -236,14 +236,14 @@ const Post = (props) => {
                 </div>
                 <span className=" text-gray-300">|</span>
                 <span className=" text-xs lg:text-sm text-gray-500">
-                  {post?.comments.length}
+                  {post?.comments.length}{" "}
                   <span className=" hidden md:inline">Comments</span>
                 </span>
               </div>
             </Link>
           </div>
 
-          <div className=" flex items-center gap-2 lg:gap-4 bg-gray-50 p-2 rounded-xl">
+          {/* <div className=" flex items-center gap-2 lg:gap-4 bg-gray-50 p-2 rounded-xl">
             <div>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -264,10 +264,9 @@ const Post = (props) => {
             <span className=" text-xs lg:text-sm text-gray-500">
               100 <span className=" hidden md:inline">Repost</span>
             </span>
-          </div>
+          </div> */}
         </div>
         {/* comment */}
-        {/* <Comments /> */}
       </div>
       <hr className=" border-t  border-gray-100 w-[95%] self-center" />
     </>

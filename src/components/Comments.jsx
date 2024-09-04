@@ -17,8 +17,6 @@ const Comments = ({ post, setComments }) => {
         comment,
       });
 
-      console.log(data);
-
       setComment("");
       setAdding(false);
       setComments(data.comments);
@@ -51,7 +49,7 @@ const Comments = ({ post, setComments }) => {
         />
         <form onSubmit={addComment} className=" flex-1">
           <input
-            className=" disabled:opacity-75 bg-gray-100 rounded-xl text-sm px-6 py-3 w-full"
+            className=" disabled:opacity-75 bg-gray-100 rounded-xl text-sm px-3 lg:px-6 py-2 lg:py-3 w-full"
             type="text"
             disabled={adding}
             placeholder="Write a comment..."
