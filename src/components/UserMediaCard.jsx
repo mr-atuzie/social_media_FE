@@ -10,7 +10,7 @@ const UserMediaCard = ({ userId }) => {
       try {
         const { data } = await axios.get("/api/v1/post/user/" + userId);
         setPosts(data.posts);
-        console.log(data);
+        // console.log(data);
       } catch (error) {
         const message =
           (error.response &&

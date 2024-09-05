@@ -1,12 +1,13 @@
 import React from "react";
 import ProfileCard from "./ProfileCard";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
+import Followers from "./Followers";
 
 const LeftMenu = ({ type }) => {
   return (
     <div className=" flex flex-col gap-6">
       {type === "home" && <ProfileCard />}
-      <div className="p-4 shadow-md bg-white text-sm rounded-lg flex flex-col text-gray-500 gap-2">
+      {/* <div className="p-4 shadow-md bg-white text-sm rounded-lg flex flex-col text-gray-500 gap-2">
         <Link
           className=" flex items-center gap-4 hover:bg-gray-50 p-2 rounded-lg"
           to={"/"}
@@ -196,7 +197,8 @@ const LeftMenu = ({ type }) => {
           <span>Settings</span>
         </Link>
         <hr className=" border-t  border-gray-50 w-36 self-center" />
-      </div>
+      </div> */}
+      <Followers />
     </div>
   );
 };

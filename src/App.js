@@ -14,6 +14,8 @@ import { Toaster } from "react-hot-toast";
 import { fetchPosts } from "./redux/features/postSlice";
 import Post from "./pages/Post";
 import ScrollTop from "./components/ScrollTop";
+import Notifications from "./pages/Notifications";
+import Followers from "./pages/Followers";
 
 axios.defaults.baseURL = process.env.REACT_APP_SERVER_URL;
 axios.defaults.withCredentials = true;
@@ -57,6 +59,8 @@ function App() {
           <Route path="/uploadPhoto" element={<UplaodPhoto />} />
           <Route path="/profile/:id" element={<Profile />} />
           <Route path="/post/:id" element={<Post />} />
+          <Route path="/notifications" element={<Notifications />} />
+          <Route path="/followers" element={<Followers />} />
         </Route>
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<Login />} />

@@ -1,24 +1,20 @@
 import React, { useEffect, useState } from "react";
-import LeftMenu from "../components/LeftMenu";
 import RightMenu from "../components/RightMenu";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-// import { useSelector } from "react-redux";
 
 import PostLoader from "../components/PostLoader";
-// import { selectUser } from "../redux/features/userSlice";
 import toast from "react-hot-toast";
 import Post from "../components/Post";
+import Followers from "../components/Followers";
+import FollowingCard from "../components/FollowingCard";
 
 const Profile = () => {
-  // const user = useSelector(selectUser);
   const [posts, setPosts] = useState([]);
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(false);
 
   const { id } = useParams();
-
-  // console.log(id);
 
   useEffect(() => {
     const fetchUserPosts = async () => {
@@ -46,34 +42,13 @@ const Profile = () => {
     fetchUserPosts();
   }, [id]);
 
-  // useEffect(() => {
-  //   const getPosts = async () => {
-  //     try {
-  //       const { data } = await axios.get("/api/v1/user/" + id);
-  //       console.log(data);
-
-  //       setUser(data);
-  //     } catch (error) {
-  //       const message =
-  //         (error.response &&
-  //           error.response.data &&
-  //           error.response.data.message) ||
-  //         error.message ||
-  //         error.toString();
-
-  //       console.log(error);
-  //       console.log(message);
-  //     }
-  //   };
-
-  //   getPosts();
-  // }, [id]);
   return (
     <div className=" flex gap-6 pt-6">
-      <div className="hidden lg:block w-[20%]">
-        <LeftMenu />
+      <div className="hidden lg:flex flex-col gap-5 w-[25%]">
+        <FollowingCard />
+        <Followers />
       </div>
-      <div className="w-full md:w-[70%] lg:w-[50%]">
+      <div className="w-full md:w-[65%] lg:w-[45%]">
         {loading ? (
           <PostLoader />
         ) : (

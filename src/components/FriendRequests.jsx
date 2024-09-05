@@ -44,6 +44,7 @@ const FriendRequests = () => {
       const { data } = await axios.patch("/api/v1/user/follow/" + userId);
 
       console.log(data);
+      setUsers(data.usersToFollow);
     } catch (error) {
       setLoading(false);
       const message =

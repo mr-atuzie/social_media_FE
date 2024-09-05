@@ -3,10 +3,12 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { SET_LOGIN, SET_USER } from "../redux/features/userSlice";
+import ErrorCard from "../components/ErrorCard";
 
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [errMsg, setErrMsg] = useState("");
 
   const dispatch = useDispatch();
 
@@ -29,7 +31,16 @@ const Login = () => {
 
       navigate("/");
     } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+
+      setErrMsg(message);
       console.log(error);
+      setLoading(false);
     }
   };
   return (
@@ -38,19 +49,14 @@ const Login = () => {
         onSubmit={handleSubmit}
         className=" flex gap-6 flex-col lg:w-[25%] my-20  mx-auto bg-white rounded-md shadow-md p-4 "
       >
-        {/* <div className="flex items-center  gap-2">
-          <div className=" bg-gray-50 p-2 rounded-md">
-            <GiSeagull size={20} />
-          </div>
-
-          <h1 className=" font-semibold">Seagull</h1>
-        </div> */}
         <div>
           <h1 className="font-bold text-2xl">Login</h1>
           <p className="text-sm text-gray-500">
             Join our community and share event,we got you
           </p>
         </div>
+
+        {errMsg && <ErrorCard message={errMsg} />}
 
         <div>
           <label className=" text-sm" htmlFor="username">

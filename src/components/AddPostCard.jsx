@@ -1,12 +1,14 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { selectUser } from "../redux/features/userSlice";
 import ErrorCard from "./ErrorCard";
 import axios from "axios";
+import { fetchPosts } from "../redux/features/postSlice";
 // import PhotoGrid from "./PhotoGrid";
 
 const AddPostCard = ({ setAddPost }) => {
   const user = useSelector(selectUser);
+  const dispatch = useDispatch();
 
   const [addedPhotos, setAddedPhotos] = useState([]);
   const [selectedImages, setSelectedImages] = useState([]);
@@ -67,7 +69,7 @@ const AddPostCard = ({ setAddPost }) => {
 
         uploadFiles.push(imageData.secure_url.toString());
 
-        console.log(uploadFiles);
+        // console.log(uploadFiles);
       }
 
       const { data } = await axios.post("/api/v1/post", {
@@ -76,6 +78,7 @@ const AddPostCard = ({ setAddPost }) => {
       });
 
       console.log(data);
+      dispatch(fetchPosts());
       setLoading(false);
       setAddPost(false);
     } catch (error) {

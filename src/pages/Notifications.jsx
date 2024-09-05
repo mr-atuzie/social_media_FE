@@ -1,9 +1,14 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
-import toast from "react-hot-toast";
-import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+
+import FriendRequests from "../components/FriendRequests";
+import Ad from "../components/Ad";
+import ProfileCard from "../components/ProfileCard";
 import { selectUser } from "../redux/features/userSlice";
+import { useSelector } from "react-redux";
+import axios from "axios";
+import toast from "react-hot-toast";
+import { Link } from "react-router-dom";
+import Followers from "../components/Followers";
 
 const Notifications = () => {
   const [notifications, setNotifications] = useState([]);
@@ -88,13 +93,17 @@ const Notifications = () => {
     }
   };
   return (
-    <>
-      {notifications.length > 0 && (
-        <div className=" px-2  pb-4 h-80 shadow-md bg-white rounded-lg flex overflow-y-scroll customScrollBar flex-col gap-4">
+    <div className=" flex gap-6 pt-6">
+      <div className="hidden flex-col gap-6  lg:flex w-[25%]">
+        <ProfileCard />
+        <Followers />
+      </div>
+      <div className="w-full md:w-[70%] lg:w-[45%]">
+        <div className=" p-4  shadow-md bg-white rounded-lg flex flex-col gap-4">
           <div className=" flex pt-4 bg-white z-40 justify-between sticky top-0 items-center">
             <span className="  font-medium tracking-wide">Notifications</span>
 
-            <Link className=" text-xs text-blue-500" to={"/notifications"}>
+            <Link className=" text-xs text-blue-500" to={"/"}>
               See all
             </Link>
           </div>
@@ -103,7 +112,7 @@ const Notifications = () => {
             return (
               <div
                 key={notification?._id}
-                className="flex  gap-2 bg-gray-100 rounded-lg h-16 p-1.5 justify-between items-center"
+                className="flex  gap-2 h-16 bg-gray-100 rounded-lg p-1.5 justify-between items-center"
               >
                 <div className=" flex items-center gap-3">
                   {notificationIcon(notification?.type)}
@@ -131,8 +140,12 @@ const Notifications = () => {
             );
           })}
         </div>
-      )}
-    </>
+      </div>
+      <div className="hidden md:flex w-[30%] flex-col gap-6 ">
+        <FriendRequests />
+        <Ad />
+      </div>
+    </div>
   );
 };
 

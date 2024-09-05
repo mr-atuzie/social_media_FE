@@ -50,6 +50,7 @@ const UserInfoCard = ({ user }) => {
 
         console.log(error);
         console.log(message);
+        toast.error(message);
       }
     };
 

@@ -133,7 +133,7 @@ const Post = (props) => {
 
               {post?.photo.length === 3 && (
                 <div className="grid gap-1  grid-cols-[2fr_1fr]  rounded-lg overflow-hidden ">
-                  <div className=" h-full flex">
+                  <div className=" h-64 flex">
                     <img
                       className=" bg-gray-200 w-full h-full  object-cover "
                       src={post?.photo[0]}
