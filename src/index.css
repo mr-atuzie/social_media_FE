@@ -51,21 +51,29 @@ body::-webkit-scrollbar-thumb:hover {
   overflow-y: scroll;
 }
 
-.customScrollBar::-webkit-scrollbar {
+.customScrollBarX {
+  overflow-x: scroll;
+}
+
+.customScrollBar::-webkit-scrollbar,
+.customScrollBarX::-webkit-scrollbar {
   width: 12px;
 }
 
-.customScrollBar::-webkit-scrollbar-track {
+.customScrollBar::-webkit-scrollbar-track,
+.customScrollBarX::-webkit-scrollbar {
   background: #f1f1f1;
 }
 
-.customScrollBar::-webkit-scrollbar-thumb {
+.customScrollBar::-webkit-scrollbar-thumb,
+.customScrollBarX::-webkit-scrollbar {
   background-color: #888;
   border-radius: 10px;
   border: 2px solid #f1f1f1;
 }
 
-.customScrollBar::-webkit-scrollbar-thumb:hover {
+.customScrollBar::-webkit-scrollbar-thumb:hover,
+.customScrollBarX::-webkit-scrollbar {
   background: #555;
 }
 

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import RightMenu from "../components/RightMenu";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 
@@ -8,6 +7,8 @@ import toast from "react-hot-toast";
 import Post from "../components/Post";
 import Followers from "../components/Followers";
 import FollowingCard from "../components/FollowingCard";
+import UserInfoCard from "../components/UserInfoCard";
+import UserMediaCard from "../components/UserMediaCard";
 
 const Profile = () => {
   const [posts, setPosts] = useState([]);
@@ -106,8 +107,9 @@ const Profile = () => {
           </>
         )}
       </div>
-      <div className="hidden md:block w-[30%]">
-        <RightMenu user={user} />
+      <div className="hidden md:flex flex-col gap-5 w-[30%]">
+        <UserInfoCard user={user} />
+        <UserMediaCard user={user} />
       </div>
     </div>
   );

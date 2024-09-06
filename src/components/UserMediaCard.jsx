@@ -2,15 +2,14 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-const UserMediaCard = ({ userId }) => {
+const UserMediaCard = ({ user }) => {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
     const getPosts = async () => {
       try {
-        const { data } = await axios.get("/api/v1/post/user/" + userId);
+        const { data } = await axios.get("/api/v1/post/user/" + user?._id);
         setPosts(data.posts);
-        // console.log(data);
       } catch (error) {
         const message =
           (error.response &&
@@ -25,7 +24,7 @@ const UserMediaCard = ({ userId }) => {
     };
 
     getPosts();
-  }, [userId]);
+  }, [user?._id]);
   return (
     <div className="p-4 shadow-md bg-white rounded-lg flex flex-col gap-4">
       <div className=" flex justify-between items-center">

@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
-import Followers from "../components/Followers";
+import Sidebar from "../components/Sidebar";
 
 const Notifications = () => {
   const [notifications, setNotifications] = useState([]);
@@ -96,11 +96,11 @@ const Notifications = () => {
     <div className=" flex gap-6 pt-6">
       <div className="hidden flex-col gap-6  lg:flex w-[25%]">
         <ProfileCard />
-        <Followers />
+        <Sidebar />
       </div>
-      <div className="w-full md:w-[70%] lg:w-[45%]">
-        <div className=" p-4  shadow-md bg-white rounded-lg flex flex-col gap-4">
-          <div className=" flex pt-4 bg-white z-40 justify-between sticky top-0 items-center">
+      <div className="w-full md:w-[70%] mb-16 lg:w-[45%]">
+        <div className=" p-4  shadow-md bg-white h-screen rounded-lg flex flex-col gap-4 overflow-y-scroll customScrollBar">
+          <div className=" flex bg-white z-40 justify-between sticky top-0 items-center">
             <span className="  font-medium tracking-wide">Notifications</span>
 
             <Link className=" text-xs text-blue-500" to={"/"}>

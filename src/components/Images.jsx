@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const Images = ({ post, setShowAllPhotos }) => {
   return (
     <div className="fixed z-50 inset-0 w-full h-screen overflow-y-auto bg-black">
-      <div className="w-full  mx-auto mb-16  p-4 lg:p-10 ">
+      <div className="w-full h-full  mx-auto mb-16  p-4 lg:p-10 ">
         <div className="flex justify-between mb-4 items-center">
           <Link to={"/profile/" + post?.user?._id}>
             <div className=" flex items-center gap-4">
@@ -22,7 +22,7 @@ const Images = ({ post, setShowAllPhotos }) => {
                   </p>
                 </div>
                 <p className=" text-gray-100 text-xs lg:text-sm">
-                  {/* {format(post?.createdAt, "mm")} */}
+                  posted{" "}
                   {formatDistanceToNow(post?.createdAt, {
                     addSuffix: true,
                   })}
@@ -50,19 +50,21 @@ const Images = ({ post, setShowAllPhotos }) => {
             Close
           </button>
         </div>
-        <div className=" grid  w-full justify-center items-center  gap-4  ">
+
+        <div className=" flex      gap-4 m-auto overflow-x-scroll md:w-[50%] md:customScrollBarX   ">
           {post.photo.length > 0 &&
             post.photo.map((photo, index) => {
               return (
                 <img
                   key={index}
-                  className=" w-full h-56 lg:h-80 rounded-lg shadow-sm object-cover"
+                  className=" w-[95%] md:w-[85%] h-96  rounded-lg shadow-sm object-cover"
                   src={photo}
                   alt=""
                 />
               );
             })}
         </div>
+        <p className=" text-sm my-3 text-gray-400 text-pretty ">{post?.desc}</p>
       </div>
     </div>
   );

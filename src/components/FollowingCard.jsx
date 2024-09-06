@@ -61,8 +61,6 @@ const FollowingCard = () => {
 
           {users?.length > 0 &&
             users?.map((user) => {
-              console.log(user);
-
               return (
                 <div key={user?._id} className="   text-sm">
                   <div className=" flex items-center gap-4">

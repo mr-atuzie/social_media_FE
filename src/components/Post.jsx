@@ -100,84 +100,82 @@ const Post = (props) => {
           <p className=" text-sm text-pretty ">{post?.desc}</p>
         </Link>
 
-        <Link to={"/post/" + post?._id}>
-          <div className=" flex flex-col gap-4">
-            <div onClick={() => setShowAllPhotos(true)}>
-              {post?.photo.length === 1 && (
-                <div className=" overflow-hidden h-96 rounded-lg">
-                  {post?.photo.map((link, index) => (
-                    <div className=" h-full flex  " key={index}>
-                      <img
-                        className=" bg-gray-200 w-full h-full  object-cover "
-                        src={link}
-                        alt=""
-                      />
-                    </div>
-                  ))}
-                </div>
-              )}
-
-              {post?.photo.length === 2 && (
-                <div className=" grid grid-cols-2 gap-1 overflow-hidden rounded-lg">
-                  {post?.photo.map((link, index) => (
-                    <div key={index} className=" h-48 flex">
-                      <img
-                        className=" bg-gray-200 w-full h-full  object-cover "
-                        src={link}
-                        alt=""
-                      />
-                    </div>
-                  ))}
-                </div>
-              )}
-
-              {post?.photo.length === 3 && (
-                <div className="grid gap-1  grid-cols-[2fr_1fr]  rounded-lg overflow-hidden ">
-                  <div className=" h-64 flex">
+        <div className=" flex flex-col gap-4">
+          <div onClick={() => setShowAllPhotos(true)}>
+            {post?.photo.length === 1 && (
+              <div className=" overflow-hidden h-96 rounded-lg">
+                {post?.photo.map((link, index) => (
+                  <div className=" h-full flex  " key={index}>
                     <img
                       className=" bg-gray-200 w-full h-full  object-cover "
-                      src={post?.photo[0]}
+                      src={link}
                       alt=""
                     />
                   </div>
-                  <div className="flex flex-col gap-1">
-                    <div className=" flex-1 h-full flex ">
-                      <img
-                        className=" w-full h-full bg-gray-200  object-cover "
-                        src={post?.photo[1]}
-                        alt=""
-                      />
-                    </div>
-                    <div className=" flex-1 h-full flex ">
-                      <img
-                        className=" w-full h-full bg-gray-200  object-cover "
-                        src={post?.photo[2]}
-                        alt=""
-                      />
-                    </div>
+                ))}
+              </div>
+            )}
+
+            {post?.photo.length === 2 && (
+              <div className=" grid grid-cols-2 gap-1 overflow-hidden rounded-lg">
+                {post?.photo.map((link, index) => (
+                  <div key={index} className=" h-48 flex">
+                    <img
+                      className=" bg-gray-200 w-full h-full  object-cover "
+                      src={link}
+                      alt=""
+                    />
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {post?.photo.length === 3 && (
+              <div className="grid gap-1  grid-cols-[2fr_1fr]  rounded-lg overflow-hidden ">
+                <div className=" h-64 flex">
+                  <img
+                    className=" bg-gray-200 w-full h-full  object-cover "
+                    src={post?.photo[0]}
+                    alt=""
+                  />
+                </div>
+                <div className="flex flex-col gap-1">
+                  <div className=" flex-1 h-full flex ">
+                    <img
+                      className=" w-full h-full bg-gray-200  object-cover "
+                      src={post?.photo[1]}
+                      alt=""
+                    />
+                  </div>
+                  <div className=" flex-1 h-full flex ">
+                    <img
+                      className=" w-full h-full bg-gray-200  object-cover "
+                      src={post?.photo[2]}
+                      alt=""
+                    />
                   </div>
                 </div>
-              )}
+              </div>
+            )}
 
-              {post?.photo.length === 4 && (
-                <div className=" grid grid-cols-2 gap-1 overflow-hidden rounded-lg">
-                  {post?.photo.map((link, index) => (
-                    <div key={index} className=" h-32 flex">
-                      <img
-                        className=" bg-gray-200 w-full h-full  object-cover "
-                        src={link}
-                        alt=""
-                      />
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
+            {post?.photo.length === 4 && (
+              <div className=" grid grid-cols-2 gap-1 overflow-hidden rounded-lg">
+                {post?.photo.map((link, index) => (
+                  <div key={index} className=" h-32 flex">
+                    <img
+                      className=" bg-gray-200 w-full h-full  object-cover "
+                      src={link}
+                      alt=""
+                    />
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
-        </Link>
+        </div>
 
         {/* interaction */}
-        <div className=" flex items-center text-sm justify-between my-2.5">
+        <div className=" flex items-center text-sm justify-between ">
           <div className="flex gap-4 md:gap-6 lg:gap-8 ">
             <button
               onClick={LikePost}
@@ -242,31 +240,7 @@ const Post = (props) => {
               </div>
             </Link>
           </div>
-
-          {/* <div className=" flex items-center gap-2 lg:gap-4 bg-gray-50 p-2 rounded-xl">
-            <div>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="size-5 lg:size-6"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M19.5 12c0-1.232-.046-2.453-.138-3.662a4.006 4.006 0 0 0-3.7-3.7 48.678 48.678 0 0 0-7.324 0 4.006 4.006 0 0 0-3.7 3.7c-.017.22-.032.441-.046.662M19.5 12l3-3m-3 3-3-3m-12 3c0 1.232.046 2.453.138 3.662a4.006 4.006 0 0 0 3.7 3.7 48.656 48.656 0 0 0 7.324 0 4.006 4.006 0 0 0 3.7-3.7c.017-.22.032-.441.046-.662M4.5 12l3 3m-3-3-3 3"
-                />
-              </svg>
-            </div>
-            <span className=" text-gray-300">|</span>
-            <span className=" text-xs lg:text-sm text-gray-500">
-              100 <span className=" hidden md:inline">Repost</span>
-            </span>
-          </div> */}
         </div>
-        {/* comment */}
       </div>
       <hr className=" border-t  border-gray-100 w-[95%] self-center" />
     </>

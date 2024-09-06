@@ -80,7 +80,7 @@ const Post = () => {
 
         {loading ? (
           <div className="w-full  mb-16  md:w-[70%] lg:w-[45%]">
-            <PostLoader />
+            <PostLoader single />
           </div>
         ) : (
           <div className="w-full p-4 rounded-lg mb-16 bg-white md:w-[70%] lg:w-[45%]">
@@ -215,7 +215,7 @@ const Post = () => {
                 </div>
 
                 {/* interaction */}
-                <div className=" flex items-center text-sm justify-between my-2.5">
+                <div className=" flex items-center text-sm justify-between ">
                   <div className="flex gap-4 md:gap-6 lg:gap-8 ">
                     <button
                       onClick={likePost}

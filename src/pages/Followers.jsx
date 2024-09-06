@@ -4,9 +4,9 @@ import { useSelector } from "react-redux";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import ProfileCard from "../components/ProfileCard";
-import FriendRequests from "../components/FriendRequests";
 import Ad from "../components/Ad";
 import toast from "react-hot-toast";
+import Sidebar from "../components/Sidebar";
 
 const Followers = () => {
   const [users, setUsers] = useState(null);
@@ -66,8 +66,9 @@ const Followers = () => {
 
   return (
     <div className=" flex gap-6 pt-6">
-      <div className="hidden lg:block w-[25%]">
+      <div className="hidden lg:flex flex-col gap-5 w-[25%]">
         <ProfileCard />
+        <Sidebar />
       </div>
       <div className="w-full md:w-[70%] lg:w-[45%]">
         <div className="p-4 w-full  shadow-md bg-white rounded-lg flex flex-col gap-4">
@@ -140,7 +141,6 @@ const Followers = () => {
         </div>
       </div>
       <div className="hidden md:flex w-[30%] flex-col gap-6 ">
-        <FriendRequests />
         <Ad />
       </div>
     </div>

@@ -35,7 +35,7 @@ const UserInfoCard = ({ user }) => {
     const isFollowing = async () => {
       try {
         const { data } = await axios.get(
-          "/api/v1/user/isFollowing/" + user._id
+          "/api/v1/user/isFollowing/" + user?._id
         );
 
         console.log(data);
@@ -55,7 +55,7 @@ const UserInfoCard = ({ user }) => {
     };
 
     isFollowing();
-  }, [user._id]);
+  }, [user?._id]);
 
   return (
     <div className="p-4 text-sm shadow-md bg-white rounded-lg flex flex-col gap-4">
@@ -64,7 +64,7 @@ const UserInfoCard = ({ user }) => {
           UserInfoCard
         </span>
 
-        {currentUser === user._id && (
+        {currentUser === user?._id && (
           <Link className=" text-xs text-blue-500" to={"/"}>
             Edit profile
           </Link>
@@ -73,13 +73,13 @@ const UserInfoCard = ({ user }) => {
       <div>
         <div className=" flex flex-col text-gray-500 gap-2">
           <div className=" items-center gap-2 flex   ">
-            <div className=" text-black text-xl">{user.name}</div>
-            <div className=" text-sm ">@{user.username}</div>
+            <div className=" text-black text-xl">{user?.name}</div>
+            <div className=" text-sm ">@{user?.username}</div>
           </div>
 
-          {user.description && <p>{user.description}</p>}
+          {user?.description && <p>{user?.description}</p>}
 
-          {user.city && (
+          {user?.city && (
             <div className=" flex items-center gap-2">
               <div>
                 <svg
@@ -108,7 +108,7 @@ const UserInfoCard = ({ user }) => {
             </div>
           )}
 
-          {user.school && (
+          {user?.school && (
             <div className=" flex gap-2">
               <div>
                 <svg
@@ -132,7 +132,7 @@ const UserInfoCard = ({ user }) => {
             </div>
           )}
 
-          {user.work && (
+          {user?.work && (
             <div className=" flex gap-2">
               <div>
                 <svg
@@ -173,16 +173,12 @@ const UserInfoCard = ({ user }) => {
               </svg>
             </div>
             <span className=" ">
-              Joined {format(user?.createdAt, "dd MMMM yyyy")}
+              Joined{" "}
+              {user?.createdAt && format(user?.createdAt, "dd MMMM yyyy")}
             </span>
           </div>
 
-          {/* {console.log({ currentUser: currentUser._id, user: user._id })} */}
-          {/* {console.log(currentUser.following.includes(user._id))}
-          {console.log(user._id)}
-          {console.log(currentUser.following)}
-          {console.log(currentUser)} */}
-          {currentUser._id !== user._id &&
+          {currentUser?._id !== user?._id &&
             (isFollowing ? (
               <button
                 disabled={loading}

@@ -12,14 +12,14 @@ const Stories = () => {
       </div>
       <div className=" flex gap-4 p-1 md:gap-6 overflow-scroll hide-scrollbar  w-full">
         <div className=" flex flex-col items-center gap-2 cursor-pointer ">
-          <div className="relative  w-14 h-14 ring-black lg:w-16 lg:h-16 ">
+          <div className="relative  w-12 h-16 ring-black  ">
             <img
               src={"https://i.ibb.co/4pDNDk1/avatar.png"}
               alt=""
-              className=" object-cover rounded-full ring-2"
+              className=" object-cover w-full h-full rounded-lg ring-2"
             />
 
-            <div className=" w-7 h-7 lg:w-8 lg:h-8 flex justify-center items-center bg-black rounded-full absolute text-white -bottom-0 -right-1">
+            <div className=" w-7 h-7 lg:w-8 lg:h-8 flex justify-center items-center bg-black rounded-full absolute text-white -bottom-1 -right-1">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -46,13 +46,13 @@ const Stories = () => {
               key={story}
               className=" flex flex-col items-center gap-2 cursor-pointer "
             >
-              <div className=" w-14 h-14 lg:w-16 lg:h-16">
+              <div className=" w-12 h-16 ">
                 <img
                   src={
                     "https://images.pexels.com/photos/22873531/pexels-photo-22873531/free-photo-of-surfers-going-into-the-sea.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load"
                   }
                   alt=""
-                  className=" w-full h-full  ring-black 6 object-cover rounded-full ring-2"
+                  className=" w-full h-full  ring-black 6 object-cover rounded-lg ring-2"
                 />
               </div>
               <span className=" text-xs md:text-sm">Marvin</span>
