@@ -9,13 +9,38 @@ import Followers from "../components/Followers";
 import FollowingCard from "../components/FollowingCard";
 import UserInfoCard from "../components/UserInfoCard";
 import UserMediaCard from "../components/UserMediaCard";
+import { useSelector } from "react-redux";
+import { selectUser } from "../redux/features/userSlice";
 
 const Profile = () => {
   const [posts, setPosts] = useState([]);
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(false);
 
+  const currentUser = useSelector(selectUser);
+  const [isFollowing, setIsFollowing] = useState(null);
+
   const { id } = useParams();
+
+  const followUser = async () => {
+    setLoading(true);
+    try {
+      const { data } = await axios.patch("/api/v1/user/follow/" + user._id);
+
+      setLoading(false);
+      setIsFollowing(data.isFollowing);
+    } catch (error) {
+      setLoading(false);
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+
+      toast.error(message);
+    }
+  };
 
   useEffect(() => {
     const fetchUserPosts = async () => {
@@ -23,6 +48,9 @@ const Profile = () => {
       try {
         const response = await axios.get("/api/v1/user/" + id);
         const { data } = await axios.get("/api/v1/post/user/" + id);
+        const isFollow = await axios.get("/api/v1/user/isFollowing/" + id);
+
+        setIsFollowing(isFollow.data);
 
         setLoading(false);
         setPosts(data.posts);
@@ -54,7 +82,7 @@ const Profile = () => {
           <PostLoader />
         ) : (
           <>
-            <div className=" flex-col gap-6 flex">
+            <div className=" flex-col lg:gap-6 flex">
               <div className=" flex flex-col items-center justify-center">
                 <div className=" h-52 lg:h-64 w-full relative">
                   <img
@@ -76,7 +104,8 @@ const Profile = () => {
                 <p className=" mb-4 text-xs lg:text-sm text-gray-500">
                   {user?.name}
                 </p>
-                <div className=" flex items-center justify-center text-sm    gap-12 mb-4">
+
+                <div className=" flex items-center justify-center text-sm  gap-6  md:gap-12 mb-4">
                   <div className=" flex flex-col items-center">
                     <h2 className=" text-black font-semibold">
                       {posts?.length}
@@ -97,6 +126,28 @@ const Profile = () => {
                   </div>
                 </div>
               </div>
+
+              {currentUser?._id !== user?._id && (
+                <div className=" flex justify-center items-center md:hidden">
+                  {isFollowing ? (
+                    <button
+                      disabled={loading}
+                      onClick={followUser}
+                      className=" disabled:opacity-60 w-[60%] text-center bg-black text-white text-sm rounded-md p-2"
+                    >
+                      Following
+                    </button>
+                  ) : (
+                    <button
+                      disabled={loading}
+                      onClick={followUser}
+                      className=" disabled:opacity-60 w-[60%] text-center bg-black text-white text-sm rounded-md p-2"
+                    >
+                      Follow
+                    </button>
+                  )}
+                </div>
+              )}
             </div>
 
             <div className=" p-4 shadow-md my-4 bg-white rounded-lg flex flex-col gap-3 lg:gap-6">
