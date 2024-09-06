@@ -14,7 +14,7 @@ const Followers = () => {
   const [loading, setLoading] = useState(false);
 
   const user = useSelector(selectUser);
-  //   const [following, setFollowing] = useState(false);
+  const [following, setFollowing] = useState(false);
 
   useEffect(() => {
     const followers = async () => {
@@ -22,7 +22,7 @@ const Followers = () => {
       try {
         const { data } = await axios.get("/api/v1/user/followers/" + user._id);
         const response = await axios.get("/api/v1/user/" + user._id);
-        console.log(response.data);
+
         setUsers(data);
         setLoading(false);
         setCurrentUser(response.data);
@@ -64,6 +64,53 @@ const Followers = () => {
     }
   };
 
+  const getfollowing = async () => {
+    setFollowing(true);
+    try {
+      const { data } = await axios.get("/api/v1/user/following/" + user._id);
+
+      setUsers(data);
+      console.log({ following: data });
+
+      setLoading(false);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+
+      setLoading(false);
+      console.log(error);
+      console.log(message);
+      toast.error(message);
+    }
+  };
+
+  const getfollowers = async () => {
+    setFollowing(false);
+    try {
+      const { data } = await axios.get("/api/v1/user/followers/" + user._id);
+      const response = await axios.get("/api/v1/user/" + user._id);
+
+      setUsers(data);
+      setLoading(false);
+      setCurrentUser(response.data);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+
+      setLoading(false);
+      console.log(error);
+      console.log(message);
+    }
+  };
+
   return (
     <div className=" flex gap-6 pt-6">
       <div className="hidden lg:flex flex-col gap-5 w-[25%]">
@@ -84,14 +131,32 @@ const Followers = () => {
             ))
           ) : (
             <>
-              <div className=" flex  gap-4">
-                <span className=" text-sm  tracking-wide font-medium">
-                  Followers
-                </span>
+              <div className=" flex  gap-8">
+                <div className=" flex flex-col justify-center">
+                  <button
+                    onClick={getfollowers}
+                    className=" flex items-center justify-center text-sm "
+                  >
+                    {/* {!following && users?.length}  */}
+                    Followers
+                  </button>
+                  {!following && (
+                    <div className=" w-20 h-0.5 bg-black rounded-lg"></div>
+                  )}
+                </div>
 
-                <span className="  text-sm tracking-wide font-medium">
-                  Following
-                </span>
+                <div className=" flex flex-col justify-center">
+                  <button
+                    onClick={getfollowing}
+                    className=" flex items-center justify-center text-sm "
+                  >
+                    {/* {following && users?.length}  */}
+                    Following
+                  </button>
+                  {following && (
+                    <div className=" w-20 h-0.5 bg-black rounded-lg"></div>
+                  )}
+                </div>
               </div>
 
               {users?.length > 0 &&

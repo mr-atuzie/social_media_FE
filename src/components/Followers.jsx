@@ -16,7 +16,7 @@ const Followers = () => {
       setLoading(true);
       try {
         const { data } = await axios.get("/api/v1/user/followers/" + user._id);
-        console.log(data);
+
         setUsers(data);
         setLoading(false);
       } catch (error) {

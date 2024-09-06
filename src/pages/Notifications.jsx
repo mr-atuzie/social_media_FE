@@ -7,25 +7,24 @@ import { selectUser } from "../redux/features/userSlice";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import toast from "react-hot-toast";
-import { Link } from "react-router-dom";
 import Sidebar from "../components/Sidebar";
 
 const Notifications = () => {
   const [notifications, setNotifications] = useState([]);
-  // const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const user = useSelector(selectUser);
 
   useEffect(() => {
     const fectchNotification = async () => {
-      // setLoading(true);
+      setLoading(true);
       try {
         const { data } = await axios.get(
           "/api/v1/user/notifications/" + user._id
         );
 
         setNotifications(data);
-        // setLoading(false);
+        setLoading(false);
         // console.log(data);
       } catch (error) {
         const message =
@@ -36,6 +35,7 @@ const Notifications = () => {
           error.toString();
 
         toast.error(message);
+        setLoading(false);
       }
     };
 
@@ -73,6 +73,19 @@ const Notifications = () => {
           </svg>
         </div>
       );
+    } else if (type === "unfolow") {
+      return (
+        <div>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            className="size-5 text-orange-600"
+          >
+            <path d="M10.375 2.25a4.125 4.125 0 1 0 0 8.25 4.125 4.125 0 0 0 0-8.25ZM10.375 12a7.125 7.125 0 0 0-7.124 7.247.75.75 0 0 0 .363.63 13.067 13.067 0 0 0 6.761 1.873c2.472 0 4.786-.684 6.76-1.873a.75.75 0 0 0 .364-.63l.001-.12v-.002A7.125 7.125 0 0 0 10.375 12ZM16 9.75a.75.75 0 0 0 0 1.5h6a.75.75 0 0 0 0-1.5h-6Z" />
+          </svg>
+        </div>
+      );
     } else {
       return (
         <div>
@@ -82,64 +95,71 @@ const Notifications = () => {
             fill="currentColor"
             className="size-5 text-green-600"
           >
-            <path
-              fillRule="evenodd"
-              d="M7.5 6a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM3.751 20.105a8.25 8.25 0 0 1 16.498 0 .75.75 0 0 1-.437.695A18.683 18.683 0 0 1 12 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 0 1-.437-.695Z"
-              clipRule="evenodd"
-            />
+            <path d="M5.25 6.375a4.125 4.125 0 1 1 8.25 0 4.125 4.125 0 0 1-8.25 0ZM2.25 19.125a7.125 7.125 0 0 1 14.25 0v.003l-.001.119a.75.75 0 0 1-.363.63 13.067 13.067 0 0 1-6.761 1.873c-2.472 0-4.786-.684-6.76-1.873a.75.75 0 0 1-.364-.63l-.001-.122ZM18.75 7.5a.75.75 0 0 0-1.5 0v2.25H15a.75.75 0 0 0 0 1.5h2.25v2.25a.75.75 0 0 0 1.5 0v-2.25H21a.75.75 0 0 0 0-1.5h-2.25V7.5Z" />
           </svg>
         </div>
       );
     }
   };
+
+  const loader = [1, 2, 3, 4, 5, 6, 7, 8, 9];
   return (
     <div className=" flex gap-6 pt-6">
       <div className="hidden flex-col gap-6  lg:flex w-[25%]">
         <ProfileCard />
         <Sidebar />
       </div>
-      <div className="w-full md:w-[70%] mb-16 lg:w-[45%]">
-        <div className=" p-4  shadow-md bg-white h-screen rounded-lg flex flex-col gap-4 overflow-y-scroll customScrollBar">
-          <div className=" flex bg-white z-40 justify-between sticky top-0 items-center">
-            <span className="  font-medium tracking-wide">Notifications</span>
-
-            <Link className=" text-xs text-blue-500" to={"/"}>
-              See all
-            </Link>
+      <div className="w-full md:w-[70%] mb-24 lg:w-[45%]">
+        {loading ? (
+          <div className=" bg-white p-4  shadow-md rounded-lg flex flex-col gap-4">
+            {loader.map((l) => {
+              return (
+                <div
+                  key={l}
+                  className=" h-12 bg-gray-100 rounded-lg w-full"
+                ></div>
+              );
+            })}
           </div>
+        ) : (
+          <div className="px-2 lg:px-4 pb-4  shadow-md bg-white h-screen rounded-lg flex flex-col gap-4 overflow-y-scroll customScrollBar">
+            <div className=" p-4 pb-2 flex bg-white z-40 justify-between sticky top-0 items-center">
+              <span className="  font-medium tracking-wide">Notifications</span>
+            </div>
 
-          {notifications?.map((notification) => {
-            return (
-              <div
-                key={notification?._id}
-                className="flex  gap-2 h-16 bg-gray-100 rounded-lg p-1.5 justify-between items-center"
-              >
-                <div className=" flex items-center gap-3">
-                  {notificationIcon(notification?.type)}
+            {notifications?.map((notification) => {
+              return (
+                <div
+                  key={notification?._id}
+                  className="flex  gap-2 h-16 bg-gray-100 rounded-lg p-1.5 justify-between items-center"
+                >
+                  <div className=" flex items-center gap-3">
+                    {notificationIcon(notification?.type)}
 
-                  <div>
-                    <img
-                      src={notification?.from?.avatar}
-                      alt=""
-                      className=" w-8 h-8 object-cover  rounded-full"
-                    />
+                    <div>
+                      <img
+                        src={notification?.from?.avatar}
+                        alt=""
+                        className=" w-8 h-8 object-cover  rounded-full"
+                      />
+                    </div>
+                    <p className="text-sm leading-3">{notification?.msg}</p>
                   </div>
-                  <p className="text-sm leading-3">{notification?.msg}</p>
+
+                  {notification?.post && (
+                    <div className=" ">
+                      <img
+                        src={notification?.post.photo[0]}
+                        alt=""
+                        className=" w-12 h-12 object-cover  rounded-lg"
+                      />
+                    </div>
+                  )}
                 </div>
-
-                {notification?.post && (
-                  <div className=" ">
-                    <img
-                      src={notification?.post.photo[0]}
-                      alt=""
-                      className=" w-12 h-12 object-cover  rounded-lg"
-                    />
-                  </div>
-                )}
-              </div>
-            );
-          })}
-        </div>
+              );
+            })}
+          </div>
+        )}
       </div>
       <div className="hidden md:flex w-[30%] flex-col gap-6 ">
         <FriendRequests />

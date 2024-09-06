@@ -49,7 +49,7 @@ const Profile = () => {
         <FollowingCard />
         <Followers />
       </div>
-      <div className="w-full md:w-[65%] lg:w-[45%]">
+      <div className="w-full md:w-[65%] mb-24 lg:w-[45%]">
         {loading ? (
           <PostLoader />
         ) : (
@@ -108,8 +108,9 @@ const Profile = () => {
         )}
       </div>
       <div className="hidden md:flex flex-col gap-5 w-[30%]">
-        <UserInfoCard user={user} />
-        <UserMediaCard user={user} />
+        {user && <UserInfoCard user={user} />}
+
+        {user && <UserMediaCard user={user} />}
       </div>
     </div>
   );

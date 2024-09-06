@@ -57,7 +57,7 @@ const Images = ({ post, setShowAllPhotos }) => {
               return (
                 <img
                   key={index}
-                  className=" w-[95%] md:w-[85%] h-96  rounded-lg shadow-sm object-cover"
+                  className=" w-[95%] md:w-[85%]  rounded-lg shadow-sm object-cover"
                   src={photo}
                   alt=""
                 />

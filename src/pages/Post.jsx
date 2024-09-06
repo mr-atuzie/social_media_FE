@@ -171,7 +171,7 @@ const Post = () => {
                     )}
 
                     {post?.photo.length === 3 && (
-                      <div className="grid gap-1  grid-cols-[2fr_1fr]  rounded-lg overflow-hidden ">
+                      <div className="grid gap-1 h-64  grid-cols-[2fr_1fr]  rounded-lg overflow-hidden ">
                         <div className=" h-full flex">
                           <img
                             className=" bg-gray-200 w-full h-full  object-cover "
@@ -302,8 +302,6 @@ const Post = () => {
                     </span>
                   </div> */}
                 </div>
-                {/* comment */}
-                {/* <Comments /> */}
               </div>
               <hr className=" border-t  border-gray-100 w-[95%] self-center" />
 
