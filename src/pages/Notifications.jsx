@@ -73,7 +73,7 @@ const Notifications = () => {
           </svg>
         </div>
       );
-    } else if (type === "unfolow") {
+    } else if (type === "unfollow") {
       return (
         <div>
           <svg

@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 
 const Sidebar = () => {
   return (
-    <div className="p-4 shadow-md bg-white text-sm rounded-lg flex flex-col text-gray-500 gap-2">
+    <div className="p-4 shadow-md bg-white text-xs rounded-lg flex flex-col text-gray-500 gap-2">
       <NavLink
         to="/"
         className={({ isActive }) =>
