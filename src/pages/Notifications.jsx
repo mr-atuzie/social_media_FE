@@ -102,7 +102,7 @@ const Notifications = () => {
     }
   };
 
-  const loader = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+  const loader = [1, 2, 3, 4, 5, 6, 7];
   return (
     <div className=" flex gap-6 pt-6">
       <div className="hidden flex-col gap-6  lg:flex w-[25%]">
@@ -131,9 +131,9 @@ const Notifications = () => {
               return (
                 <div
                   key={notification?._id}
-                  className="flex  gap-2 h-16 bg-gray-100 rounded-lg p-1.5 justify-between items-center"
+                  className="flex  gap-2 min-h-16 bg-gray-100 rounded-lg p-1.5 justify-between items-center"
                 >
-                  <div className=" flex items-center gap-3">
+                  <div className=" flex items-center gap-2 lg:gap-3">
                     {notificationIcon(notification?.type)}
 
                     <div>
@@ -143,10 +143,12 @@ const Notifications = () => {
                         className=" w-8 h-8 object-cover  rounded-full"
                       />
                     </div>
-                    <p className="text-sm leading-3">{notification?.msg}</p>
+                    <p className=" text-xs lg:text-sm leading-3">
+                      {notification?.msg}
+                    </p>
                   </div>
 
-                  {notification?.post && (
+                  {notification?.post?.photo && (
                     <div className=" ">
                       <img
                         src={notification?.post.photo[0]}

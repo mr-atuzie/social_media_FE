@@ -2,6 +2,15 @@ import { formatDistanceToNow } from "date-fns";
 import React from "react";
 import { Link } from "react-router-dom";
 
+import { Navigation, Pagination, Scrollbar, A11y } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
+
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import "swiper/css/scrollbar";
+
 const Images = ({ post, setShowAllPhotos }) => {
   return (
     <div className="fixed z-50 inset-0 w-full h-screen overflow-y-auto bg-black">
@@ -50,21 +59,36 @@ const Images = ({ post, setShowAllPhotos }) => {
             Close
           </button>
         </div>
-
-        <div className=" flex      gap-4 m-auto overflow-x-scroll md:w-[50%] md:customScrollBarX   ">
-          {post.photo.length > 0 &&
-            post.photo.map((photo, index) => {
-              return (
-                <img
-                  key={index}
-                  className=" w-[95%] md:w-[85%]  rounded-lg shadow-sm object-cover"
-                  src={photo}
-                  alt=""
-                />
-              );
-            })}
+        {/* className=" flex gap-4 m-auto overflow-x-scroll md:w-[50%]
+        lg:customScrollBarX " */}
+        <div className=" lg:w-[50%] mx-auto">
+          <p className=" text-sm my-3 text-gray-400 text-pretty ">
+            {post?.desc}
+          </p>
+          <Swiper
+            modules={[Navigation, Pagination, Scrollbar, A11y]}
+            spaceBetween={10}
+            slidesPerView={1}
+            // navigation
+            pagination={{ clickable: true }}
+            scrollbar={{ draggable: true }}
+            onSwiper={(swiper) => console.log(swiper)}
+            onSlideChange={() => console.log("slide change")}
+          >
+            {post.photo.length > 0 &&
+              post.photo.map((photo, index) => {
+                return (
+                  <SwiperSlide key={index}>
+                    <img
+                      className=" w-full  h-96   rounded-lg shadow-sm object-cover"
+                      src={photo}
+                      alt=""
+                    />
+                  </SwiperSlide>
+                );
+              })}
+          </Swiper>
         </div>
-        <p className=" text-sm my-3 text-gray-400 text-pretty ">{post?.desc}</p>
       </div>
     </div>
   );

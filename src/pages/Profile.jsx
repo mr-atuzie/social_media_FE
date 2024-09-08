@@ -16,6 +16,7 @@ const Profile = () => {
   const [posts, setPosts] = useState([]);
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [followLoading, setFollowLoading] = useState(false);
 
   const currentUser = useSelector(selectUser);
   const [isFollowing, setIsFollowing] = useState(null);
@@ -23,14 +24,14 @@ const Profile = () => {
   const { id } = useParams();
 
   const followUser = async () => {
-    setLoading(true);
+    setFollowLoading(true);
     try {
       const { data } = await axios.patch("/api/v1/user/follow/" + user._id);
 
-      setLoading(false);
+      setFollowLoading(false);
       setIsFollowing(data.isFollowing);
     } catch (error) {
-      setLoading(false);
+      setFollowLoading(false);
       const message =
         (error.response &&
           error.response.data &&
@@ -131,7 +132,7 @@ const Profile = () => {
                 <div className=" flex justify-center items-center md:hidden">
                   {isFollowing ? (
                     <button
-                      disabled={loading}
+                      disabled={followLoading}
                       onClick={followUser}
                       className=" disabled:opacity-60 w-[60%] text-center bg-black text-white text-sm rounded-md p-2"
                     >

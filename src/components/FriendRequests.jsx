@@ -70,7 +70,9 @@ const FriendRequests = () => {
       ) : (
         <>
           <div className=" flex justify-between items-center">
-            <span className=" tracking-wide font-medium">Who to follow</span>
+            <span className=" tracking-wide font-medium">
+              Suggested for you
+            </span>
 
             <Link className=" text-xs text-blue-500" to={"/"}>
               See all

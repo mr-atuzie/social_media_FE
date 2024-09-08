@@ -117,7 +117,7 @@ const Followers = () => {
         <ProfileCard />
         <Sidebar />
       </div>
-      <div className="w-full md:w-[70%] lg:w-[45%]">
+      <div className="w-full md:w-[70%] lg:w-[45%] flex flex-col gap-10">
         <div className="p-4 w-full  shadow-md bg-white rounded-lg flex flex-col gap-4">
           {loading ? (
             loader.map((l) => (
@@ -197,8 +197,10 @@ const Followers = () => {
                 })}
 
               {users?.length < 1 && (
-                <div className=" text-gray-500 text-sm capitalize font-mono">
-                  You have no followers
+                <div className=" text-gray-500  text-xs lg:text-sm capitalize font-mono">
+                  {following
+                    ? "You're not following anyone"
+                    : "You have no followers"}
                 </div>
               )}
             </>
