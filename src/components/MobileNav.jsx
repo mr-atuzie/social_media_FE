@@ -6,7 +6,7 @@ import { selectUser } from "../redux/features/userSlice";
 const MobileNav = () => {
   const user = useSelector(selectUser);
   return (
-    <div className=" bg-white border-t bottom-0 z-40  fixed w-full py-3 flex justify-evenly items-center  lg:hidden">
+    <div className=" bg-white border-t bottom-0 z-40  fixed w-full p-3 flex justify-between items-center  lg:hidden">
       <NavLink
         to="/"
         className={({ isActive }) =>
@@ -59,7 +59,7 @@ const MobileNav = () => {
               </svg>
             </div>
           </span>
-          <p className=" text-xs">Searxh</p>
+          <p className=" text-xs">Search</p>
         </div>
       </NavLink>
 

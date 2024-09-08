@@ -2,6 +2,7 @@ import React from "react";
 import ProfileCard from "../components/ProfileCard";
 import Sidebar from "../components/Sidebar";
 import RightMenu from "../components/RightMenu";
+import FriendRequests from "../components/FriendRequests";
 
 const Search = () => {
   return (
@@ -11,7 +12,10 @@ const Search = () => {
         <Sidebar />
       </div>
       <div className="w-full md:w-[70%] lg:w-[45%]">
-        <div className=" flex-col gap-6 flex">search</div>
+        <div className=" flex-col gap-6 flex">
+          search
+          <FriendRequests />
+        </div>
       </div>
       <div className="hidden md:block w-[30%]">
         <RightMenu />
