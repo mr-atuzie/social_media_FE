@@ -3,9 +3,11 @@ import { Link } from "react-router-dom";
 import ShowOnLogin, { ShowOnLogOut } from "./Protect";
 import { useSelector } from "react-redux";
 import { selectUser } from "../redux/features/userSlice";
+import { useState } from "react";
 
 const Navbar = () => {
   const user = useSelector(selectUser);
+  const [menu, setMenu] = useState(false);
 
   return (
     <nav className="bg-white sticky w-full top-0 z-50 flex items-center  py-5 shadow-md">
@@ -172,17 +174,18 @@ const Navbar = () => {
                 </svg>
               </div>
 
-              <Link to={"/profile/" + user?._id}>
-                <img
-                  src={
-                    user?.avatar
-                      ? user?.avatar
-                      : "https://i.ibb.co/4pDNDk1/avatar.png"
-                  }
-                  alt=""
-                  className=" w-8 ring-black ring-2 h-8 rounded-full object-cover"
-                />
-              </Link>
+              {/* <Link to={"/profile/" + user?._id}> */}
+              <img
+                onClick={() => setMenu((prev) => !prev)}
+                src={
+                  user?.avatar
+                    ? user?.avatar
+                    : "https://i.ibb.co/4pDNDk1/avatar.png"
+                }
+                alt=""
+                className=" z-50 w-8 ring-black ring-2 h-8 rounded-full object-cover"
+              />
+              {/* </Link> */}
             </div>
           </ShowOnLogin>
 
@@ -213,6 +216,11 @@ const Navbar = () => {
           {/* <MobileMenu /> */}
         </div>
       </div>
+      {menu && (
+        <div className=" bg-black/30 w-full absolute h-screen z-40 left-0 top-0">
+          <div className="  shadow-md w-[80%] h-full bg-white">rex is boss</div>
+        </div>
+      )}
     </nav>
   );
 };

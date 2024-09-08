@@ -13,7 +13,22 @@ const Search = () => {
       </div>
       <div className="w-full md:w-[70%] lg:w-[45%]">
         <div className=" flex-col gap-6 flex">
-          search
+          <div className=" bg-white rounded-lg p-4 shadow-md">
+            <div>
+              <label className=" text-sm" htmlFor="username">
+                Search
+              </label>
+              <input
+                className=" border rounded-md p-2 w-full placeholder:text-sm placeholder:font-normal bg-gray-50"
+                type="text"
+                id="username"
+                name="username"
+                placeholder="Enter username"
+                // value={username}
+                // onChange={(e) => setUsername(e.target.value)}
+              />
+            </div>
+          </div>
           <FriendRequests />
         </div>
       </div>

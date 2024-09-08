@@ -80,7 +80,7 @@ const Images = ({ post, setShowAllPhotos }) => {
                 return (
                   <SwiperSlide key={index}>
                     <img
-                      className=" w-full  h-96   rounded-lg shadow-sm object-cover"
+                      className=" w-full  max-h-96   rounded-lg shadow-sm object-cover"
                       src={photo}
                       alt=""
                     />

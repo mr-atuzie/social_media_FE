@@ -3,7 +3,7 @@ import React from "react";
 const PostLoader = ({ single }) => {
   const loaders = [1, 2, 3];
   return (
-    <div className=" p-4 shadow-md bg-white rounded-lg mb-4 flex flex-col gap-3 lg:gap-6">
+    <div className=" p-4 shadow-md bg-white rounded-lg  flex flex-col mb-24 gap-3 lg:gap-6">
       {single ? (
         <div className=" flex flex-col gap-2 lg:gap-4">
           <div className=" flex items-center gap-4">
