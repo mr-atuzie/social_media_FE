@@ -1,7 +1,43 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
+import axios from "axios";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { NavLink, useNavigate } from "react-router-dom";
+import { SET_LOGIN } from "../redux/features/userSlice";
+import toast from "react-hot-toast";
 
 const Sidebar = () => {
+  const dispatch = useDispatch();
+
+  const [loading, setLoading] = useState(false);
+
+  const navigate = useNavigate();
+  const logout = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+
+    try {
+      const { data } = await axios.get("/api/v1/user/logout");
+
+      //  dispatch(SET_USER(data));
+      dispatch(SET_LOGIN(false));
+
+      console.log(data);
+      setLoading(false);
+      navigate("/");
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+
+      //  setErrMsg(message);
+      console.log(error);
+      toast.error(message);
+      setLoading(false);
+    }
+  };
   return (
     <div className="p-4 shadow-md bg-white text-xs rounded-lg flex flex-col text-gray-500 gap-2">
       <NavLink
@@ -115,7 +151,11 @@ const Sidebar = () => {
       </NavLink>
       <hr className=" border-t  border-gray-100 w-[80%] self-center" />
 
-      <button className=" w-full flex items-center text-red-500 gap-4 hover:bg-gray-50 p-2 rounded-lg">
+      <button
+        onClick={logout}
+        disabled={loading}
+        className=" disabled:opacity-50 w-full flex items-center bg-black text-white gap-4 hover:bg-gray-50 p-2 rounded-lg"
+      >
         <div>
           <svg
             xmlns="http://www.w3.org/2000/svg"
