@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 import axios from "axios";
 import toast from "react-hot-toast";
 import Sidebar from "../components/Sidebar";
+import { Link } from "react-router-dom";
 
 const Notifications = () => {
   const [notifications, setNotifications] = useState([]);
@@ -148,14 +149,14 @@ const Notifications = () => {
                     </p>
                   </div>
 
-                  {notification?.post?.photo && (
-                    <div className=" ">
+                  {notification?.post?.photo?.length > 0 && (
+                    <Link to={"/post/" + notification?.post?._id}>
                       <img
                         src={notification?.post.photo[0]}
                         alt=""
                         className=" w-12 h-12 object-cover  rounded-lg"
                       />
-                    </div>
+                    </Link>
                   )}
                 </div>
               );

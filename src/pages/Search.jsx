@@ -15,15 +15,15 @@ const Search = () => {
         <div className=" flex-col gap-6 flex">
           <div className=" bg-white rounded-lg p-4 shadow-md">
             <div>
-              <label className=" text-sm" htmlFor="username">
+              {/* <label className=" text-sm" htmlFor="username">
                 Search
-              </label>
+              </label> */}
               <input
                 className=" border rounded-md p-2 w-full placeholder:text-sm placeholder:font-normal bg-gray-50"
                 type="text"
                 id="username"
                 name="username"
-                placeholder="Enter username"
+                placeholder="Search username"
                 // value={username}
                 // onChange={(e) => setUsername(e.target.value)}
               />

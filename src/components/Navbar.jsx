@@ -218,7 +218,27 @@ const Navbar = () => {
       </div>
       {menu && (
         <div className=" bg-black/30 w-full absolute h-screen z-40 left-0 top-0">
-          <div className="  shadow-md w-[80%] h-full bg-white">rex is boss</div>
+          <div className="  shadow-md p-4 w-[85%] h-full bg-white">
+            <Link to={"/profile/" + user?._id}>
+              <img
+                onClick={() => setMenu((prev) => !prev)}
+                src={
+                  user?.avatar
+                    ? user?.avatar
+                    : "https://i.ibb.co/4pDNDk1/avatar.png"
+                }
+                alt=""
+                className="  w-12 ring-black ring-2 h-12 rounded-full object-cover"
+              />
+            </Link>
+
+            <div>
+              <h1 className=" text-lg font-semibold">{user?.name}</h1>
+              <h5 className=" text-sm text-gray-500">@{user?.username}</h5>
+            </div>
+
+            <hr className=" border-t  border-gray-100 w-full self-center" />
+          </div>
         </div>
       )}
     </nav>

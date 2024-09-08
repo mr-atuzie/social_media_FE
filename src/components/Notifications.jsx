@@ -112,7 +112,7 @@ const Notifications = () => {
             return (
               <div
                 key={notification?._id}
-                className="flex  gap-2 bg-gray-100 rounded-lg h-16 p-1.5 justify-between items-center"
+                className="flex  gap-2 bg-gray-100 rounded-lg min-h-16 p-1.5 justify-between items-center"
               >
                 <div className=" flex items-center gap-3">
                   {notificationIcon(notification?.type)}
@@ -124,17 +124,17 @@ const Notifications = () => {
                       className=" w-8 h-8 object-cover  rounded-full"
                     />
                   </div>
-                  <p className="text-sm leading-3">{notification?.msg}</p>
+                  <p className="text-xs leading-3">{notification?.msg}</p>
                 </div>
 
-                {notification?.post && (
-                  <div className=" ">
+                {notification?.post?.photo?.length > 0 && (
+                  <Link to={"/post/" + notification?.post?._id}>
                     <img
                       src={notification?.post.photo[0]}
                       alt=""
                       className=" w-12 h-12 object-cover  rounded-lg"
                     />
-                  </div>
+                  </Link>
                 )}
               </div>
             );
