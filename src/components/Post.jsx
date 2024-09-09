@@ -241,7 +241,7 @@ const Post = (props) => {
           </div>
         </div>
       </div>
-      <hr className=" border-t  border-gray-100 w-[95%] self-center" />
+      <hr className=" border-t  border-gray-100 w-full self-center" />
     </>
   );
 };
