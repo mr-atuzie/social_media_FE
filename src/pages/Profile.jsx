@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 import PostLoader from "../components/PostLoader";
 import toast from "react-hot-toast";
@@ -91,15 +91,15 @@ const Profile = () => {
                     alt=""
                     className=" h-full w-full bg-gray-400 rounded-md object-cover"
                   />
-                  <div className=" relative ">
+                  <div className="absolute left-0 right-0 m-auto w-24 lg:w-32 h-24 lg:h-32  -bottom-16">
                     <img
                       src={user?.avatar}
                       alt=""
-                      className=" w-24 lg:w-32 h-24 lg:h-32 absolute left-0 right-0 m-auto -bottom-16 bg-gray-400 rounded-full object-cover ring-4 ring-white z-20"
+                      className=" w-full h-full  bg-gray-400 rounded-full object-cover ring-4 ring-white z-20"
                     />
-                    <label
-                      htmlFor="myImage"
-                      className=" cursor-pointer  absolute bottom-0 right-2 p-2 h-10 w-10 rounded-full bg-black text-white"
+                    <Link
+                      to={"/uploadPhoto"}
+                      className=" cursor-pointer  absolute -bottom-4 right-2 p-2 h-10 w-10 rounded-full bg-black text-white"
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -120,7 +120,7 @@ const Profile = () => {
                           d="M16.5 12.75a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0ZM18.75 10.5h.008v.008h-.008V10.5Z"
                         />
                       </svg>
-                    </label>
+                    </Link>
                   </div>
                 </div>
                 <h1 className=" mt-20  font-medium text-2xl">
