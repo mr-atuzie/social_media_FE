@@ -140,7 +140,7 @@ const Profile = () => {
                     </button>
                   ) : (
                     <button
-                      disabled={loading}
+                      disabled={followLoading}
                       onClick={followUser}
                       className=" disabled:opacity-60 w-[60%] text-center bg-black text-white text-sm rounded-md p-2"
                     >
