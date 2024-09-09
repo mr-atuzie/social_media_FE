@@ -276,7 +276,7 @@ const Navbar = () => {
 
             <hr className=" border-t my-2  border-gray-200 w-full self-center" />
 
-            <div className=" flex flex-col gap-4">
+            <div className=" flex flex-col gap-3">
               <NavLink
                 to="/"
                 onClick={() => setMenu((prev) => !prev)}
@@ -452,7 +452,7 @@ const Navbar = () => {
             <button
               onClick={logout}
               disabled={loading}
-              className="  w-full mt-8 flex items-center  text-red-500 gap-4 bg-gray-100 p-2 rounded-lg"
+              className="  w-full mt-8 text-sm flex items-center  text-red-500 gap-4 bg-gray-100 p-2 rounded-lg"
             >
               <div>
                 <svg
