@@ -393,7 +393,7 @@ const Navbar = () => {
                 <span>Followers</span>
               </NavLink>
 
-              <NavLink
+              {/* <NavLink
                 onClick={() => setMenu((prev) => !prev)}
                 className={({ isActive }) =>
                   isActive
@@ -419,7 +419,7 @@ const Navbar = () => {
                   </svg>
                 </div>
                 <span>Stories</span>
-              </NavLink>
+              </NavLink> */}
 
               <NavLink
                 className={({ isActive }) =>
