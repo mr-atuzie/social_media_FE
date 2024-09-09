@@ -137,18 +137,23 @@ const Profile = () => {
                     </h2>
                     <p className=" ">Posts</p>
                   </div>
-                  <div className=" flex flex-col  items-center">
-                    <h2 className=" text-black font-semibold">
-                      {user?.follower.length}
-                    </h2>
-                    <p className=" ">Followers</p>
-                  </div>
-                  <div className=" flex flex-col items-center">
-                    <h2 className=" text-black font-semibold">
-                      {user?.following.length}
-                    </h2>
-                    <p className=" ">Followings</p>
-                  </div>
+                  <Link to={"/follower"}>
+                    <div className=" flex flex-col  items-center">
+                      <h2 className=" text-black font-semibold">
+                        {user?.follower.length}
+                      </h2>
+                      <p className=" ">Followers</p>
+                    </div>
+                  </Link>
+
+                  <Link to={"/follower"}>
+                    <div className=" flex flex-col items-center">
+                      <h2 className=" text-black font-semibold">
+                        {user?.following.length}
+                      </h2>
+                      <p className=" ">Followings</p>
+                    </div>
+                  </Link>
                 </div>
               </div>
 

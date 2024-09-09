@@ -15,6 +15,7 @@ const Search = () => {
 
   const searchUser = async (e) => {
     e.preventDefault();
+    setNotFound(false);
     setLoading(true);
     if (!search) {
       toast.error("Enter search field");
