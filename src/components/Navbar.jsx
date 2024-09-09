@@ -1,13 +1,48 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 // import MobileMenu from "./MobileMenu";
 import ShowOnLogin, { ShowOnLogOut } from "./Protect";
-import { useSelector } from "react-redux";
-import { selectUser } from "../redux/features/userSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { selectUser, SET_LOGIN } from "../redux/features/userSlice";
 import { useState } from "react";
+import toast from "react-hot-toast";
+import axios from "axios";
 
 const Navbar = () => {
   const user = useSelector(selectUser);
   const [menu, setMenu] = useState(false);
+
+  const dispatch = useDispatch();
+
+  const [loading, setLoading] = useState(false);
+
+  const navigate = useNavigate();
+
+  const logout = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+
+    try {
+      const { data } = await axios.get("/api/v1/user/logout");
+
+      dispatch(SET_LOGIN(false));
+      console.log(data);
+      setLoading(false);
+
+      navigate("/login");
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+
+      //  setErrMsg(message);
+      console.log(error);
+      toast.error(message);
+      setLoading(false);
+    }
+  };
 
   return (
     <nav className="bg-white sticky w-full top-0 z-50 flex items-center  py-5 shadow-md">
@@ -244,6 +279,7 @@ const Navbar = () => {
             <div className=" flex flex-col gap-4">
               <NavLink
                 to="/"
+                onClick={() => setMenu((prev) => !prev)}
                 className={({ isActive }) =>
                   isActive
                     ? " flex items-center gap-4  bg-gray-100 p-2 rounded-lg"
@@ -270,6 +306,7 @@ const Navbar = () => {
               </NavLink>
 
               <NavLink
+                onClick={() => setMenu((prev) => !prev)}
                 className={({ isActive }) =>
                   isActive
                     ? " flex items-center gap-4  bg-gray-100 p-2 rounded-lg"
@@ -298,6 +335,35 @@ const Navbar = () => {
               </NavLink>
 
               <NavLink
+                onClick={() => setMenu((prev) => !prev)}
+                className={({ isActive }) =>
+                  isActive
+                    ? " flex items-center gap-4  bg-gray-100 p-2 rounded-lg"
+                    : "flex items-center gap-4 hover:bg-gray-50 p-2 rounded-lg"
+                }
+                to={"/search"}
+              >
+                <div>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                    className="size-5"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
+                    />
+                  </svg>
+                </div>
+                <span>Search</span>
+              </NavLink>
+
+              <NavLink
+                onClick={() => setMenu((prev) => !prev)}
                 className={({ isActive }) =>
                   isActive
                     ? " flex items-center gap-4  bg-gray-100 p-2 rounded-lg"
@@ -325,6 +391,7 @@ const Navbar = () => {
               </NavLink>
 
               <NavLink
+                onClick={() => setMenu((prev) => !prev)}
                 className={({ isActive }) =>
                   isActive
                     ? " flex items-center gap-4  bg-gray-100 p-2 rounded-lg"
@@ -350,9 +417,59 @@ const Navbar = () => {
                 </div>
                 <span>Stories</span>
               </NavLink>
+
+              <NavLink
+                className={({ isActive }) =>
+                  isActive
+                    ? " flex items-center gap-4  bg-gray-100 p-2 rounded-lg"
+                    : "flex items-center gap-4 hover:bg-gray-50 p-2 rounded-lg"
+                }
+                to={"/profile/" + user?._id}
+                onClick={() => setMenu((prev) => !prev)}
+              >
+                <div>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                    className="w-5 h-5"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"
+                    />
+                  </svg>
+                </div>
+                <span>Profile</span>
+              </NavLink>
             </div>
 
             <hr className=" border-t  border-gray-200 my-2 w-full self-center" />
+
+            <button
+              onClick={logout}
+              disabled={loading}
+              className="  w-full mt-8 flex items-center  text-red-500 gap-4 bg-gray-100 p-2 rounded-lg"
+            >
+              <div>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  className="size-5"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M16.5 3.75a1.5 1.5 0 0 1 1.5 1.5v13.5a1.5 1.5 0 0 1-1.5 1.5h-6a1.5 1.5 0 0 1-1.5-1.5V15a.75.75 0 0 0-1.5 0v3.75a3 3 0 0 0 3 3h6a3 3 0 0 0 3-3V5.25a3 3 0 0 0-3-3h-6a3 3 0 0 0-3 3V9A.75.75 0 1 0 9 9V5.25a1.5 1.5 0 0 1 1.5-1.5h6ZM5.78 8.47a.75.75 0 0 0-1.06 0l-3 3a.75.75 0 0 0 0 1.06l3 3a.75.75 0 0 0 1.06-1.06l-1.72-1.72H15a.75.75 0 0 0 0-1.5H4.06l1.72-1.72a.75.75 0 0 0 0-1.06Z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </div>
+              <span>Log out</span>
+            </button>
           </div>
         </div>
       )}
