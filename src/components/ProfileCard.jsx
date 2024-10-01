@@ -11,6 +11,8 @@ const ProfileCard = () => {
 
   const currentUser = useSelector(selectUser);
 
+  console.log(currentUser);
+
   useEffect(() => {
     const fetchUserPosts = async () => {
       setLoading(true);
@@ -33,7 +35,7 @@ const ProfileCard = () => {
     };
 
     fetchUserPosts();
-  }, [currentUser._id]);
+  }, [currentUser?._id]);
 
   return (
     <div className=" p-2.5 shadow-md bg-white rounded-lg flex flex-col gap-4">
