@@ -16,7 +16,7 @@ const Notifications = () => {
       // setLoading(true);
       try {
         const { data } = await axios.get(
-          "/api/v1/user/notifications/" + user._id
+          "/api/v1/user/notifications/" + user?._id
         );
 
         setNotifications(data);
@@ -35,7 +35,7 @@ const Notifications = () => {
     };
 
     fectchNotification();
-  }, [user._id]);
+  }, [user?._id]);
 
   const notificationIcon = (type) => {
     if (type === "like") {

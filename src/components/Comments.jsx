@@ -13,7 +13,7 @@ const Comments = ({ post, setComments }) => {
     e.preventDefault();
     setAdding(true);
     try {
-      const { data } = await axios.post("/api/v1/post/comment/" + post._id, {
+      const { data } = await axios.post("/api/v1/post/comment/" + post?._id, {
         comment,
       });
 

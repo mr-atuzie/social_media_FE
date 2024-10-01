@@ -15,7 +15,7 @@ const FollowingCard = () => {
     const followers = async () => {
       setLoading(true);
       try {
-        const { data } = await axios.get("/api/v1/user/following/" + user._id);
+        const { data } = await axios.get("/api/v1/user/following/" + user?._id);
 
         setUsers(data);
         setLoading(false);
@@ -35,7 +35,7 @@ const FollowingCard = () => {
     };
 
     followers();
-  }, [user._id]);
+  }, [user?._id]);
 
   return (
     <div className="p-4 w-full  shadow-md bg-white rounded-lg flex flex-col gap-4">

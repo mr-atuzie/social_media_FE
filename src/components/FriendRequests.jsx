@@ -16,7 +16,7 @@ const FriendRequests = () => {
       setLoading(true);
       try {
         const { data } = await axios.get(
-          "/api/v1/user/whoToFollow/" + currentUser._id
+          "/api/v1/user/whoToFollow/" + currentUser?._id
         );
 
         // console.log(data);
@@ -37,7 +37,7 @@ const FriendRequests = () => {
     };
 
     whoToFollow();
-  }, [currentUser._id]);
+  }, [currentUser?._id]);
 
   const followUser = async (userId) => {
     try {
