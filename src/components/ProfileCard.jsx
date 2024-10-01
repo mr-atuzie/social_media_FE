@@ -11,13 +11,11 @@ const ProfileCard = () => {
 
   const currentUser = useSelector(selectUser);
 
-  console.log(currentUser);
-
   useEffect(() => {
     const fetchUserPosts = async () => {
       setLoading(true);
       try {
-        const response = await axios.get("/api/v1/user/" + currentUser._id);
+        const response = await axios.get("/api/v1/user/" + currentUser?._id);
 
         setLoading(false);
         setUser(response.data);
