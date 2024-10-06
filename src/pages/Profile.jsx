@@ -157,13 +157,13 @@ const Profile = () => {
                 </div>
               </div> */}
 
-              <div className=" flex gap-4 items-center">
+              <div className=" flex gap-6 items-center">
                 {/* image container */}
-                <div className="relative shadow-md  w-20 lg:w-32 h-20 lg:h-32 ">
+                <div className="relative   w-20 lg:w-32 h-20 lg:h-32 ">
                   <img
                     src={user?.avatar}
                     alt=""
-                    className=" w-full h-full  bg-gray-400 rounded-full object-cover"
+                    className=" shadow-md w-full h-full  bg-gray-400 rounded-full object-cover"
                   />
                   <Link
                     to={"/uploadPhoto"}
@@ -220,7 +220,7 @@ const Profile = () => {
               </div>
 
               <div>
-                <h1 className="font-medium  capitalize text-2xl">
+                <h1 className="font-medium  capitalize text-lg lg:text-2xl">
                   {user?.username}
                 </h1>
                 <p className=" mb-4 text-xs lg:text-sm text-gray-500">
