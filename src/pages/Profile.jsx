@@ -219,8 +219,8 @@ const Profile = () => {
                 </div>
               </div>
 
-              <div>
-                <h1 className="font-medium  capitalize text-lg lg:text-2xl">
+              <div className=" mt-2">
+                <h1 className="font-medium  capitalize lg:text-2xl">
                   {user?.username}
                 </h1>
                 <p className=" mb-4 text-xs lg:text-sm text-gray-500">

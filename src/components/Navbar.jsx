@@ -212,21 +212,41 @@ const Navbar = () => {
                 </div>
               </Link>
 
-              <button onClick={() => setMenu((prev) => !prev)}>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                  className="size-6"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
-                  />
-                </svg>
+              <button
+                className=" z-50 rounded-full object-cover"
+                onClick={() => setMenu((prev) => !prev)}
+              >
+                {menu ? (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                    className="size-6"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M6 18 18 6M6 6l12 12"
+                    />
+                  </svg>
+                ) : (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                    className="size-6"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+                    />
+                  </svg>
+                )}
               </button>
               {/* <Link to={"/profile/" + user?._id}> */}
               {/* <img
@@ -271,7 +291,7 @@ const Navbar = () => {
         </div>
       </div>
       {menu && (
-        <div className=" bg-black/30 w-full absolute h-screen z-40 left-0 top-0">
+        <div className=" bg-black/10 w-full absolute h-screen z-40 left-0 top-0">
           <div className="  shadow-md p-4 w-[85%] h-full bg-white">
             <Link to={"/profile/" + user?._id}>
               <img
@@ -466,12 +486,12 @@ const Navbar = () => {
               </NavLink>
             </div>
 
-            <hr className=" border-t  border-gray-200 my-2 w-full self-center" />
+            <hr className=" border-t  border-gray-200 mt-4 w-full self-center" />
 
             <button
               onClick={logout}
               disabled={loading}
-              className="  w-full mt-8  flex items-center  text-red-500 gap-2 bg-gray-100 p-2 rounded-lg"
+              className="  w-full mt-8  flex items-center  text-red-500 gap-2 bg-red-50 py-4 p-2 rounded-lg"
             >
               <div>
                 <svg
