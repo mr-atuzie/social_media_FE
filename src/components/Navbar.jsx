@@ -471,7 +471,7 @@ const Navbar = () => {
             <button
               onClick={logout}
               disabled={loading}
-              className="  w-full mt-8  justify-center flex items-center  text-red-500 gap-2 bg-gray-100 p-2 rounded-lg"
+              className="  w-full mt-8  flex items-center  text-red-500 gap-2 bg-gray-100 p-2 rounded-lg"
             >
               <div>
                 <svg
