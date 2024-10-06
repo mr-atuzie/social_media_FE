@@ -38,7 +38,7 @@ const UserInfoCard = ({ user }) => {
           "/api/v1/user/isFollowing/" + user?._id
         );
 
-        console.log(data);
+        // console.log(data);
         setIsFollowing(data);
       } catch (error) {
         const message =

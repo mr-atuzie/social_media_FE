@@ -17,6 +17,7 @@ import ScrollTop from "./components/ScrollTop";
 import Notifications from "./pages/Notifications";
 import Followers from "./pages/Followers";
 import Search from "./pages/Search";
+import Private from "./components/Private";
 
 axios.defaults.baseURL = process.env.REACT_APP_SERVER_URL;
 axios.defaults.withCredentials = true;
@@ -55,14 +56,16 @@ function App() {
       <ScrollTop />
       <Navbar />
       <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<Home />} />
-          <Route path="/uploadPhoto" element={<UplaodPhoto />} />
-          <Route path="/profile/:id" element={<Profile />} />
-          <Route path="/post/:id" element={<Post />} />
-          <Route path="/notifications" element={<Notifications />} />
-          <Route path="/followers" element={<Followers />} />
-          <Route path="/search" element={<Search />} />
+        <Route element={<Private />}>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Home />} />
+            <Route path="/uploadPhoto" element={<UplaodPhoto />} />
+            <Route path="/profile/:id" element={<Profile />} />
+            <Route path="/post/:id" element={<Post />} />
+            <Route path="/notifications" element={<Notifications />} />
+            <Route path="/followers" element={<Followers />} />
+            <Route path="/search" element={<Search />} />
+          </Route>
         </Route>
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<Login />} />

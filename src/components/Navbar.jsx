@@ -212,8 +212,24 @@ const Navbar = () => {
                 </div>
               </Link>
 
+              <button onClick={() => setMenu((prev) => !prev)}>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="size-6"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+                  />
+                </svg>
+              </button>
               {/* <Link to={"/profile/" + user?._id}> */}
-              <img
+              {/* <img
                 onClick={() => setMenu((prev) => !prev)}
                 src={
                   user?.avatar
@@ -222,7 +238,7 @@ const Navbar = () => {
                 }
                 alt=""
                 className=" z-50 w-8 ring-black ring-2 h-8 rounded-full object-cover"
-              />
+              /> */}
               {/* </Link> */}
             </div>
           </ShowOnLogin>
