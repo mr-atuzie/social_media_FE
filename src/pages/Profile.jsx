@@ -84,7 +84,7 @@ const Profile = () => {
         ) : (
           <>
             <div className=" flex-col  lg:gap-6 flex">
-              {/* <div className=" flex flex-col items-center justify-center">
+              <div className=" flex flex-col items-center justify-center">
                 <div className=" h-52 lg:h-64 w-full relative">
                   <img
                     src={user?.coverPic}
@@ -155,10 +155,10 @@ const Profile = () => {
                     </div>
                   </Link>
                 </div>
-              </div> */}
+              </div>
 
-              <div className=" flex gap-6 items-center">
-                {/* image container */}
+              {/* <div className=" flex gap-6 items-center">
+                image container
                 <div className="relative   w-20 lg:w-32 h-20 lg:h-32 ">
                   <img
                     src={user?.avatar}
@@ -191,7 +191,7 @@ const Profile = () => {
                   </Link>
                 </div>
 
-                {/* post ,follower, following */}
+                post ,follower, following
                 <div className=" flex items-center justify-center text-sm  gap-6  md:gap-12 mb-4">
                   <div className=" flex flex-col items-center">
                     <h2 className=" text-black font-semibold">
@@ -217,7 +217,7 @@ const Profile = () => {
                     </div>
                   </Link>
                 </div>
-              </div>
+              </div> */}
 
               <div className=" mt-2">
                 <h1 className="font-medium  capitalize lg:text-2xl">
