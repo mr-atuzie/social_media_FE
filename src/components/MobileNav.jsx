@@ -137,7 +137,7 @@ const MobileNav = () => {
                   : "https://i.ibb.co/4pDNDk1/avatar.png"
               }
               alt=""
-              className="  w-8 ring-black ring-2 h-8 rounded-full object-cover"
+              className="  w-6 ring-black ring-2 h-6 rounded-full object-cover"
             />
             {/* <svg
               xmlns="http://www.w3.org/2000/svg"
