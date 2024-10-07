@@ -130,19 +130,19 @@ const Profile = () => {
                   {user?.name}
                 </p>
 
-                <div className=" flex items-center justify-center text-sm  gap-6  md:gap-12 mb-4">
+                <div className=" flex items-center justify-center text-sm  gap-8  md:gap-12 mb-4">
                   <div className=" flex flex-col items-center">
                     <h2 className=" text-black font-semibold">
                       {posts?.length}
                     </h2>
-                    <p className=" ">Posts</p>
+                    <p className=" text-sm lg:text-base ">Posts</p>
                   </div>
                   <Link to={"/follower"}>
                     <div className=" flex flex-col  items-center">
                       <h2 className=" text-black font-semibold">
                         {user?.follower.length}
                       </h2>
-                      <p className=" ">Followers</p>
+                      <p className=" text-sm lg:text-base ">Followers</p>
                     </div>
                   </Link>
 
@@ -151,7 +151,7 @@ const Profile = () => {
                       <h2 className=" text-black font-semibold">
                         {user?.following.length}
                       </h2>
-                      <p className=" ">Followings</p>
+                      <p className=" text-sm lg:text-base ">Followings</p>
                     </div>
                   </Link>
                 </div>
@@ -219,14 +219,14 @@ const Profile = () => {
                 </div>
               </div> */}
 
-              <div className=" mt-2">
+              {/* <div className=" mt-2">
                 <h1 className="font-medium  capitalize lg:text-2xl">
                   {user?.username}
                 </h1>
                 <p className=" mb-4 text-xs lg:text-sm text-gray-500">
                   {user?.name}
                 </p>
-              </div>
+              </div> */}
 
               {currentUser?._id !== user?._id && (
                 <div className=" flex justify-center items-center md:hidden">
