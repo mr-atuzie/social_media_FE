@@ -95,7 +95,7 @@ const Profile = () => {
                 <div className=" h-52 lg:h-64 w-full relative">
                   {selectedImage && (
                     <button
-                      onClick={() => selectedImage(null)}
+                      onClick={() => setSelectedImage(null)}
                       className=" cursor-pointer  absolute flex justify-center items-center  top-3 left-3 p-2 h-10 w-10 rounded-full bg-black opacity-70 text-white"
                     >
                       <svg
