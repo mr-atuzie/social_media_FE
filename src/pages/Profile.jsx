@@ -20,6 +20,7 @@ const Profile = () => {
 
   const currentUser = useSelector(selectUser);
   const [isFollowing, setIsFollowing] = useState(null);
+  const [selectedImage, setSelectedImage] = useState(null);
 
   const { id } = useParams();
 
@@ -72,6 +73,12 @@ const Profile = () => {
     fetchUserPosts();
   }, [id]);
 
+  function uploadPhoto(ev) {
+    console.log(URL.createObjectURL(ev.target.files[0]));
+
+    setSelectedImage(URL.createObjectURL(ev.target.files[0]));
+  }
+
   return (
     <div className=" flex gap-6 pt-6">
       <div className="hidden lg:flex flex-col gap-5 w-[25%]">
@@ -86,8 +93,116 @@ const Profile = () => {
             <div className=" flex-col  lg:gap-6 flex">
               <div className=" flex flex-col items-center justify-center">
                 <div className=" h-52 lg:h-64 w-full relative">
+                  {selectedImage && (
+                    <button
+                      onClick={() => selectedImage(null)}
+                      className=" cursor-pointer  absolute flex justify-center items-center  top-3 left-3 p-2 h-10 w-10 rounded-full bg-black opacity-40 text-white"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth={1.5}
+                        stroke="currentColor"
+                        className="size-5"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0"
+                        />
+                      </svg>
+                    </button>
+                  )}
+                  {selectedImage ? (
+                    <button className=" opacity-40 cursor-pointer  absolute flex justify-center items-center  top-3 right-3 p-2 h-10 w-10 rounded-full bg-black text-white">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth={1.5}
+                        stroke="currentColor"
+                        className="size-5"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M12 16.5V9.75m0 0 3 3m-3-3-3 3M6.75 19.5a4.5 4.5 0 0 1-1.41-8.775 5.25 5.25 0 0 1 10.233-2.33 3 3 0 0 1 3.758 3.848A3.752 3.752 0 0 1 18 19.5H6.75Z"
+                        />
+                      </svg>
+                    </button>
+                  ) : (
+                    <div>
+                      <label
+                        htmlFor="coverPic"
+                        className=" cursor-pointer  absolute flex justify-center items-center  top-3 right-3 p-2 h-10 w-10 rounded-full bg-black text-white"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          strokeWidth={1.5}
+                          stroke="currentColor"
+                          className="size-5"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M6.827 6.175A2.31 2.31 0 0 1 5.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 0 0-1.134-.175 2.31 2.31 0 0 1-1.64-1.055l-.822-1.316a2.192 2.192 0 0 0-1.736-1.039 48.774 48.774 0 0 0-5.232 0 2.192 2.192 0 0 0-1.736 1.039l-.821 1.316Z"
+                          />
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M16.5 12.75a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0ZM18.75 10.5h.008v.008h-.008V10.5Z"
+                          />
+                        </svg>
+                      </label>
+                      <input
+                        name="coverPic"
+                        id="coverPic"
+                        type="file"
+                        className="hidden"
+                        onChange={uploadPhoto}
+                      />
+                    </div>
+                  )}
+
+                  {/* <div>
+                    <label
+                      htmlFor="coverPic"
+                      className=" cursor-pointer  absolute flex justify-center items-center  top-3 right-3 p-2 h-10 w-10 rounded-full bg-black text-white"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth={1.5}
+                        stroke="currentColor"
+                        className="size-5"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M6.827 6.175A2.31 2.31 0 0 1 5.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 0 0-1.134-.175 2.31 2.31 0 0 1-1.64-1.055l-.822-1.316a2.192 2.192 0 0 0-1.736-1.039 48.774 48.774 0 0 0-5.232 0 2.192 2.192 0 0 0-1.736 1.039l-.821 1.316Z"
+                        />
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M16.5 12.75a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0ZM18.75 10.5h.008v.008h-.008V10.5Z"
+                        />
+                      </svg>
+                    </label>
+                    <input
+                      name="coverPic"
+                      id="coverPic"
+                      type="file"
+                      className="hidden"
+                      onChange={uploadPhoto}
+                    />
+                  </div> */}
+
                   <img
-                    src={user?.coverPic}
+                    src={selectedImage ? selectedImage : user?.coverPic}
                     alt=""
                     className=" h-full w-full bg-gray-400 rounded-md object-cover"
                   />
