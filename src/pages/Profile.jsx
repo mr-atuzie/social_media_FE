@@ -96,7 +96,7 @@ const Profile = () => {
                   {selectedImage && (
                     <button
                       onClick={() => selectedImage(null)}
-                      className=" cursor-pointer  absolute flex justify-center items-center  top-3 left-3 p-2 h-10 w-10 rounded-full bg-black opacity-40 text-white"
+                      className=" cursor-pointer  absolute flex justify-center items-center  top-3 left-3 p-2 h-10 w-10 rounded-full bg-black opacity-70 text-white"
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -115,7 +115,7 @@ const Profile = () => {
                     </button>
                   )}
                   {selectedImage ? (
-                    <button className=" opacity-40 cursor-pointer  absolute flex justify-center items-center  top-3 right-3 p-2 h-10 w-10 rounded-full bg-black text-white">
+                    <button className=" opacity-70 cursor-pointer  absolute flex justify-center items-center  top-3 right-3 p-2 h-10 w-10 rounded-full bg-black text-white">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
