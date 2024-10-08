@@ -7,8 +7,6 @@ const Private = () => {
   const user = JSON.parse(localStorage.getItem("user"));
   //   const isLoggedIn = useSelector(selectIsLoggedIn);
 
- console.log(user)
-
   return user ? <Outlet /> : <Navigate to={"/login"} replace />;
 };
 

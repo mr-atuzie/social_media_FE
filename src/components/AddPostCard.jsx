@@ -178,7 +178,7 @@ const AddPostCard = ({ setAddPost }) => {
         {numberOfPhotos === 2 && (
           <div className=" grid grid-cols-2 gap-2 overflow-hidden rounded-lg">
             {addedPhotos.map((link, index) => (
-              <div key={index} className=" h-48 flex relative ">
+              <div key={index} className=" h-32 flex relative ">
                 <img
                   className=" w-full h-full  object-cover "
                   src={link}
@@ -295,7 +295,7 @@ const AddPostCard = ({ setAddPost }) => {
         {numberOfPhotos === 4 && (
           <div className=" grid grid-cols-2  gap-2 overflow-hidden rounded-lg">
             {addedPhotos.map((link, index) => (
-              <div key={index} className=" h-48 flex relative ">
+              <div key={index} className=" h-32 flex relative ">
                 <img
                   className=" w-full h-full  object-cover "
                   src={link}

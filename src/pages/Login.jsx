@@ -1,9 +1,10 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { SET_LOGIN, SET_USER } from "../redux/features/userSlice";
 import ErrorCard from "../components/ErrorCard";
+import { selectIsLoggedIn } from "../redux/features/userSlice";
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -43,6 +44,10 @@ const Login = () => {
       setLoading(false);
     }
   };
+
+  if (selectIsLoggedIn) {
+    return <Navigate to={"/"} />;
+  }
   return (
     <div className="h-full w-full flex justify-center items-center">
       <form
