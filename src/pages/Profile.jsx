@@ -113,6 +113,8 @@ const Profile = () => {
       });
 
       console.log(data);
+      setUploading(false);
+      setSelectedImage(null);
 
       dispatch(SET_USER(data));
     } catch (error) {
