@@ -113,13 +113,13 @@ const Profile = () => {
       });
 
       console.log(data);
-      setUser(data)
+      setUser(data);
       setUploading(false);
       setSelectedImage(null);
 
       dispatch(SET_USER(data));
 
-      toast.success("Cover picture updated")
+      toast.success("Cover picture updated");
     } catch (error) {
       console.log(error);
       setUploading(false);
@@ -253,39 +253,6 @@ const Profile = () => {
                     </>
                   )}
 
-                  {/* <div>
-                    <label 
-                      htmlFor="coverPic"
-                      className=" cursor-pointer  absolute flex justify-center items-center  top-3 right-3 p-2 h-10 w-10 rounded-full bg-black text-white"
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        strokeWidth={1.5}
-                        stroke="currentColor"
-                        className="size-5"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M6.827 6.175A2.31 2.31 0 0 1 5.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 0 0-1.134-.175 2.31 2.31 0 0 1-1.64-1.055l-.822-1.316a2.192 2.192 0 0 0-1.736-1.039 48.774 48.774 0 0 0-5.232 0 2.192 2.192 0 0 0-1.736 1.039l-.821 1.316Z"
-                        />
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M16.5 12.75a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0ZM18.75 10.5h.008v.008h-.008V10.5Z"
-                        />
-                      </svg>
-                    </label>
-                    <input
-                      name="coverPic"
-                      id="coverPic"
-                      type="file"
-                      className="hidden"
-                      onChange={uploadPhoto}
-                    />
-                  </div> */}
                   <img
                     src={selectedImage ? previewImage : user?.coverPic}
                     alt=""
@@ -357,77 +324,6 @@ const Profile = () => {
                 </div>
               </div>
 
-              {/* <div className=" flex gap-6 items-center">
-                image container
-                <div className="relative   w-20 lg:w-32 h-20 lg:h-32 ">
-                  <img
-                    src={user?.avatar}
-                    alt=""
-                    className=" shadow-md w-full h-full  bg-gray-400 rounded-full object-cover"
-                  />
-                  <Link
-                    to={"/uploadPhoto"}
-                    className=" cursor-pointer  absolute -bottom-2 right-0 p-2 h-8 w-8 rounded-full bg-black text-white"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth={1.5}
-                      stroke="currentColor"
-                      className="size-4"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M6.827 6.175A2.31 2.31 0 0 1 5.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 0 0-1.134-.175 2.31 2.31 0 0 1-1.64-1.055l-.822-1.316a2.192 2.192 0 0 0-1.736-1.039 48.774 48.774 0 0 0-5.232 0 2.192 2.192 0 0 0-1.736 1.039l-.821 1.316Z"
-                      />
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M16.5 12.75a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0ZM18.75 10.5h.008v.008h-.008V10.5Z"
-                      />
-                    </svg>
-                  </Link>
-                </div>
-
-                post ,follower, following
-                <div className=" flex items-center justify-center text-sm  gap-6  md:gap-12 mb-4">
-                  <div className=" flex flex-col items-center">
-                    <h2 className=" text-black font-semibold">
-                      {posts?.length}
-                    </h2>
-                    <p className=" ">Posts</p>
-                  </div>
-                  <Link to={"/followers"}>
-                    <div className=" flex flex-col  items-center">
-                      <h2 className=" text-black font-semibold">
-                        {user?.follower.length}
-                      </h2>
-                      <p className=" ">Followers</p>
-                    </div>
-                  </Link>
-
-                  <Link to={"/followers"}>
-                    <div className=" flex flex-col items-center">
-                      <h2 className=" text-black font-semibold">
-                        {user?.following.length}
-                      </h2>
-                      <p className=" ">Followings</p>
-                    </div>
-                  </Link>
-                </div>
-              </div> */}
-
-              {/* <div className=" mt-2">
-                <h1 className="font-medium  capitalize lg:text-2xl">
-                  {user?.username}
-                </h1>
-                <p className=" mb-4 text-xs lg:text-sm text-gray-500">
-                  {user?.name}
-                </p>
-              </div> */}
-
               {currentUser?._id !== user?._id && (
                 <div className=" flex justify-center items-center md:hidden">
                   {isFollowing ? (
@@ -449,6 +345,10 @@ const Profile = () => {
                   )}
                 </div>
               )}
+            </div>
+
+            <div className=" lg:hidden">
+              {user && <UserMediaCard user={user} />}
             </div>
 
             <div className=" p-4 shadow-md my-4 bg-white rounded-lg flex flex-col gap-3 lg:gap-6">
