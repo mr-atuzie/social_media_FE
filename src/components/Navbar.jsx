@@ -126,7 +126,7 @@ const Navbar = () => {
           </div>
 
           <Link to={"/search"}>
-            <div className="hidden w-80 lg:flex px-4 py-2 bg-slate-100 items-center rounded-xl">
+            <div className="hidden lg:flex px-4 py-2 bg-slate-100 items-center rounded-xl">
               <input
                 type="text"
                 placeholder="Search..."
