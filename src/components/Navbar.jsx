@@ -80,7 +80,7 @@ const Navbar = () => {
               </div>
             </Link>
 
-            <Link to={"/"}>
+            <Link to={"/followers"}>
               <div className=" flex gap-2 items-center">
                 <div>
                   <svg
@@ -98,11 +98,11 @@ const Navbar = () => {
                     />
                   </svg>
                 </div>
-                <span className=" text-sm text-gray-600">Friends</span>
+                <span className=" text-sm text-gray-600">Followers</span>
               </div>
             </Link>
 
-            <Link to={"/"}>
+            <Link to={"/notifications"}>
               <div className=" flex gap-2 items-center">
                 <div>
                   <svg
@@ -120,7 +120,7 @@ const Navbar = () => {
                     />
                   </svg>
                 </div>
-                <span className=" text-sm text-gray-600">Stories</span>
+                <span className=" text-sm text-gray-600">Notifications</span>
               </div>
             </Link>
           </div>

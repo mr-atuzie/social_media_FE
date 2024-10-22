@@ -54,7 +54,7 @@ const Post = (props) => {
             </Link>
 
             <div>
-              <div className=" flex  items-center gap-1">
+              <div className=" flex  items-start gap-1">
                 <p className=" font-medium text-sm lg:text-base">
                   {post?.user.name}
                 </p>
@@ -65,7 +65,7 @@ const Post = (props) => {
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
                       fill="currentColor"
-                      className="size-4 text-green-500"
+                      className="size-5 text-green-500"
                     >
                       <path
                         fillRule="evenodd"
