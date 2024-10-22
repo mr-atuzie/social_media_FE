@@ -40,11 +40,26 @@ const FollowingCard = () => {
   return (
     <div className="p-4 w-full  shadow-md bg-white rounded-lg flex flex-col gap-4">
       {loading ? (
-        <div>
-          <div className=" w-10 h-10 rounded-full bg-gray-100"></div>
-          <div className=" flex  flex-col mt-1 ">
-            <div className=" font-semibold text-center w-[50%] bg-gray-100 p-2"></div>
-            <div className=" flex items-center my-2 rounded-lg justify-center w-full h-40 text-xs bg-gray-100 p-2 text-gray-500  gap-2"></div>
+        <div className=" flex flex-col gap-3">
+          <div className=" flex gap-4 justify-between">
+            <div className=" w-8 h-8 rounded-full bg-gray-100"></div>
+
+            <div className=" font-semibold text-center w-[80%] rounded-lg bg-gray-100 p-2"></div>
+          </div>
+          <div className=" flex gap-4 justify-between">
+            <div className=" w-8 h-8 rounded-full bg-gray-100"></div>
+
+            <div className=" font-semibold text-center w-[80%] rounded-lg bg-gray-100 p-2"></div>
+          </div>
+          <div className=" flex gap-4 justify-between">
+            <div className=" w-8 h-8 rounded-full bg-gray-100"></div>
+
+            <div className=" font-semibold text-center w-[80%] rounded-lg bg-gray-100 p-2"></div>
+          </div>
+          <div className=" flex gap-4 justify-between">
+            <div className=" w-8 h-8 rounded-full bg-gray-100"></div>
+
+            <div className=" font-semibold text-center w-[80%] rounded-lg bg-gray-100 p-2"></div>
           </div>
         </div>
       ) : (
@@ -52,7 +67,9 @@ const FollowingCard = () => {
           <div className=" flex justify-between ">
             <div>
               <h1 className=" tracking-wide font-medium">Following</h1>
-              <p className=" text-xs -mt-1 capitalize text-gray-400">People that you follow</p>
+              <p className=" text-xs -mt-1 capitalize text-gray-400">
+                People that you follow
+              </p>
             </div>
 
             <Link className=" text-xs text-blue-500" to={"/following"}>
