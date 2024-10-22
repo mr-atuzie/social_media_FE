@@ -104,7 +104,7 @@ const Navbar = () => {
 
             <Link to={"/notifications"}>
               <div className=" flex gap-2 items-center">
-                <div>
+                <div className=" relative">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -116,9 +116,10 @@ const Navbar = () => {
                     <path
                       strokeLinecap="round"
                       strokeLinejoin="round"
-                      d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                      d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0"
                     />
                   </svg>
+                  <div className=" w-2 h-2 bg-red-600 rounded-full top-1 right-0 absolute"></div>
                 </div>
                 <span className=" text-sm text-gray-600">Notifications</span>
               </div>
@@ -215,7 +216,7 @@ const Navbar = () => {
               </Link>
 
               <button
-                className=" z-50 rounded-full object-cover"
+                className=" lg:hidden z-50 rounded-full object-cover"
                 onClick={() => setMenu((prev) => !prev)}
               >
                 {menu ? (
@@ -250,18 +251,18 @@ const Navbar = () => {
                   </svg>
                 )}
               </button>
-              {/* <Link to={"/profile/" + user?._id}> */}
-              {/* <img
-                onClick={() => setMenu((prev) => !prev)}
-                src={
-                  user?.avatar
-                    ? user?.avatar
-                    : "https://i.ibb.co/4pDNDk1/avatar.png"
-                }
-                alt=""
-                className=" z-50 w-8 ring-black ring-2 h-8 rounded-full object-cover"
-              /> */}
-              {/* </Link> */}
+              <Link to={"/profile/" + user?._id}>
+                <img
+                  onClick={() => setMenu((prev) => !prev)}
+                  src={
+                    user?.avatar
+                      ? user?.avatar
+                      : "https://i.ibb.co/4pDNDk1/avatar.png"
+                  }
+                  alt=""
+                  className=" hidden lg:block w-8 ring-black ring-2 h-8 rounded-full object-cover"
+                />
+              </Link>
             </div>
           </ShowOnLogin>
 

@@ -5,13 +5,14 @@ import Tooltip from "rc-tooltip";
 import "rc-tooltip/assets/bootstrap_white.css";
 import PostLoader from "../components/PostLoader";
 import RightMenu from "../components/RightMenu";
-import LeftMenu from "../components/LeftMenu";
 import Comments from "../components/Comments";
 import { formatDistanceToNow } from "date-fns";
 import { selectUser } from "../redux/features/userSlice";
 import Images from "../components/Images";
 import axios from "axios";
 import toast from "react-hot-toast";
+import Sidebar from "../components/Sidebar";
+import Followers from "../components/Followers";
 
 const Post = () => {
   const { id } = useParams();
@@ -74,16 +75,18 @@ const Post = () => {
         <Images post={post} setShowAllPhotos={setShowAllPhotos} />
       )}
       <div className=" flex gap-6 pt-6">
-        <div className="hidden lg:block w-[25%]">
-          <LeftMenu />
+        <div className="hidden lg:flex flex-col   gap-6  w-[25%]">
+          <Followers />
+
+          <Sidebar />
         </div>
 
         {loading ? (
-          <div className="w-full  mb-16  md:w-[70%] lg:w-[45%]">
+          <div className="w-full  mb-16  md:w-[70%] lg:w-[40%]">
             <PostLoader single />
           </div>
         ) : (
-          <div className="w-full p-4 rounded-lg mb-16 bg-white md:w-[70%] lg:w-[45%]">
+          <div className="w-full p-4 rounded-lg mb-16 bg-white md:w-[70%] lg:w-[40%]">
             <div className="  flex-col gap-6 flex">
               <div className=" flex flex-col gap-3 lg:gap-4">
                 <div className=" flex items-start justify-between">
