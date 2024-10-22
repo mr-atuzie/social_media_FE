@@ -52,7 +52,8 @@ const Followers = () => {
         <>
           <div className=" flex justify-between ">
             <div>
-              <span className=" tracking-wide font-medium">Followers</span>
+              <h2 className=" tracking-wide font-medium">Followers</h2>
+              <p className=" text-xs  -mt-1 capitalize text-gray-400">people that follow you</p>
             </div>
 
             <Link className=" text-xs text-blue-500" to={"/following"}>

@@ -113,10 +113,13 @@ const Profile = () => {
       });
 
       console.log(data);
+      setUser(data)
       setUploading(false);
       setSelectedImage(null);
 
       dispatch(SET_USER(data));
+
+      toast.success("Cover picture updated")
     } catch (error) {
       console.log(error);
       setUploading(false);

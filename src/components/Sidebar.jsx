@@ -40,7 +40,7 @@ const Sidebar = () => {
     }
   };
   return (
-    <div className="p-4 shadow-md bg-white text-xs rounded-lg flex flex-col text-gray-500 gap-2">
+    <div className="p-4 shadow-md bg-white text-sm rounded-lg flex flex-col text-gray-500 gap-2">
       <NavLink
         to="/"
         className={({ isActive }) =>
@@ -124,7 +124,7 @@ const Sidebar = () => {
         <span>Followers</span>
       </NavLink>
       <hr className=" border-t  border-gray-100 w-[80%] self-center" />
-      <NavLink
+      {/* <NavLink
         className={({ isActive }) =>
           isActive
             ? " flex items-center gap-4  bg-gray-100 p-2 rounded-lg"
@@ -149,8 +149,8 @@ const Sidebar = () => {
           </svg>
         </div>
         <span>Stories</span>
-      </NavLink>
-      <hr className=" border-t  border-gray-100 w-[80%] self-center" />
+      </NavLink> */}
+      {/* <hr className=" border-t  border-gray-100 w-[80%] self-center" /> */}
 
       <button
         onClick={logout}

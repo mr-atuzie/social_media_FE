@@ -51,7 +51,8 @@ const FollowingCard = () => {
         <>
           <div className=" flex justify-between ">
             <div>
-              <span className=" tracking-wide font-medium">Following</span>
+              <h1 className=" tracking-wide font-medium">Following</h1>
+              <p className=" text-xs -mt-1 capitalize text-gray-400">People that you follow</p>
             </div>
 
             <Link className=" text-xs text-blue-500" to={"/following"}>

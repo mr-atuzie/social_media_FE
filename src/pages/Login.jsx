@@ -1,15 +1,19 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { SET_LOGIN, SET_USER } from "../redux/features/userSlice";
 import ErrorCard from "../components/ErrorCard";
 import { selectIsLoggedIn } from "../redux/features/userSlice";
+// import { selectIsLoggedIn } from "../redux/features/authSlice";
 
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errMsg, setErrMsg] = useState("");
+
+  const isLoggedIn = useSelector(selectIsLoggedIn);
+
 
   const dispatch = useDispatch();
 
@@ -45,7 +49,7 @@ const Login = () => {
     }
   };
 
-  if (selectIsLoggedIn) {
+  if (isLoggedIn) {
     return <Navigate to={"/"} />;
   }
   return (
