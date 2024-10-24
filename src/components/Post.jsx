@@ -69,6 +69,38 @@ const Post = (props) => {
     }
   };
 
+  // const imageUrls = [
+  //   'https://example.com/image1.jpg',
+  //   'https://example.com/image2.jpg',
+  //   'https://example.com/image3.jpg',
+  // ];
+
+  // Function to download multiple images
+  const downloadImages = async (imageUrls) => {
+    try {
+      // Loop through each image URL
+      for (let i = 0; i < imageUrls.length; i++) {
+        const imageUrl = imageUrls[i];
+        const response = await fetch(imageUrl);
+        const blob = await response.blob();
+        const url = window.URL.createObjectURL(blob);
+
+        // Create a temporary download link
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = `image-${i + 1}.jpg`; // Dynamic filename for each image
+        document.body.appendChild(link);
+        link.click(); // Trigger the download
+        document.body.removeChild(link); // Clean up the link element
+        window.URL.revokeObjectURL(url); // Release the blob URL
+      }
+      toast.success("Photo saved");
+    } catch (error) {
+      console.error("Error downloading images:", error);
+      toast.error("Error downloading images");
+    }
+  };
+
   return (
     <>
       {showAllPhotos && (
@@ -121,37 +153,39 @@ const Post = (props) => {
               </p>
             </div>
           </div>
-          {currentUser?._id === post?.user._id && (
-            <div
-              className="relative"
-              onMouseEnter={handleMouseEnter}
-              onMouseLeave={handleMouseLeave}
-            >
-              {/* Trigger button */}
-              <button>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                  className="size-6"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M6.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM12.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM18.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z"
-                  />
-                </svg>
-              </button>
 
-              {/* Tooltip content */}
-              {isTooltipVisible && (
-                <div className="absolute  bg-white shadow-sm text-xs lg:text-sm border  rounded p-2.5  right-4  top-4 mb-2 whitespace-nowrap">
-                  {/* dlete post btn */}
+          <div
+            className="relative"
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+          >
+            {/* Trigger button */}
+            <button>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="size-6"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M6.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM12.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM18.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z"
+                />
+              </svg>
+            </button>
+
+            {/* Tooltip content */}
+            {isTooltipVisible && (
+              <div className="absolute  z-40 bg-white min-h-20  shadow-lg text-xs lg:text-sm  flex flex-col gap-2  rounded p-2.5  right-4  top-4 mb-2 whitespace-nowrap">
+                {/* delete post btn */}
+
+                {currentUser?._id === post?.user._id && (
                   <button
                     onClick={deletePost}
-                    className="flex items-center gap-2 text-red-400"
+                    className="flex items-center p-2 text-center shadow bg-gray-50 rounded-lg gap-2 "
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -170,10 +204,33 @@ const Post = (props) => {
 
                     <span className=" font-medium">Delete </span>
                   </button>
-                </div>
-              )}
-            </div>
-          )}
+                )}
+
+                {/* download post btn */}
+                <button
+                  onClick={() => downloadImages(post?.photo)}
+                  className="flex bg-gray-50 shadow rounded-lg w-full p-2 text-center items-center gap-2"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                    className="size-4"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M7.5 7.5h-.75A2.25 2.25 0 0 0 4.5 9.75v7.5a2.25 2.25 0 0 0 2.25 2.25h7.5a2.25 2.25 0 0 0 2.25-2.25v-7.5a2.25 2.25 0 0 0-2.25-2.25h-.75m-6 3.75 3 3m0 0 3-3m-3 3V1.5m6 9h.75a2.25 2.25 0 0 1 2.25 2.25v7.5a2.25 2.25 0 0 1-2.25 2.25h-7.5a2.25 2.25 0 0 1-2.25-2.25v-.75"
+                    />
+                  </svg>
+
+                  <span className=" font-medium">Download Image</span>
+                </button>
+              </div>
+            )}
+          </div>
         </div>
 
         <Link to={"/post/" + post?._id}>
