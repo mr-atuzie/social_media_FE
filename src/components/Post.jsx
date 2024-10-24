@@ -49,6 +49,26 @@ const Post = (props) => {
     }
   };
 
+  const deletePost = async () => {
+    try {
+      const { data } = await axios.delete("/api/v1/post/" + post?._id);
+
+      // dispatch(fetchPosts());
+      setPost(data.post);
+      // dispatch(SET_POSTS(data.posts));
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+
+      toast.error(message);
+      console.log(error);
+    }
+  };
+
   return (
     <>
       {showAllPhotos && (
@@ -128,7 +148,11 @@ const Post = (props) => {
               {/* Tooltip content */}
               {isTooltipVisible && (
                 <div className="absolute  bg-white shadow-sm text-xs lg:text-sm border  rounded p-2.5  right-4  top-4 mb-2 whitespace-nowrap">
-                  <button className="flex items-center gap-2 text-red-400">
+                  {/* dlete post btn */}
+                  <button
+                    onClick={deletePost}
+                    className="flex items-center gap-2 text-red-400"
+                  >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
