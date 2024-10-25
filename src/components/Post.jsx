@@ -173,7 +173,7 @@ const Post = (props) => {
 
             {/* Tooltip content */}
             {isTooltipVisible && (
-              <div className="absolute border  z-40 bg-gray-50  w-[35%]  shadow-lg text-sm  flex flex-col gap-2  rounded-sm p-2.5  right-3  top-3 mb-2 whitespace-nowrap">
+              <div className="absolute border  z-40 bg-gray-50   shadow-lg w-40 text-sm  flex flex-col gap-2  rounded-lg p-4  right-3  top-3 mb-2 whitespace-nowrap">
                 {/* download post btn */}
                 <button
                   onClick={() => downloadImages(post?.photo)}
@@ -185,7 +185,7 @@ const Post = (props) => {
                     viewBox="0 0 24 24"
                     strokeWidth={1.5}
                     stroke="currentColor"
-                    className="size-4"
+                    className="size-5"
                   >
                     <path
                       strokeLinecap="round"
