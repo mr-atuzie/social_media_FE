@@ -256,7 +256,7 @@ const Post = (props) => {
             {post?.photo.length === 2 && (
               <div className=" grid grid-cols-2 gap-1 overflow-hidden rounded-lg">
                 {post?.photo.map((link, index) => (
-                  <div key={index} className=" h-48 flex">
+                  <div key={index} className=" h-64 flex">
                     <img
                       className=" bg-gray-200 w-full h-full  object-cover  object-top "
                       src={link}
@@ -267,7 +267,7 @@ const Post = (props) => {
               </div>
             )}
 
-            {post?.photo.length === 3 && (
+            {/* {post?.photo.length === 3 && (
               <div className="grid gap-1  grid-cols-[2fr_1fr]  rounded-lg overflow-hidden  ">
                 <div className=" h-64 flex">
                   <img
@@ -291,6 +291,35 @@ const Post = (props) => {
                       alt=""
                     />
                   </div>
+                </div>
+              </div>
+            )} */}
+
+            {post?.photo.length === 3 && (
+              <div className="grid gap-1 grid-cols-3 rounded-lg overflow-hidden h-64">
+                {/* First image (Takes 2/3 of width) */}
+
+                <img
+                  className="w-full h-full object-cover object-center rounded-lg"
+                  src={post?.photo[0]}
+                  alt="First "
+                />
+
+                {/* Second and third images (Stacked on right, 1/3 of width) */}
+
+                <div className="flex-1">
+                  <img
+                    className="w-full h-full object-cover object-center rounded-lg"
+                    src={post?.photo[1]}
+                    alt="Second"
+                  />
+                </div>
+                <div className="flex-1">
+                  <img
+                    className="w-full h-full object-cover object-center rounded-lg"
+                    src={post?.photo[2]}
+                    alt="Third "
+                  />
                 </div>
               </div>
             )}
