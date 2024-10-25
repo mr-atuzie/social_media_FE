@@ -101,6 +101,26 @@ export const likePost = createAsyncThunk(
   }
 );
 
+export const deletePost = createAsyncThunk(
+  "posts/deletePost",
+  async (postId, thunkAPI) => {
+    try {
+      const response = await axios.delete("/api/v1/post/delete/" + postId);
+
+      return response.data; // Assuming your API returns the data directly
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 const initialState = {
   posts: [],
   post: null,
@@ -189,6 +209,22 @@ const postSlice = createSlice({
         state.post = action.payload;
       })
       .addCase(likePost.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+
+        toast.error(action.payload);
+      })
+      //delete post
+      .addCase(deletePost.pending, (state) => {
+        state.isLoading = false;
+      })
+      .addCase(deletePost.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isError = false;
+        // state.post = action.payload;
+        console.log(action.payload);
+      })
+      .addCase(deletePost.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
 

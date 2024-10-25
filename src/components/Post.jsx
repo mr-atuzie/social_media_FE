@@ -3,9 +3,10 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { selectUser } from "../redux/features/userSlice";
 import Images from "./Images";
+import { deletePost } from "../redux/features/postSlice";
 // import "rc-tooltip/assets/bootstrap_white.css";
 const { formatDistanceToNow } = require("date-fns");
 
@@ -16,6 +17,8 @@ const Post = (props) => {
   const [showAllPhotos, setShowAllPhotos] = useState(false);
 
   const [isTooltipVisible, setTooltipVisible] = useState(false);
+
+  const dispatch = useDispatch();
 
   // Show tooltip on mouse enter
   const handleMouseEnter = () => {
@@ -49,24 +52,9 @@ const Post = (props) => {
     }
   };
 
-  const deletePost = async () => {
-    try {
-      const { data } = await axios.delete("/api/v1/post/" + post?._id);
-
-      // dispatch(fetchPosts());
-      setPost(data.post);
-      // dispatch(SET_POSTS(data.posts));
-    } catch (error) {
-      const message =
-        (error.response &&
-          error.response.data &&
-          error.response.data.message) ||
-        error.message ||
-        error.toString();
-
-      toast.error(message);
-      console.log(error);
-    }
+  const handleDelete = (postId) => {
+    dispatch(deletePost(postId));
+    console.log(postId);
   };
 
   // Function to download multiple images
@@ -173,7 +161,7 @@ const Post = (props) => {
 
             {/* Tooltip content */}
             {isTooltipVisible && (
-              <div className="absolute border  z-40 bg-gray-50   shadow-lg w-40 text-sm  flex flex-col gap-2  rounded-lg p-4  right-3  top-3 mb-2 whitespace-nowrap">
+              <div className="absolute border  z-40 bg-gray-100 px-2   shadow-lg w-44 text-sm  flex flex-col gap-2  rounded-lg py-4  right-3  top-3 mb-2 whitespace-nowrap">
                 {/* download post btn */}
                 <button
                   onClick={() => downloadImages(post?.photo)}
@@ -228,7 +216,7 @@ const Post = (props) => {
                 {/* delete post btn */}
                 {currentUser?._id === post?.user._id && (
                   <button
-                    onClick={deletePost}
+                    onClick={() => handleDelete(post?._id)}
                     className="flex items-center p-2 text-center  bg-white text-red-500 rounded-lg gap-2 "
                   >
                     <svg
