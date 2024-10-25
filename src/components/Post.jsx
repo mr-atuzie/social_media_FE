@@ -173,11 +173,11 @@ const Post = (props) => {
 
             {/* Tooltip content */}
             {isTooltipVisible && (
-              <div className="absolute  z-40 bg-white min-h-20  shadow-lg text-sm  flex flex-col gap-2  rounded-sm p-2.5  right-3  top-3 mb-2 whitespace-nowrap">
+              <div className="absolute border  z-40 bg-gray-50  w-[35%]  shadow-lg text-sm  flex flex-col gap-2  rounded-sm p-2.5  right-3  top-3 mb-2 whitespace-nowrap">
                 {/* download post btn */}
                 <button
                   onClick={() => downloadImages(post?.photo)}
-                  className="flex bg-gray-50  rounded-lg w-full p-2 text-center items-center gap-2"
+                  className="flex bg-white rounded-lg w-full p-2 text-center items-center gap-2"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -200,7 +200,7 @@ const Post = (props) => {
                 {/* view photos btn */}
                 <button
                   onClick={() => setShowAllPhotos(true)}
-                  className="flex bg-gray-50  rounded-lg w-full p-2 text-center items-center gap-2"
+                  className="flex bg-white  rounded-lg w-full p-2 text-center items-center gap-2"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -229,7 +229,7 @@ const Post = (props) => {
                 {currentUser?._id === post?.user._id && (
                   <button
                     onClick={deletePost}
-                    className="flex items-center p-2 text-center  bg-gray-50 rounded-lg gap-2 "
+                    className="flex items-center p-2 text-center  bg-white text-red-500 rounded-lg gap-2 "
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
