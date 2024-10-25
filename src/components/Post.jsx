@@ -69,12 +69,6 @@ const Post = (props) => {
     }
   };
 
-  // const imageUrls = [
-  //   'https://example.com/image1.jpg',
-  //   'https://example.com/image2.jpg',
-  //   'https://example.com/image3.jpg',
-  // ];
-
   // Function to download multiple images
   const downloadImages = async (imageUrls) => {
     try {
@@ -179,9 +173,8 @@ const Post = (props) => {
 
             {/* Tooltip content */}
             {isTooltipVisible && (
-              <div className="absolute  z-40 bg-white min-h-20  shadow-lg text-xs lg:text-sm  flex flex-col gap-2  rounded p-2.5  right-4  top-4 mb-2 whitespace-nowrap">
+              <div className="absolute  z-40 bg-white min-h-20  shadow-lg text-sm  flex flex-col gap-2  rounded-sm p-2.5  right-4  top-4 mb-2 whitespace-nowrap">
                 {/* delete post btn */}
-
                 {currentUser?._id === post?.user._id && (
                   <button
                     onClick={deletePost}
@@ -226,7 +219,35 @@ const Post = (props) => {
                     />
                   </svg>
 
-                  <span className=" font-medium">Download Image</span>
+                  <span className=" font-medium">Save photo</span>
+                </button>
+
+                {/* view photos btn */}
+                <button
+                  onClick={() => setShowAllPhotos(true)}
+                  className="flex bg-gray-50 shadow rounded-lg w-full p-2 text-center items-center gap-2"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                    className="size-4"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z"
+                    />
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+                    />
+                  </svg>
+
+                  <span className=" font-medium">View photo</span>
                 </button>
               </div>
             )}
@@ -325,9 +346,9 @@ const Post = (props) => {
             )}
 
             {post?.photo.length === 4 && (
-              <div className=" grid grid-cols-2 gap-1 overflow-hidden rounded-lg ">
+              <div className=" grid grid-cols-4 gap-1 overflow-hidden rounded-lg ">
                 {post?.photo.map((link, index) => (
-                  <div key={index} className=" h-32 flex">
+                  <div key={index} className=" h-64 flex">
                     <img
                       className=" bg-gray-200 w-full h-full  object-cover object-top"
                       src={link}
