@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectUser } from "../redux/features/userSlice";
 import ErrorCard from "./ErrorCard";
@@ -98,8 +98,16 @@ const AddPostCard = ({ setAddPost }) => {
     }
   };
 
+  const textareaRef = useRef(null);
+
+  useEffect(() => {
+    const textarea = textareaRef.current;
+    textarea.style.height = "auto"; // Reset height
+    textarea.style.height = `${textarea.scrollHeight}px`; // Set to scroll height
+  }, [desc]);
+
   return (
-    <div className=" w-[90%] flex flex-col gap-4 mx-auto bg-white  rounded-md shadow-md p-4 lg:w-[35%]">
+    <div className=" w-[90%] flex flex-col gap-2  lg:gap-4 mx-auto bg-white  rounded-md shadow-md p-4 lg:w-[35%]">
       <div className=" flex  items-center justify-between">
         <div className=" flex gap-2 items-center">
           <img
@@ -139,10 +147,13 @@ const AddPostCard = ({ setAddPost }) => {
       {errMsg && <ErrorCard message={errMsg} />}
       <div className=" w-full">
         <textarea
+          ref={textareaRef}
           placeholder="Write something"
           value={desc}
+          rows={4}
           onChange={(e) => setDesc(e.target.value)}
-          className=" p-2 w-full text-sm md:text-base bg-transparent outline-none placeholder:font-light placeholder:text-gray-400"
+          className="w-full p-4 text-gray-800 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm transition duration-200 ease-in-out resize-none custom-scrollbar"
+          // className=" p-2 w-full min-h-20 text-sm md:text-base bg-transparent outline-none  placeholder:font-light placeholder:text-gray-400"
         ></textarea>
 
         {numberOfPhotos === 1 && (

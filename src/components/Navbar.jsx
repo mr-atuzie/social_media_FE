@@ -176,7 +176,7 @@ const Navbar = () => {
         {/* RIGHT */}
         <div className=" flex gap-2 items-center">
           <ShowOnLogin>
-            <div className="cursor-pointer flex items-center gap-6">
+            <div className="cursor-pointer flex items-center gap-4 lg:gap-6">
               <Link to={"/followers"}>
                 <div>
                   <svg
