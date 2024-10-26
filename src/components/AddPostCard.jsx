@@ -150,9 +150,9 @@ const AddPostCard = ({ setAddPost }) => {
           ref={textareaRef}
           placeholder="Write something"
           value={desc}
-          rows={4}
+          // rows={4}
           onChange={(e) => setDesc(e.target.value)}
-          className="w-full p-4 text-gray-800 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm transition duration-200 ease-in-out resize-none custom-scrollbar"
+          className="w-full p-4 text-gray-800  rounded-lg focus:outline-none  shadow-sm transition duration-200 ease-in-out resize-none customScrollBar"
           // className=" p-2 w-full min-h-20 text-sm md:text-base bg-transparent outline-none  placeholder:font-light placeholder:text-gray-400"
         ></textarea>
 
