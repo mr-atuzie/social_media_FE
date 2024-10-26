@@ -24,7 +24,7 @@ const Sidebar = () => {
 
       console.log(data);
       setLoading(false);
-      navigate("/");
+      navigate("/login");
     } catch (error) {
       const message =
         (error.response &&

@@ -221,8 +221,11 @@ const postSlice = createSlice({
       .addCase(deletePost.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isError = false;
+        state.posts = action.payload;
         // state.post = action.payload;
         console.log(action.payload);
+
+        toast.success("Post has been deleted");
       })
       .addCase(deletePost.rejected, (state, action) => {
         state.isLoading = false;

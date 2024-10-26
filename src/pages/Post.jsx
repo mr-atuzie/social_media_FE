@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
-import Tooltip from "rc-tooltip";
-import "rc-tooltip/assets/bootstrap_white.css";
 import PostLoader from "../components/PostLoader";
 import RightMenu from "../components/RightMenu";
 import Comments from "../components/Comments";
@@ -13,6 +11,8 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import Sidebar from "../components/Sidebar";
 import Followers from "../components/Followers";
+import { deletePost } from "../redux/features/postSlice";
+import AddPost from "../components/AddPost";
 
 const Post = () => {
   const { id } = useParams();
@@ -23,8 +23,21 @@ const Post = () => {
   const [post, setPost] = useState(null);
   const [loading, setLoading] = useState(false);
   const [comments, setComments] = useState([]);
+  const [isTooltipVisible, setTooltipVisible] = useState(false);
 
   const liked = post?.likes.includes(currentUser?._id);
+
+  // Show tooltip on mouse enter
+  const handleMouseEnter = () => {
+    setTooltipVisible(true);
+  };
+
+  // Hide tooltip on mouse leave
+  const handleMouseLeave = () => {
+    setTooltipVisible(false);
+  };
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const fectchSinglePost = async () => {
@@ -69,6 +82,37 @@ const Post = () => {
     }
   };
 
+  const handleDelete = (postId) => {
+    dispatch(deletePost(postId));
+    console.log(postId);
+  };
+
+  // Function to download multiple images
+  const downloadImages = async (imageUrls) => {
+    try {
+      // Loop through each image URL
+      for (let i = 0; i < imageUrls.length; i++) {
+        const imageUrl = imageUrls[i];
+        const response = await fetch(imageUrl);
+        const blob = await response.blob();
+        const url = window.URL.createObjectURL(blob);
+
+        // Create a temporary download link
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = `image-${i + 1}.jpg`; // Dynamic filename for each image
+        document.body.appendChild(link);
+        link.click(); // Trigger the download
+        document.body.removeChild(link); // Clean up the link element
+        window.URL.revokeObjectURL(url); // Release the blob URL
+      }
+      toast.success("Photo saved");
+    } catch (error) {
+      console.error("Error downloading images:", error);
+      toast.error("Error downloading images");
+    }
+  };
+
   return (
     <>
       {showAllPhotos && (
@@ -87,6 +131,7 @@ const Post = () => {
           </div>
         ) : (
           <div className="w-full p-4 rounded-lg mb-16 bg-white md:w-[70%] lg:w-[40%]">
+            <AddPost />
             <div className="  flex-col gap-6 flex">
               <div className=" flex flex-col gap-3 lg:gap-4">
                 <div className=" flex items-start justify-between">
@@ -100,10 +145,28 @@ const Post = () => {
                     </Link>
 
                     <div>
-                      <div className=" flex  items-center gap-2">
+                      <div className=" flex  items-start gap-1">
                         <p className=" font-medium text-sm lg:text-base">
                           {post?.user.name}
                         </p>
+
+                        {post?.user.verified && (
+                          <div>
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              viewBox="0 0 24 24"
+                              fill="currentColor"
+                              className="size-5 text-green-500"
+                            >
+                              <path
+                                fillRule="evenodd"
+                                d="M8.603 3.799A4.49 4.49 0 0 1 12 2.25c1.357 0 2.573.6 3.397 1.549a4.49 4.49 0 0 1 3.498 1.307 4.491 4.491 0 0 1 1.307 3.497A4.49 4.49 0 0 1 21.75 12a4.49 4.49 0 0 1-1.549 3.397 4.491 4.491 0 0 1-1.307 3.497 4.491 4.491 0 0 1-3.497 1.307A4.49 4.49 0 0 1 12 21.75a4.49 4.49 0 0 1-3.397-1.549 4.49 4.49 0 0 1-3.498-1.306 4.491 4.491 0 0 1-1.307-3.498A4.49 4.49 0 0 1 2.25 12c0-1.357.6-2.573 1.549-3.397a4.49 4.49 0 0 1 1.307-3.497 4.49 4.49 0 0 1 3.497-1.307Zm7.007 6.387a.75.75 0 1 0-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 0 0-1.06 1.06l2.25 2.25a.75.75 0 0 0 1.14-.094l3.75-5.25Z"
+                                clipRule="evenodd"
+                              />
+                            </svg>
+                          </div>
+                        )}
+
                         <p className=" text-gray-500 text-xs lg:text-sm">
                           @{post?.user.username}
                         </p>
@@ -117,11 +180,13 @@ const Post = () => {
                       </p>
                     </div>
                   </div>
-                  <Tooltip
-                    placement="bottomRight'"
-                    trigger={["click"]}
-                    overlay={<span>tooltip</span>}
+
+                  <div
+                    className="relative"
+                    onMouseEnter={handleMouseEnter}
+                    onMouseLeave={handleMouseLeave}
                   >
+                    {/* Trigger button */}
                     <button>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -138,19 +203,102 @@ const Post = () => {
                         />
                       </svg>
                     </button>
-                  </Tooltip>
+
+                    {/* Tooltip content */}
+                    {isTooltipVisible && (
+                      <div className="absolute border  z-40 bg-gray-100 px-2   shadow-lg w-44 text-sm  flex flex-col gap-2  rounded-lg py-4  right-3  top-3 mb-2 whitespace-nowrap">
+                        {/* download post btn */}
+                        <button
+                          onClick={() => downloadImages(post?.photo)}
+                          className="flex bg-white rounded-lg w-full p-2 text-center items-center gap-2"
+                        >
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            strokeWidth={1.5}
+                            stroke="currentColor"
+                            className="size-5"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M7.5 7.5h-.75A2.25 2.25 0 0 0 4.5 9.75v7.5a2.25 2.25 0 0 0 2.25 2.25h7.5a2.25 2.25 0 0 0 2.25-2.25v-7.5a2.25 2.25 0 0 0-2.25-2.25h-.75m-6 3.75 3 3m0 0 3-3m-3 3V1.5m6 9h.75a2.25 2.25 0 0 1 2.25 2.25v7.5a2.25 2.25 0 0 1-2.25 2.25h-7.5a2.25 2.25 0 0 1-2.25-2.25v-.75"
+                            />
+                          </svg>
+
+                          <span className=" ">Save photo</span>
+                        </button>
+
+                        {/* view photos btn */}
+                        <button
+                          onClick={() => setShowAllPhotos(true)}
+                          className="flex bg-white  rounded-lg w-full p-2 text-center items-center gap-2"
+                        >
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            strokeWidth={1.5}
+                            stroke="currentColor"
+                            className="size-5"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z"
+                            />
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+                            />
+                          </svg>
+
+                          <span className=" ">View photo</span>
+                        </button>
+
+                        {/* delete post btn */}
+                        {currentUser?._id === post?.user._id && (
+                          <button
+                            onClick={() => handleDelete(post?._id)}
+                            className="flex items-center p-2 text-center  bg-white text-red-500 rounded-lg gap-2 "
+                          >
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              strokeWidth={1.5}
+                              stroke="currentColor"
+                              className="size-4 "
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0"
+                              />
+                            </svg>
+
+                            <span className="">Delete post </span>
+                          </button>
+                        )}
+                      </div>
+                    )}
+                  </div>
                 </div>
 
-                <p className=" text-sm text-pretty ">{post?.desc}</p>
+                <Link to={"/post/" + post?._id}>
+                  <p className=" text-sm text-pretty ">{post?.desc}</p>
+                </Link>
 
                 <div className=" flex flex-col gap-4">
                   <div onClick={() => setShowAllPhotos(true)}>
                     {post?.photo.length === 1 && (
-                      <div className=" overflow-hidden h-96 rounded-lg">
+                      <div className=" overflow-hidden h-72 lg:h-96 rounded-lg">
                         {post?.photo.map((link, index) => (
                           <div className=" h-full flex  " key={index}>
                             <img
-                              className=" bg-gray-200 w-full h-full  object-cover "
+                              className=" bg-gray-200 w-full h-full  object-cover object-top "
                               src={link}
                               alt=""
                             />
@@ -162,9 +310,9 @@ const Post = () => {
                     {post?.photo.length === 2 && (
                       <div className=" grid grid-cols-2 gap-1 overflow-hidden rounded-lg">
                         {post?.photo.map((link, index) => (
-                          <div key={index} className=" h-48 flex">
+                          <div key={index} className=" h-64 flex">
                             <img
-                              className=" bg-gray-200 w-full h-full  object-cover "
+                              className=" bg-gray-200 w-full h-full  object-cover  object-top "
                               src={link}
                               alt=""
                             />
@@ -173,40 +321,69 @@ const Post = () => {
                       </div>
                     )}
 
+                    {/* {post?.photo.length === 3 && (
+              <div className="grid gap-1  grid-cols-[2fr_1fr]  rounded-lg overflow-hidden  ">
+                <div className=" h-64 flex">
+                  <img
+                    className=" bg-gray-200 w-full h-full  object-cover object-top"
+                    src={post?.photo[0]}
+                    alt=""
+                  />
+                </div>
+                <div className="flex flex-col gap-1">
+                  <div className=" flex-1 h-full flex ">
+                    <img
+                      className=" w-full h-full bg-gray-200  object-cover object-top "
+                      src={post?.photo[1]}
+                      alt=""
+                    />
+                  </div>
+                  <div className=" flex-1 h-full flex ">
+                    <img
+                      className=" w-full h-full bg-gray-200  object-cover object-top "
+                      src={post?.photo[2]}
+                      alt=""
+                    />
+                  </div>
+                </div>
+              </div>
+            )} */}
+
                     {post?.photo.length === 3 && (
-                      <div className="grid gap-1 h-64  grid-cols-[2fr_1fr]  rounded-lg overflow-hidden ">
-                        <div className=" h-full flex">
+                      <div className="grid gap-1 grid-cols-3 rounded-lg overflow-hidden h-64">
+                        {/* First image (Takes 2/3 of width) */}
+
+                        <img
+                          className="w-full h-full object-cover object-center rounded-lg"
+                          src={post?.photo[0]}
+                          alt="First "
+                        />
+
+                        {/* Second and third images (Stacked on right, 1/3 of width) */}
+
+                        <div className="flex-1">
                           <img
-                            className=" bg-gray-200 w-full h-full  object-cover "
-                            src={post?.photo[0]}
-                            alt=""
+                            className="w-full h-full object-cover object-center rounded-lg"
+                            src={post?.photo[1]}
+                            alt="Second"
                           />
                         </div>
-                        <div className="flex flex-col gap-1">
-                          <div className=" flex-1 h-full flex ">
-                            <img
-                              className=" w-full h-full bg-gray-200  object-cover "
-                              src={post?.photo[1]}
-                              alt=""
-                            />
-                          </div>
-                          <div className=" flex-1 h-full flex ">
-                            <img
-                              className=" w-full h-full bg-gray-200  object-cover "
-                              src={post?.photo[2]}
-                              alt=""
-                            />
-                          </div>
+                        <div className="flex-1">
+                          <img
+                            className="w-full h-full object-cover object-center rounded-lg"
+                            src={post?.photo[2]}
+                            alt="Third "
+                          />
                         </div>
                       </div>
                     )}
 
                     {post?.photo.length === 4 && (
-                      <div className=" grid grid-cols-2 gap-1 overflow-hidden rounded-lg">
+                      <div className=" grid grid-cols-4 gap-1 overflow-hidden rounded-lg ">
                         {post?.photo.map((link, index) => (
-                          <div key={index} className=" h-48 flex">
+                          <div key={index} className=" h-64 flex">
                             <img
-                              className=" bg-gray-200 w-full h-full  object-cover "
+                              className=" bg-gray-200 w-full h-full  object-cover object-top"
                               src={link}
                               alt=""
                             />
@@ -257,53 +434,32 @@ const Post = () => {
                         <span className=" hidden md:inline">Likes</span>
                       </span>
                     </button>
-                    <div className=" flex items-center gap-2 lg:gap-4 bg-gray-50 p-2 rounded-xl">
-                      <div>
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          strokeWidth={1.5}
-                          stroke="currentColor"
-                          className="size-5 lg:size-6"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="M12 20.25c4.97 0 9-3.694 9-8.25s-4.03-8.25-9-8.25S3 7.444 3 12c0 2.104.859 4.023 2.273 5.48.432.447.74 1.04.586 1.641a4.483 4.483 0 0 1-.923 1.785A5.969 5.969 0 0 0 6 21c1.282 0 2.47-.402 3.445-1.087.81.22 1.668.337 2.555.337Z"
-                          />
-                        </svg>
+                    <Link to={"/post/" + post?._id}>
+                      <div className=" flex items-center gap-2 lg:gap-4 bg-gray-50 p-2 rounded-xl">
+                        <div>
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            strokeWidth={1.5}
+                            stroke="currentColor"
+                            className="size-5 lg:size-6"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M12 20.25c4.97 0 9-3.694 9-8.25s-4.03-8.25-9-8.25S3 7.444 3 12c0 2.104.859 4.023 2.273 5.48.432.447.74 1.04.586 1.641a4.483 4.483 0 0 1-.923 1.785A5.969 5.969 0 0 0 6 21c1.282 0 2.47-.402 3.445-1.087.81.22 1.668.337 2.555.337Z"
+                            />
+                          </svg>
+                        </div>
+                        <span className=" text-gray-300">|</span>
+                        <span className=" text-xs lg:text-sm text-gray-500">
+                          {post?.comments.length}{" "}
+                          <span className=" hidden md:inline">Comments</span>
+                        </span>
                       </div>
-                      <span className=" text-gray-300">|</span>
-                      <span className=" text-xs lg:text-sm text-gray-500">
-                        {post?.comments.length}{" "}
-                        <span className=" hidden md:inline">Comments</span>
-                      </span>
-                    </div>
+                    </Link>
                   </div>
-
-                  {/* <div className=" flex items-center gap-2 lg:gap-4 bg-gray-50 p-2 rounded-xl">
-                    <div>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        strokeWidth={1.5}
-                        stroke="currentColor"
-                        className="size-5 lg:size-6"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M19.5 12c0-1.232-.046-2.453-.138-3.662a4.006 4.006 0 0 0-3.7-3.7 48.678 48.678 0 0 0-7.324 0 4.006 4.006 0 0 0-3.7 3.7c-.017.22-.032.441-.046.662M19.5 12l3-3m-3 3-3-3m-12 3c0 1.232.046 2.453.138 3.662a4.006 4.006 0 0 0 3.7 3.7 48.656 48.656 0 0 0 7.324 0 4.006 4.006 0 0 0 3.7-3.7c.017-.22.032-.441.046-.662M4.5 12l3 3m-3-3-3 3"
-                        />
-                      </svg>
-                    </div>
-                    <span className=" text-gray-300">|</span>
-                    <span className=" text-xs lg:text-sm text-gray-500">
-                      100 <span className=" hidden md:inline">Repost</span>
-                    </span>
-                  </div> */}
                 </div>
               </div>
               <hr className=" border-t  border-gray-100 w-[95%] self-center" />

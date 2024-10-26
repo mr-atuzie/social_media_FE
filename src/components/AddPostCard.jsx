@@ -16,9 +16,9 @@ const AddPostCard = ({ setAddPost }) => {
   const [errMsg, setErrMsg] = useState("");
   const [loading, setLoading] = useState(false);
 
-  async function uploadPhoto(ev) {
-    let uploadFiles = [];
+  let uploadFiles = [];
 
+  async function uploadPhoto(ev) {
     const files = ev.target.files;
 
     console.log(files);
@@ -43,6 +43,8 @@ const AddPostCard = ({ setAddPost }) => {
 
   function removePhoto(filename) {
     setAddedPhotos([...addedPhotos.filter((photo) => photo !== filename)]);
+
+    uploadFiles = addedPhotos.filter((photo) => photo !== filename);
   }
 
   const numberOfPhotos = addedPhotos?.length;

@@ -56,7 +56,7 @@ const Navbar = () => {
         </div>
 
         {/* MIDDLE */}
-        <div className=" hidden md:flex items-center w-[50%]  justify-between">
+        <div className=" hidden md:flex items-center w-[60%]   justify-between">
           <div className="flex gap-6">
             <Link to={"/"}>
               <div className=" flex gap-2 items-center">
@@ -124,6 +124,26 @@ const Navbar = () => {
                 <span className=" text-sm text-gray-600">Notifications</span>
               </div>
             </Link>
+
+            <div className=" flex gap-2 items-center">
+              <div>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="size-6"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                  />
+                </svg>
+              </div>
+              <span className=" text-sm text-gray-600">Add Post</span>
+            </div>
           </div>
 
           <Link to={"/search"}>
@@ -253,7 +273,7 @@ const Navbar = () => {
               </button>
               <Link to={"/profile/" + user?._id}>
                 <img
-                  onClick={() => setMenu((prev) => !prev)}
+                  // onClick={() => setMenu((prev) => !prev)}
                   src={
                     user?.avatar
                       ? user?.avatar
@@ -494,7 +514,7 @@ const Navbar = () => {
             <button
               onClick={logout}
               disabled={loading}
-              className="  w-full mt-8  flex items-center  text-red-500 gap-2 bg-red-50 py-4 p-2 rounded-lg"
+              className="  w-full mt-8  flex items-center  text-red-500 gap-2 bg-red-50  p-2.5 rounded-lg"
             >
               <div>
                 <svg
