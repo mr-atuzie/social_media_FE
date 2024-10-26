@@ -161,7 +161,7 @@ const Post = (props) => {
 
             {/* Tooltip content */}
             {isTooltipVisible && (
-              <div className="absolute border  z-40 bg-gray-100 px-2   shadow-lg w-44 text-sm  flex flex-col gap-2  rounded-lg py-4  right-3  top-3 mb-2 whitespace-nowrap">
+              <div className="absolute border  z-40 bg-gray-100 px-2   shadow-lg w-44 text-sm  flex flex-col gap-2  rounded-lg py-4  right-3  top-4 mb-2 whitespace-nowrap">
                 {/* download post btn */}
                 <button
                   onClick={() => downloadImages(post?.photo)}

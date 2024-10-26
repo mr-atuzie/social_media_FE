@@ -64,6 +64,7 @@ const Search = () => {
                 placeholder="Search  username"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
+                autoFocus
               />
             </form>
             {loading ? (
