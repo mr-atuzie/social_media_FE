@@ -6,10 +6,12 @@ import { selectUser, SET_LOGIN } from "../redux/features/userSlice";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import axios from "axios";
+import AddPostCard from "./AddPostCard";
 
 const Navbar = () => {
   const user = useSelector(selectUser);
   const [menu, setMenu] = useState(false);
+  const [addpost, setAddPost] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -125,7 +127,10 @@ const Navbar = () => {
               </div>
             </Link>
 
-            <div className=" flex gap-2 items-center">
+            <button
+              onClick={() => setAddPost(true)}
+              className=" flex gap-2 items-center"
+            >
               <div>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -143,7 +148,7 @@ const Navbar = () => {
                 </svg>
               </div>
               <span className=" text-sm text-gray-600">Add Post</span>
-            </div>
+            </button>
           </div>
 
           <Link to={"/search"}>
@@ -533,6 +538,11 @@ const Navbar = () => {
               <span>Log out</span>
             </button>
           </div>
+        </div>
+      )}
+      {addpost && (
+        <div className=" fixed inset-0 z-50 w-full h-screen hide-scrollbar overflow-hidden flex justify-center items-center  bg-black/50">
+          <AddPostCard setAddPost={setAddPost} />
         </div>
       )}
     </nav>

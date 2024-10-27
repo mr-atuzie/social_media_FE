@@ -166,7 +166,7 @@ const AddPostCard = ({ setAddPost }) => {
           value={desc}
           // rows={4}
           onChange={(e) => setDesc(e.target.value)}
-          className="w-full p-4 text-gray-800  rounded-lg focus:outline-none   transition duration-200 ease-in-out resize-none customScrollBar"
+          className="w-full p-4 text-gray-800 https://novascores.com/league/bundesliga.82/werder-bremen-vs-bayer-04-leverkusen.19154611 rounded-lg focus:outline-none   transition duration-200 ease-in-out resize-none customScrollBar"
           // className=" p-2 w-full min-h-20 text-sm md:text-base bg-transparent outline-none  placeholder:font-light placeholder:text-gray-400"
         ></textarea>
 
