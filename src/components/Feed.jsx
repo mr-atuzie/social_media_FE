@@ -44,7 +44,7 @@ const Feed = () => {
   }
 
   return (
-    <div className="p-2 lg:p-4 shadow-md  bg-white rounded-lg flex flex-col gap-3 lg:gap-6  mb-40 overflow-y-scroll customScrollBar">
+    <div className="p-2 lg:p-4 shadow-md  bg-white rounded-lg flex flex-col gap-3 lg:gap-6  mb-40 ">
       {posts?.map((post) => {
         return <Post key={post?._id} post={post} />;
       })}

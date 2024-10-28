@@ -62,7 +62,10 @@ const Navbar = () => {
         {/* MIDDLE */}
         <div className=" hidden md:flex items-center w-[60%]   justify-between">
           <div className="flex gap-6">
-            <Link to={"/"}>
+            <NavLink
+              className={({ isActive }) => isActive && " text-green-500"}
+              to={"/"}
+            >
               <div className=" flex gap-2 items-center">
                 <div>
                   <svg
@@ -80,11 +83,14 @@ const Navbar = () => {
                     />
                   </svg>
                 </div>
-                <span className=" text-sm text-gray-600 ">Homepage</span>
+                <span className=" text-sm  ">Homepage</span>
               </div>
-            </Link>
+            </NavLink>
 
-            <Link to={"/followers"}>
+            <NavLink
+              className={({ isActive }) => isActive && " text-green-500"}
+              to={"/followers"}
+            >
               <div className=" flex gap-2 items-center">
                 <div>
                   <svg
@@ -102,11 +108,14 @@ const Navbar = () => {
                     />
                   </svg>
                 </div>
-                <span className=" text-sm text-gray-600">Followers</span>
+                <span className=" text-sm ">Followers</span>
               </div>
-            </Link>
+            </NavLink>
 
-            <Link to={"/notifications"}>
+            <NavLink
+              className={({ isActive }) => isActive && " text-green-500"}
+              to={"/notifications"}
+            >
               <div className=" flex gap-2 items-center">
                 <div className=" relative">
                   <svg
@@ -125,9 +134,9 @@ const Navbar = () => {
                   </svg>
                   <div className=" w-2 h-2 bg-red-600 rounded-full top-1 right-0 absolute"></div>
                 </div>
-                <span className=" text-sm text-gray-600">Notifications</span>
+                <span className=" text-sm ">Notifications</span>
               </div>
-            </Link>
+            </NavLink>
 
             <button
               onClick={() => setAddPost(true)}
@@ -184,7 +193,10 @@ const Navbar = () => {
         <div className=" flex gap-2 items-center">
           <ShowOnLogin>
             <div className="cursor-pointer flex items-center gap-4 lg:gap-6">
-              <Link to={"/followers"}>
+              <NavLink
+                className={({ isActive }) => isActive && " text-green-500"}
+                to={"/followers"}
+              >
                 <div>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -201,9 +213,12 @@ const Navbar = () => {
                     />
                   </svg>
                 </div>
-              </Link>
+              </NavLink>
 
-              <Link to={"/notifications"}>
+              <NavLink
+                className={({ isActive }) => isActive && " text-green-500"}
+                to={"/notifications"}
+              >
                 <div className=" relative">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -221,9 +236,12 @@ const Navbar = () => {
                   </svg>
                   <div className=" w-2 h-2 bg-red-600 rounded-full top-1 right-0 absolute"></div>
                 </div>
-              </Link>
+              </NavLink>
 
-              <Link to={"/search"}>
+              <NavLink
+                className={({ isActive }) => isActive && " text-green-500"}
+                to={"/search"}
+              >
                 <div>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -240,7 +258,7 @@ const Navbar = () => {
                     />
                   </svg>
                 </div>
-              </Link>
+              </NavLink>
 
               <button
                 className=" lg:hidden z-50 rounded-full object-cover"

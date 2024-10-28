@@ -92,13 +92,13 @@ const Images = ({ post, setShowAllPhotos }) => {
             onSwiper={(swiper) => console.log(swiper)}
             onSlideChange={() => console.log("slide change")}
           >
-            <div className="   w-[50%] flex flex-col justify-center items-center   ">
+            <div className="   flex flex-col justify-center items-center   ">
               {post.photo.length > 0 &&
                 post.photo.map((photo, index) => {
                   return (
                     <SwiperSlide key={index}>
                       <img
-                        className=" w-full max-h-[480px]  rounded-lg shadow-sm object-cover object-top"
+                        className=" w-full max-h-[480px]  rounded-lg shadow-sm object-contain"
                         src={photo}
                         alt=""
                       />
