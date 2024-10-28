@@ -100,7 +100,7 @@ const Notifications = () => {
     <>
       {notifications.length > 0 && (
         <div className=" px-2  pb-4 h-80 shadow-md bg-white rounded-lg flex overflow-y-scroll customScrollBar flex-col gap-4">
-          <div className=" flex pt-4 bg-white z-40 justify-between sticky top-0 items-center">
+          <div className=" flex pt-4 bg-white z-30 justify-between sticky top-0 items-center">
             <span className="  font-medium tracking-wide">Notifications</span>
 
             <Link className=" text-xs text-blue-500" to={"/notifications"}>

@@ -16,24 +16,25 @@ const AddPostCard = ({ setAddPost }) => {
   const [errMsg, setErrMsg] = useState("");
   const [loading, setLoading] = useState(false);
 
-  let uploadFiles = [];
-
   async function uploadPhoto(ev) {
     const files = ev.target.files;
 
-    console.log(files);
+    let uploadFiles = [];
+
+    // console.log(files.length);
+
+    if (files.length > 4) {
+      return setErrMsg("You can only add 4 photos");
+    }
 
     for (let i = 0; i < files.length; i++) {
-      if (files.length > 4) {
-        return setErrMsg("You can only add 4 photos");
-      }
       uploadFiles.push(URL.createObjectURL(ev.target.files[i]));
 
       setSelectedImages((prev) => {
         return [...prev, ev.target.files[i]];
       });
 
-      // console.log(uploadFiles);
+      console.log(uploadFiles);
     }
 
     setAddedPhotos((prev) => {
@@ -42,10 +43,24 @@ const AddPostCard = ({ setAddPost }) => {
   }
 
   function removePhoto(filename) {
+    console.log({ link: filename });
+
     setAddedPhotos([...addedPhotos.filter((photo) => photo !== filename)]);
 
-    uploadFiles = addedPhotos.filter((photo) => photo !== filename);
+    setSelectedImages((prev) =>
+      prev.filter((file) => {
+        console.log({ file });
+        console.log(URL.createObjectURL(file));
+
+        return URL.createObjectURL(file) !== filename;
+      })
+    );
+
+    // console.log(uploadFiles);
+    // console.log(addedPhotos);
   }
+  console.log(selectedImages.length);
+  console.log(addedPhotos.length);
 
   const numberOfPhotos = addedPhotos?.length;
 

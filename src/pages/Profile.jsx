@@ -363,7 +363,7 @@ const Profile = () => {
               )}
             </div>
 
-            <div className=" lg:hidden">
+            <div className="my-4 lg:hidden">
               {user && <UserMediaCard user={user} />}
             </div>
 

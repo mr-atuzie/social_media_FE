@@ -249,11 +249,11 @@ const Post = (props) => {
         <div className=" flex flex-col gap-4">
           <div onClick={() => setShowAllPhotos(true)}>
             {post?.photo.length === 1 && (
-              <div className=" overflow-hidden h-72 lg:h-96 rounded-lg">
+              <div className=" overflow-hidden h-80 lg:h-96 rounded-lg">
                 {post?.photo.map((link, index) => (
                   <div className=" h-full flex  " key={index}>
                     <img
-                      className=" bg-gray-200 w-full h-full  object-cover object-top "
+                      className=" bg-gray-200 w-full h-full  object-cover  "
                       src={link}
                       alt=""
                     />
@@ -265,7 +265,7 @@ const Post = (props) => {
             {post?.photo.length === 2 && (
               <div className=" grid grid-cols-2 gap-1 overflow-hidden rounded-lg">
                 {post?.photo.map((link, index) => (
-                  <div key={index} className=" h-64 flex">
+                  <div key={index} className=" h-80 flex">
                     <img
                       className=" bg-gray-200 w-full h-full  object-cover  object-top "
                       src={link}
@@ -334,7 +334,7 @@ const Post = (props) => {
             )}
 
             {post?.photo.length === 4 && (
-              <div className=" grid grid-cols-4 gap-1 overflow-hidden rounded-lg ">
+              <div className=" grid grid-cols-2 gap-1 overflow-hidden rounded-lg ">
                 {post?.photo.map((link, index) => (
                   <div key={index} className=" h-64 flex">
                     <img

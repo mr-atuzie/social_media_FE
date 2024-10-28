@@ -59,7 +59,7 @@ const FriendRequests = () => {
   };
 
   return (
-    <div className="p-4 w-full  shadow-md bg-white rounded-lg flex flex-col gap-4">
+    <div className="p-4 w-full  shadow-md bg-white rounded-lg flex flex-col gap-4 overflow-y-scroll customScrollBar h-96">
       {loading ? (
         <div>
           <div className=" w-10 h-10 rounded-full bg-gray-100"></div>
@@ -70,7 +70,7 @@ const FriendRequests = () => {
         </div>
       ) : (
         <>
-          <div className=" flex justify-between items-center">
+          <div className=" flex justify-between items-center ">
             <span className=" tracking-wide font-medium">
               Suggested for you
             </span>
