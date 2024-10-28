@@ -332,7 +332,7 @@ const Post = (props) => {
             {post?.photo.length === 4 && (
               <div className=" grid grid-cols-2 gap-1 overflow-hidden rounded-lg ">
                 {post?.photo.map((link, index) => (
-                  <div key={index} className=" h-52 flex">
+                  <div key={index} className=" h-36 flex">
                     <img
                       className=" bg-gray-200 w-full h-full  object-cover "
                       src={link}
