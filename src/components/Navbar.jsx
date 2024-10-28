@@ -52,8 +52,10 @@ const Navbar = () => {
       <div className=" w-[95%] flex justify-between items-center lg:w-[85%] mx-auto ">
         {/* LEFT */}
         <div className=" md:hidden lg:block ">
-          <Link className=" text-xl font-semibold logo" to={"/"}>
-            fotoVerse
+          <Link className="" to={"/"}>
+            <h1 class=" text-2xl lg:text-4xl logo font-semibold text-gray-800 tracking-wide hover:text-gray-600 transition duration-300 ease-in-out">
+              Foto<span class="text-green-500">Verse</span>
+            </h1>
           </Link>
         </div>
 
