@@ -78,8 +78,8 @@ const Images = ({ post, setShowAllPhotos }) => {
         </div>
         {/* className=" flex gap-4 m-auto overflow-x-scroll md:w-[50%]
         lg:customScrollBarX " */}
-        <div className=" lg:w-[50%] mx-auto">
-          <p className=" text-sm my-3 text-gray-400 text-pretty ">
+        <div className=" lg:w-[40%] mx-auto">
+          <p className=" text-sm lg:text-base my-3 text-start text-gray-400 text-pretty ">
             {post?.desc}
           </p>
           <Swiper
@@ -92,18 +92,20 @@ const Images = ({ post, setShowAllPhotos }) => {
             onSwiper={(swiper) => console.log(swiper)}
             onSlideChange={() => console.log("slide change")}
           >
-            {post.photo.length > 0 &&
-              post.photo.map((photo, index) => {
-                return (
-                  <SwiperSlide key={index}>
-                    <img
-                      className=" w-full  max-h-96   rounded-lg shadow-sm object-cover"
-                      src={photo}
-                      alt=""
-                    />
-                  </SwiperSlide>
-                );
-              })}
+            <div className="   w-[50%] flex flex-col justify-center items-center   ">
+              {post.photo.length > 0 &&
+                post.photo.map((photo, index) => {
+                  return (
+                    <SwiperSlide key={index}>
+                      <img
+                        className=" w-full max-h-[480px]  rounded-lg shadow-sm object-cover object-top"
+                        src={photo}
+                        alt=""
+                      />
+                    </SwiperSlide>
+                  );
+                })}
+            </div>
           </Swiper>
         </div>
       </div>

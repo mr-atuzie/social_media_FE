@@ -81,7 +81,7 @@ const FriendRequests = ({ basic }) => {
           </div>
 
           {basic
-            ? users?.splice[(0, 6)]?.map((user) => {
+            ? users?.slice(0, 6)?.map((user) => {
                 return (
                   <div
                     key={user?._id}

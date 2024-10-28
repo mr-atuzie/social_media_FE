@@ -249,11 +249,11 @@ const Post = (props) => {
         <div className=" flex flex-col gap-4">
           <div onClick={() => setShowAllPhotos(true)}>
             {post?.photo.length === 1 && (
-              <div className=" overflow-hidden h-80 lg:h-96 rounded-lg">
+              <div className=" overflow-hidden max-h-96 rounded-lg">
                 {post?.photo.map((link, index) => (
                   <div className=" h-full flex  " key={index}>
                     <img
-                      className=" bg-gray-200 w-full h-full  object-cover  "
+                      className=" bg-gray-200 w-full h-full  aspect-square object-cover  object-center"
                       src={link}
                       alt=""
                     />
@@ -276,9 +276,9 @@ const Post = (props) => {
               </div>
             )}
 
-            {/* {post?.photo.length === 3 && (
-              <div className="grid gap-1  grid-cols-[2fr_1fr]  rounded-lg overflow-hidden  ">
-                <div className=" h-64 flex">
+            {post?.photo.length === 3 && (
+              <div className="grid gap-1   grid-cols-[2fr_1fr]  rounded-lg overflow-hidden  ">
+                <div className=" h-full flex">
                   <img
                     className=" bg-gray-200 w-full h-full  object-cover object-top"
                     src={post?.photo[0]}
@@ -302,19 +302,15 @@ const Post = (props) => {
                   </div>
                 </div>
               </div>
-            )} */}
-
+            )}
+            {/* 
             {post?.photo.length === 3 && (
               <div className="grid gap-1 grid-cols-3 rounded-lg overflow-hidden h-64">
-                {/* First image (Takes 2/3 of width) */}
-
                 <img
                   className="w-full h-full object-cover object-center rounded-lg"
                   src={post?.photo[0]}
                   alt="First "
                 />
-
-                {/* Second and third images (Stacked on right, 1/3 of width) */}
 
                 <div className="flex-1">
                   <img
@@ -331,14 +327,14 @@ const Post = (props) => {
                   />
                 </div>
               </div>
-            )}
+            )} */}
 
             {post?.photo.length === 4 && (
               <div className=" grid grid-cols-2 gap-1 overflow-hidden rounded-lg ">
                 {post?.photo.map((link, index) => (
-                  <div key={index} className=" h-32 flex">
+                  <div key={index} className=" h-52 flex">
                     <img
-                      className=" bg-gray-200 w-full h-full  object-cover object-top"
+                      className=" bg-gray-200 w-full h-full  object-cover "
                       src={link}
                       alt=""
                     />
