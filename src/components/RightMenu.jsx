@@ -14,7 +14,7 @@ const RightMenu = ({ user }) => {
         </>
       ) : (
         <>
-          <FriendRequests />
+          <FriendRequests basic />
           <Notifications />
         </>
       )}
