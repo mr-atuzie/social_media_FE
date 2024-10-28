@@ -130,7 +130,7 @@ const Post = () => {
             <PostLoader single />
           </div>
         ) : (
-          <div className="w-full p-4 rounded-lg mb-16 bg-white md:w-[70%] lg:w-[40%]">
+          <div className="w-full p-4 rounded-lg mb-16 bg-white h-fit md:w-[70%] lg:w-[40%]">
             <AddPost />
             <div className="  flex-col gap-6 flex">
               <div className=" flex flex-col gap-3 lg:gap-4">
