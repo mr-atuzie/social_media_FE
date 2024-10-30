@@ -7,7 +7,7 @@ const AddPost = () => {
     <>
       <button
         onClick={() => setAddPost(true)}
-        className=" w-16 h-16 flex justify-center items-center fixed bottom-[15%] right-[15%] z-40  rounded-full shadow-md bg-black text-white"
+        className=" w-16 h-16 flex justify-center items-center fixed bottom-[15%] right-[10%] lg:right-[15%] z-40  rounded-full shadow-md bg-black text-white"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
