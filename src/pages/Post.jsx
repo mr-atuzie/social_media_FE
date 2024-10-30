@@ -13,6 +13,7 @@ import Sidebar from "../components/Sidebar";
 import Followers from "../components/Followers";
 import { deletePost } from "../redux/features/postSlice";
 import AddPost from "../components/AddPost";
+import { shortenText } from "../utils";
 
 const Post = () => {
   const { id } = useParams();
@@ -133,7 +134,7 @@ const Post = () => {
             <PostLoader single />
           </div>
         ) : (
-          <div className="w-full p-4 rounded-lg mb-16 bg-white h-fit md:w-[70%] lg:w-[40%]">
+          <div className="w-full p-4 rounded-lg mb-24 bg-white h-fit md:w-[70%] lg:w-[40%]">
             <AddPost />
             <div className="  flex-col gap-6 flex">
               <div className=" flex flex-col gap-3 lg:gap-4">
@@ -171,7 +172,7 @@ const Post = () => {
                         )}
 
                         <p className=" text-gray-500 text-xs lg:text-sm">
-                          @{post?.user.username}
+                          @{shortenText(post?.user.username, 8)}
                         </p>
                       </div>
                       <p className=" text-gray-500 text-xs lg:text-sm">

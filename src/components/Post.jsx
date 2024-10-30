@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectUser } from "../redux/features/userSlice";
 import Images from "./Images";
 import { deletePost } from "../redux/features/postSlice";
+import { shortenText } from "../utils";
 const { formatDistanceToNow } = require("date-fns");
 
 const Post = (props) => {
@@ -126,7 +127,7 @@ const Post = (props) => {
                 )}
 
                 <p className=" text-gray-500 text-xs lg:text-sm">
-                  @{post?.user.username}
+                  @{shortenText(post?.user.username, 8)}
                 </p>
               </div>
               <p className=" text-gray-500 text-xs lg:text-sm">
