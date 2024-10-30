@@ -125,10 +125,11 @@ const Post = (props) => {
                     </svg>
                   </div>
                 )}
-
-                <p className=" text-gray-500 text-xs lg:text-sm">
-                  @{shortenText(post?.user.username, 8)}
-                </p>
+                {post && (
+                  <p className=" text-gray-500 text-xs lg:text-sm">
+                    @{shortenText(post?.user.username, 8)}
+                  </p>
+                )}
               </div>
               <p className=" text-gray-500 text-xs lg:text-sm">
                 posted{" "}
@@ -269,7 +270,7 @@ const Post = (props) => {
             {post?.photo.length === 2 && (
               <div className=" grid grid-cols-2 gap-1 overflow-hidden rounded-lg">
                 {post?.photo.map((link, index) => (
-                  <div key={index} className=" h-64 flex">
+                  <div key={index} className=" h-40 lg:h-64 flex">
                     <img
                       className=" bg-gray-200 w-full h-full  object-cover  object-top "
                       src={link}
@@ -281,7 +282,7 @@ const Post = (props) => {
             )}
 
             {post?.photo.length === 3 && (
-              <div className="flex gap-1 h-80    rounded-md overflow-hidden  ">
+              <div className="flex gap-1 h-64 lg:h-80    rounded-md overflow-hidden  ">
                 <div className=" w-[60%]">
                   <img
                     className=" bg-gray-200 w-full h-full  object-cover object-top"
@@ -311,7 +312,7 @@ const Post = (props) => {
             {post?.photo.length === 4 && (
               <div className=" grid grid-cols-2 gap-1 overflow-hidden rounded-md ">
                 {post?.photo.map((link, index) => (
-                  <div key={index} className=" h-56 flex">
+                  <div key={index} className=" h-40 lg:h-56 flex">
                     <img
                       className=" bg-gray-200 w-full h-full  object-cover object-top"
                       src={link}

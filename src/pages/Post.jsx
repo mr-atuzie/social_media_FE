@@ -172,7 +172,9 @@ const Post = () => {
                         )}
 
                         <p className=" text-gray-500 text-xs lg:text-sm">
-                          @{shortenText(post?.user.username, 8)}
+                          {/* @{shortenText(post?.user.username, 8)} */}
+                          {console.log(post)}
+                          {post && shortenText(post?.user.username, 8)}
                         </p>
                       </div>
                       <p className=" text-gray-500 text-xs lg:text-sm">
