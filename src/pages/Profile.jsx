@@ -11,7 +11,6 @@ import UserInfoCard from "../components/UserInfoCard";
 import UserMediaCard from "../components/UserMediaCard";
 import { useDispatch, useSelector } from "react-redux";
 import { selectUser, SET_USER } from "../redux/features/userSlice";
-
 const Profile = () => {
   const [posts, setPosts] = useState([]);
   const [user, setUser] = useState(null);
@@ -130,6 +129,29 @@ const Profile = () => {
         error.message ||
         error.toString();
 
+      toast.error(message);
+    }
+  };
+
+  const handleProfileDelete = async (postId) => {
+    console.log("new logic");
+
+    try {
+      await axios.delete("/api/v1/post/delete/" + postId);
+      const { data } = await axios.get("/api/v1/post/user/" + id);
+
+      setPosts(data.posts);
+
+      console.log(data);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+
+      setLoading(false);
       toast.error(message);
     }
   };
@@ -369,7 +391,14 @@ const Profile = () => {
 
             <div className=" p-4 shadow-md my-4 bg-white rounded-lg flex flex-col gap-3 lg:gap-6">
               {posts?.map((post) => {
-                return <Post key={post?._id} post={post} />;
+                return (
+                  <Post
+                    key={post?._id}
+                    post={post}
+                    profile
+                    handleProfileDelete={handleProfileDelete}
+                  />
+                );
               })}
             </div>
           </>

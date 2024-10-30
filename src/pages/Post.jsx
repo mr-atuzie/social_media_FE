@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import PostLoader from "../components/PostLoader";
 import RightMenu from "../components/RightMenu";
 import Comments from "../components/Comments";
@@ -26,6 +26,8 @@ const Post = () => {
   const [isTooltipVisible, setTooltipVisible] = useState(false);
 
   const liked = post?.likes.includes(currentUser?._id);
+
+  const navigate = useNavigate();
 
   // Show tooltip on mouse enter
   const handleMouseEnter = () => {
@@ -84,7 +86,8 @@ const Post = () => {
 
   const handleDelete = (postId) => {
     dispatch(deletePost(postId));
-    console.log(postId);
+
+    navigate("/");
   };
 
   // Function to download multiple images
@@ -206,7 +209,7 @@ const Post = () => {
 
                     {/* Tooltip content */}
                     {isTooltipVisible && (
-                      <div className="absolute border  z-40 bg-gray-100 px-2   shadow-lg w-44 text-sm  flex flex-col gap-2  rounded-lg py-4  right-3  top-3 mb-2 whitespace-nowrap">
+                      <div className="absolute border  z-40 bg-gray-100 px-2   shadow-lg w-44 text-sm  flex flex-col gap-2  rounded-lg py-4  right-3  top-4 mb-2 whitespace-nowrap">
                         {/* download post btn */}
                         <button
                           onClick={() => downloadImages(post?.photo)}
@@ -294,11 +297,11 @@ const Post = () => {
                 <div className=" flex flex-col gap-4">
                   <div onClick={() => setShowAllPhotos(true)}>
                     {post?.photo.length === 1 && (
-                      <div className=" overflow-hidden h-72 lg:h-96 rounded-lg">
+                      <div className=" overflow-hidden h-80 lg:h-[400px]  rounded-md">
                         {post?.photo.map((link, index) => (
                           <div className=" h-full flex  " key={index}>
                             <img
-                              className=" bg-gray-200 w-full h-full  object-cover object-top "
+                              className=" bg-gray-200 w-full h-full   object-cover  object-center"
                               src={link}
                               alt=""
                             />
@@ -321,67 +324,38 @@ const Post = () => {
                       </div>
                     )}
 
-                    {/* {post?.photo.length === 3 && (
-              <div className="grid gap-1  grid-cols-[2fr_1fr]  rounded-lg overflow-hidden  ">
-                <div className=" h-64 flex">
-                  <img
-                    className=" bg-gray-200 w-full h-full  object-cover object-top"
-                    src={post?.photo[0]}
-                    alt=""
-                  />
-                </div>
-                <div className="flex flex-col gap-1">
-                  <div className=" flex-1 h-full flex ">
-                    <img
-                      className=" w-full h-full bg-gray-200  object-cover object-top "
-                      src={post?.photo[1]}
-                      alt=""
-                    />
-                  </div>
-                  <div className=" flex-1 h-full flex ">
-                    <img
-                      className=" w-full h-full bg-gray-200  object-cover object-top "
-                      src={post?.photo[2]}
-                      alt=""
-                    />
-                  </div>
-                </div>
-              </div>
-            )} */}
-
                     {post?.photo.length === 3 && (
-                      <div className="grid gap-1 grid-cols-3 rounded-lg overflow-hidden h-64">
-                        {/* First image (Takes 2/3 of width) */}
-
-                        <img
-                          className="w-full h-full object-cover object-center rounded-lg"
-                          src={post?.photo[0]}
-                          alt="First "
-                        />
-
-                        {/* Second and third images (Stacked on right, 1/3 of width) */}
-
-                        <div className="flex-1">
+                      <div className="flex gap-1 h-80    rounded-md overflow-hidden  ">
+                        <div className=" w-[60%]">
                           <img
-                            className="w-full h-full object-cover object-center rounded-lg"
-                            src={post?.photo[1]}
-                            alt="Second"
+                            className=" bg-gray-200 w-full h-full  object-cover object-top"
+                            src={post?.photo[0]}
+                            alt=""
                           />
                         </div>
-                        <div className="flex-1">
-                          <img
-                            className="w-full h-full object-cover object-center rounded-lg"
-                            src={post?.photo[2]}
-                            alt="Third "
-                          />
+                        <div className=" flex gap-1 flex-col w-[40%]">
+                          <div className=" h-[50%]">
+                            <img
+                              className=" w-full h-full  bg-gray-200  object-cover object-top "
+                              src={post?.photo[1]}
+                              alt=""
+                            />
+                          </div>
+                          <div className="h-[50%]">
+                            <img
+                              className=" w-full h-full flex-1 bg-gray-200  object-cover object-top "
+                              src={post?.photo[2]}
+                              alt=""
+                            />
+                          </div>
                         </div>
                       </div>
                     )}
 
                     {post?.photo.length === 4 && (
-                      <div className=" grid grid-cols-4 gap-1 overflow-hidden rounded-lg ">
+                      <div className=" grid grid-cols-2 gap-1 overflow-hidden rounded-md ">
                         {post?.photo.map((link, index) => (
-                          <div key={index} className=" h-64 flex">
+                          <div key={index} className=" h-56 flex">
                             <img
                               className=" bg-gray-200 w-full h-full  object-cover object-top"
                               src={link}
@@ -462,7 +436,7 @@ const Post = () => {
                   </div>
                 </div>
               </div>
-              <hr className=" border-t  border-gray-100 w-[95%] self-center" />
+              <hr className=" border-t  border-gray-100 mx-auto w-[95%] self-center" />
 
               <Comments post={post} setComments={setComments} />
               {comments?.map((comment) => {
@@ -479,7 +453,7 @@ const Post = () => {
                     </Link>
 
                     <div className=" bg-gray-100 rounded-lg p-2 w-full">
-                      <p className=" font-medium m-0 flex gap-1 items-center text-sm lg:text-base">
+                      <div className=" font-medium m-0 flex gap-1 items-center text-sm lg:text-base">
                         {comment?.user.name}
 
                         {comment?.user?.verified && (
@@ -498,7 +472,7 @@ const Post = () => {
                             </svg>
                           </div>
                         )}
-                      </p>
+                      </div>
 
                       <p className=" text-gray-500 -mt-1 text-sm lg:text-sm">
                         {comment?.comment}

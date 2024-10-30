@@ -52,7 +52,7 @@ const Search = () => {
         <ProfileCard />
         <Sidebar />
       </div>
-      <div className="w-full md:w-[70%] lg:w-[45%]">
+      <div className="w-full mb-16 md:w-[70%] lg:w-[45%]">
         <div className=" flex-col gap-6 flex">
           <div className=" bg-white rounded-lg p-4 shadow-md">
             <form onSubmit={searchUser}>

@@ -223,7 +223,6 @@ const postSlice = createSlice({
         state.isError = false;
         state.posts = action.payload;
         // state.post = action.payload;
-        console.log(action.payload);
 
         toast.success("Post has been deleted");
       })

@@ -7,7 +7,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectUser } from "../redux/features/userSlice";
 import Images from "./Images";
 import { deletePost } from "../redux/features/postSlice";
-// import "rc-tooltip/assets/bootstrap_white.css";
 const { formatDistanceToNow } = require("date-fns");
 
 const Post = (props) => {
@@ -19,6 +18,8 @@ const Post = (props) => {
   const [isTooltipVisible, setTooltipVisible] = useState(false);
 
   const dispatch = useDispatch();
+
+  const profile = props.profile;
 
   // Show tooltip on mouse enter
   const handleMouseEnter = () => {
@@ -36,9 +37,7 @@ const Post = (props) => {
     try {
       const { data } = await axios.patch("/api/v1/post/like/" + post?._id);
 
-      // dispatch(fetchPosts());
       setPost(data.post);
-      // dispatch(SET_POSTS(data.posts));
     } catch (error) {
       const message =
         (error.response &&
@@ -53,8 +52,12 @@ const Post = (props) => {
   };
 
   const handleDelete = (postId) => {
-    dispatch(deletePost(postId));
-    console.log(postId);
+    if (profile) {
+      props.handleProfileDelete(postId);
+    } else {
+      dispatch(deletePost(postId));
+    }
+    // console.log(postId);
   };
 
   // Function to download multiple images
@@ -249,11 +252,11 @@ const Post = (props) => {
         <div className=" flex flex-col gap-4">
           <div onClick={() => setShowAllPhotos(true)}>
             {post?.photo.length === 1 && (
-              <div className=" overflow-hidden h-80 lg:h-[450px] rounded-lg">
+              <div className=" overflow-hidden h-80 lg:h-[400px]  rounded-md">
                 {post?.photo.map((link, index) => (
                   <div className=" h-full flex  " key={index}>
                     <img
-                      className=" bg-gray-200 w-full h-full  aspect-square object-cover  object-center"
+                      className=" bg-gray-200 w-full h-full   object-cover  object-center"
                       src={link}
                       alt=""
                     />
@@ -265,7 +268,7 @@ const Post = (props) => {
             {post?.photo.length === 2 && (
               <div className=" grid grid-cols-2 gap-1 overflow-hidden rounded-lg">
                 {post?.photo.map((link, index) => (
-                  <div key={index} className=" h-80 flex">
+                  <div key={index} className=" h-64 flex">
                     <img
                       className=" bg-gray-200 w-full h-full  object-cover  object-top "
                       src={link}
@@ -277,25 +280,25 @@ const Post = (props) => {
             )}
 
             {post?.photo.length === 3 && (
-              <div className="grid gap-1   grid-cols-[2fr_1fr]  rounded-lg overflow-hidden  ">
-                <div className=" h-full flex">
+              <div className="flex gap-1 h-80    rounded-md overflow-hidden  ">
+                <div className=" w-[60%]">
                   <img
                     className=" bg-gray-200 w-full h-full  object-cover object-top"
                     src={post?.photo[0]}
                     alt=""
                   />
                 </div>
-                <div className="flex flex-col gap-1">
-                  <div className=" flex-1 h-full flex ">
+                <div className=" flex gap-1 flex-col w-[40%]">
+                  <div className=" h-[50%]">
                     <img
-                      className=" w-full h-full bg-gray-200  object-cover object-top "
+                      className=" w-full h-full  bg-gray-200  object-cover object-top "
                       src={post?.photo[1]}
                       alt=""
                     />
                   </div>
-                  <div className=" flex-1 h-full flex ">
+                  <div className="h-[50%]">
                     <img
-                      className=" w-full h-full bg-gray-200  object-cover object-top "
+                      className=" w-full h-full flex-1 bg-gray-200  object-cover object-top "
                       src={post?.photo[2]}
                       alt=""
                     />
@@ -303,38 +306,13 @@ const Post = (props) => {
                 </div>
               </div>
             )}
-            {/* 
-            {post?.photo.length === 3 && (
-              <div className="grid gap-1 grid-cols-3 rounded-lg overflow-hidden h-64">
-                <img
-                  className="w-full h-full object-cover object-center rounded-lg"
-                  src={post?.photo[0]}
-                  alt="First "
-                />
-
-                <div className="flex-1">
-                  <img
-                    className="w-full h-full object-cover object-center rounded-lg"
-                    src={post?.photo[1]}
-                    alt="Second"
-                  />
-                </div>
-                <div className="flex-1">
-                  <img
-                    className="w-full h-full object-cover object-center rounded-lg"
-                    src={post?.photo[2]}
-                    alt="Third "
-                  />
-                </div>
-              </div>
-            )} */}
 
             {post?.photo.length === 4 && (
-              <div className=" grid grid-cols-2 gap-1 overflow-hidden rounded-lg ">
+              <div className=" grid grid-cols-2 gap-1 overflow-hidden rounded-md ">
                 {post?.photo.map((link, index) => (
-                  <div key={index} className=" h-36 flex">
+                  <div key={index} className=" h-56 flex">
                     <img
-                      className=" bg-gray-200 w-full h-full  object-cover "
+                      className=" bg-gray-200 w-full h-full  object-cover object-top"
                       src={link}
                       alt=""
                     />

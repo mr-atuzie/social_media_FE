@@ -59,8 +59,8 @@ const AddPostCard = ({ setAddPost }) => {
     // console.log(uploadFiles);
     // console.log(addedPhotos);
   }
-  console.log(selectedImages.length);
-  console.log(addedPhotos.length);
+  // console.log(selectedImages.length);
+  // console.log(addedPhotos.length);
 
   const numberOfPhotos = addedPhotos?.length;
 

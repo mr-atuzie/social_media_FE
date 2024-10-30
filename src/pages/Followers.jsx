@@ -212,7 +212,7 @@ const Followers = () => {
                             : "follow"}
                         </button>
                       </div>
-                      <hr className=" border-t  border-gray-100 mt-2 w-[90%] rounded-lg self-center" />
+                      <hr className=" border-t  border-gray-100 mt-2 w-[90%] mx-auto rounded-lg self-center" />
                     </div>
                   );
                 })}

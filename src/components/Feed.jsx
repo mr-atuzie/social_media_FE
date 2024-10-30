@@ -12,6 +12,7 @@ const Feed = () => {
   const dispatch = useDispatch();
   const posts = useSelector(selectPosts);
   const postLoader = useSelector(selectPostLoader);
+
   // const getPosts = async () => {
   //   setLoading(true);
   //   try {

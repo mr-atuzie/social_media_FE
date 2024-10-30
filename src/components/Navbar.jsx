@@ -52,9 +52,9 @@ const Navbar = () => {
       <div className=" w-[95%] flex justify-between items-center lg:w-[85%] mx-auto ">
         {/* LEFT */}
         <div className=" md:hidden lg:block ">
-          <Link className="" to={"/"}>
-            <h1 class=" text-2xl lg:text-4xl logo font-semibold text-gray-800 tracking-wide hover:text-gray-600 transition duration-300 ease-in-out">
-              Foto<span class="text-green-500">Verse</span>
+          <Link to={"/"}>
+            <h1 className=" text-2xl lg:text-4xl logo font-semibold text-gray-800 tracking-wide hover:text-gray-600 transition duration-300 ease-in-out">
+              Foto<span className="text-green-500">Verse</span>
             </h1>
           </Link>
         </div>
@@ -63,7 +63,7 @@ const Navbar = () => {
         <div className=" hidden md:flex items-center w-[60%]   justify-between">
           <div className="flex gap-6">
             <NavLink
-              className={({ isActive }) => isActive && " text-green-500"}
+              className={({ isActive }) => (isActive ? " text-green-500" : "")}
               to={"/"}
             >
               <div className=" flex gap-2 items-center">
@@ -88,7 +88,7 @@ const Navbar = () => {
             </NavLink>
 
             <NavLink
-              className={({ isActive }) => isActive && " text-green-500"}
+              className={({ isActive }) => (isActive ? " text-green-500" : "")}
               to={"/followers"}
             >
               <div className=" flex gap-2 items-center">
@@ -113,7 +113,7 @@ const Navbar = () => {
             </NavLink>
 
             <NavLink
-              className={({ isActive }) => isActive && " text-green-500"}
+              className={({ isActive }) => (isActive ? " text-green-500" : "")}
               to={"/notifications"}
             >
               <div className=" flex gap-2 items-center">
@@ -154,11 +154,11 @@ const Navbar = () => {
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                    d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"
                   />
                 </svg>
               </div>
-              <span className=" text-sm text-gray-600">Add Post</span>
+              <span className=" text-sm ">Add Post</span>
             </button>
           </div>
 
@@ -194,7 +194,9 @@ const Navbar = () => {
           <ShowOnLogin>
             <div className="cursor-pointer flex items-center gap-4 lg:gap-6">
               <NavLink
-                className={({ isActive }) => isActive && " text-green-500"}
+                className={({ isActive }) =>
+                  isActive ? " text-green-500" : ""
+                }
                 to={"/followers"}
               >
                 <div>
@@ -216,7 +218,9 @@ const Navbar = () => {
               </NavLink>
 
               <NavLink
-                className={({ isActive }) => isActive && " text-green-500"}
+                className={({ isActive }) =>
+                  isActive ? " text-green-500" : ""
+                }
                 to={"/notifications"}
               >
                 <div className=" relative">
@@ -239,7 +243,9 @@ const Navbar = () => {
               </NavLink>
 
               <NavLink
-                className={({ isActive }) => isActive && " text-green-500"}
+                className={({ isActive }) =>
+                  isActive ? " text-green-500" : ""
+                }
                 to={"/search"}
               >
                 <div>
@@ -296,6 +302,7 @@ const Navbar = () => {
                   </svg>
                 )}
               </button>
+
               <Link to={"/profile/" + user?._id}>
                 <img
                   // onClick={() => setMenu((prev) => !prev)}
@@ -476,34 +483,6 @@ const Navbar = () => {
                 </div>
                 <span>Followers</span>
               </NavLink>
-
-              {/* <NavLink
-                onClick={() => setMenu((prev) => !prev)}
-                className={({ isActive }) =>
-                  isActive
-                    ? " flex items-center gap-4  bg-gray-100 p-2 rounded-lg"
-                    : "flex items-center gap-4 hover:bg-gray-50 p-2 rounded-lg"
-                }
-                to={"/*"}
-              >
-                <div>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth={1.5}
-                    stroke="currentColor"
-                    className="size-4"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"
-                    />
-                  </svg>
-                </div>
-                <span>Stories</span>
-              </NavLink> */}
 
               <NavLink
                 className={({ isActive }) =>

@@ -36,19 +36,16 @@ const UserMediaCard = ({ user }) => {
       </div>
       <div className=" flex gap-4  flex-wrap">
         {posts.map((post) => {
-          return (
-            post.photo.map((img)=>{
-
-              return(
-                <img
-                  key={post?._id}
-                  src={img}
-                  alt=""
-                  className=" object-cover w-1/5 h-24 rounded-md"
-                />
-              )
-            })
-          );
+          return post.photo.map((img) => {
+            return (
+              <img
+                key={img}
+                src={img}
+                alt=""
+                className=" object-cover w-1/5 h-24 rounded-md"
+              />
+            );
+          });
         })}
       </div>
     </div>
