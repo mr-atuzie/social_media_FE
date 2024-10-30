@@ -67,7 +67,7 @@ const Post = () => {
     fectchSinglePost();
   }, [id]);
 
-  const likePost = async () => {
+  const LikePost = async () => {
     try {
       const { data } = await axios.patch("/api/v1/post/like/" + post?._id);
 
@@ -149,7 +149,7 @@ const Post = () => {
                     </Link>
 
                     <div>
-                      <div className=" flex  items-start gap-1">
+                      <div className=" flex  items-center gap-1">
                         <p className=" font-medium text-sm lg:text-base">
                           {post?.user.name}
                         </p>
@@ -170,12 +170,11 @@ const Post = () => {
                             </svg>
                           </div>
                         )}
-
-                        <p className=" text-gray-500 text-xs lg:text-sm">
-                          {/* @{shortenText(post?.user.username, 8)} */}
-                          {console.log(post)}
-                          {post && shortenText(post?.user.username, 8)}
-                        </p>
+                        {post && (
+                          <p className=" text-gray-500 text-xs lg:text-sm">
+                            @{shortenText(post?.user.username, 8)}
+                          </p>
+                        )}
                       </div>
                       <p className=" text-gray-500 text-xs lg:text-sm">
                         posted{" "}
@@ -300,7 +299,7 @@ const Post = () => {
                 <div className=" flex flex-col gap-4">
                   <div onClick={() => setShowAllPhotos(true)}>
                     {post?.photo.length === 1 && (
-                      <div className=" overflow-hidden h-80 lg:h-[400px]  rounded-md">
+                      <div className=" overflow-hidden h-72 lg:h-[400px]  rounded-md">
                         {post?.photo.map((link, index) => (
                           <div className=" h-full flex  " key={index}>
                             <img
@@ -316,7 +315,7 @@ const Post = () => {
                     {post?.photo.length === 2 && (
                       <div className=" grid grid-cols-2 gap-1 overflow-hidden rounded-lg">
                         {post?.photo.map((link, index) => (
-                          <div key={index} className=" h-64 flex">
+                          <div key={index} className=" h-40 lg:h-64 flex">
                             <img
                               className=" bg-gray-200 w-full h-full  object-cover  object-top "
                               src={link}
@@ -328,7 +327,7 @@ const Post = () => {
                     )}
 
                     {post?.photo.length === 3 && (
-                      <div className="flex gap-1 h-80    rounded-md overflow-hidden  ">
+                      <div className="flex gap-1 h-64 lg:h-80    rounded-md overflow-hidden  ">
                         <div className=" w-[60%]">
                           <img
                             className=" bg-gray-200 w-full h-full  object-cover object-top"
@@ -358,7 +357,7 @@ const Post = () => {
                     {post?.photo.length === 4 && (
                       <div className=" grid grid-cols-2 gap-1 overflow-hidden rounded-md ">
                         {post?.photo.map((link, index) => (
-                          <div key={index} className=" h-56 flex">
+                          <div key={index} className=" h-40 lg:h-56 flex">
                             <img
                               className=" bg-gray-200 w-full h-full  object-cover object-top"
                               src={link}
@@ -375,7 +374,7 @@ const Post = () => {
                 <div className=" flex items-center text-sm justify-between ">
                   <div className="flex gap-4 md:gap-6 lg:gap-8 ">
                     <button
-                      onClick={likePost}
+                      onClick={LikePost}
                       className=" flex items-center gap-2 lg:gap-4 bg-gray-50 p-2 rounded-xl"
                     >
                       <div>

@@ -104,7 +104,7 @@ const Post = (props) => {
             </Link>
 
             <div>
-              <div className=" flex  items-start gap-1">
+              <div className=" flex  items-center gap-1">
                 <p className=" font-medium text-sm lg:text-base">
                   {post?.user.name}
                 </p>
