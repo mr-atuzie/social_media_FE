@@ -4,7 +4,7 @@ import { selectUser } from "../redux/features/userSlice";
 import toast from "react-hot-toast";
 import axios from "axios";
 
-const Comments = ({ post, setComments }) => {
+const Comments = ({ post, setPost, setComments }) => {
   const currentUser = useSelector(selectUser);
   const [comment, setComment] = useState("");
   const [adding, setAdding] = useState(false);
@@ -20,6 +20,9 @@ const Comments = ({ post, setComments }) => {
       setComment("");
       setAdding(false);
       setComments(data.comments);
+      setPost(data.post);
+
+      toast.success("Reply sent");
     } catch (error) {
       const message =
         (error.response &&
@@ -33,6 +36,7 @@ const Comments = ({ post, setComments }) => {
       toast.error(message);
     }
   };
+
   return (
     <div>
       <div className=" flex items-center gap-4">
@@ -51,6 +55,7 @@ const Comments = ({ post, setComments }) => {
           <input
             className=" disabled:opacity-75 bg-gray-100 rounded-xl text-sm px-3 lg:px-6 py-2 lg:py-3 w-full"
             type="text"
+            autoFocus
             disabled={adding}
             placeholder="Write a comment..."
             value={comment}

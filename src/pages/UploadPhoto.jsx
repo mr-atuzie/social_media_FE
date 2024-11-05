@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import ErrorCard from "../components/ErrorCard";
 import { useDispatch } from "react-redux";
 import { SET_USER } from "../redux/features/userSlice";
+import toast from "react-hot-toast";
 
 const UplaodPhoto = () => {
   const [selectedImage, setSelectedImage] = useState(null);
@@ -52,6 +53,7 @@ const UplaodPhoto = () => {
       navigate("/");
 
       setUploading(false);
+      toast.success("Profile picture updated");
     } catch (error) {
       setUploading(false);
       console.log(error);

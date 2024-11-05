@@ -170,7 +170,7 @@ const Post = () => {
                             </svg>
                           </div>
                         )}
-                        {post && (
+                        {post?.user && (
                           <p className=" text-gray-500 text-xs lg:text-sm">
                             @{shortenText(post?.user.username, 8)}
                           </p>
@@ -440,7 +440,11 @@ const Post = () => {
               </div>
               <hr className=" border-t  border-gray-100 mx-auto w-[95%] self-center" />
 
-              <Comments post={post} setComments={setComments} />
+              <Comments
+                post={post}
+                setPost={setPost}
+                setComments={setComments}
+              />
               {comments?.map((comment) => {
                 return (
                   <div key={comment?._id} className=" flex items-center gap-3">
@@ -476,7 +480,7 @@ const Post = () => {
                         )}
                       </div>
 
-                      <p className=" text-gray-500 -mt-1 text-sm lg:text-sm">
+                      <p className=" text-gray-500  text-sm lg:text-sm">
                         {comment?.comment}
                       </p>
                     </div>
