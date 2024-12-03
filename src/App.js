@@ -57,9 +57,12 @@ function App() {
       <ScrollTop />
       <Navbar />
       <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
+        </Route>
         <Route element={<Private />}>
           <Route path="/" element={<Layout />}>
-            <Route index element={<Home />} />
+            {/* <Route index element={<Home />} /> */}
             <Route path="/uploadPhoto" element={<UplaodPhoto />} />
 
             <Route element={<Auth />}>
@@ -71,6 +74,7 @@ function App() {
             <Route path="/search" element={<Search />} />
           </Route>
         </Route>
+
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<Login />} />
       </Routes>
