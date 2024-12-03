@@ -57,12 +57,9 @@ function App() {
       <ScrollTop />
       <Navbar />
       <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<Home />} />
-        </Route>
         <Route element={<Private />}>
           <Route path="/" element={<Layout />}>
-            {/* <Route index element={<Home />} /> */}
+            <Route index element={<Home />} />
             <Route path="/uploadPhoto" element={<UplaodPhoto />} />
 
             <Route element={<Auth />}>
